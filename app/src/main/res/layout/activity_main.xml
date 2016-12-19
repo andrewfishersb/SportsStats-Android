@@ -7,10 +7,42 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fisher.andrew.sportstats.MainActivity">
+    tools:context="fisher.andrew.sportstats.MainActivity"
+    android:background="@drawable/basketball_clipboard">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginTop="225dp"
+        android:text="Welcome Coach"
+        android:textSize="30sp"
+        android:textColor="#0f349a"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Team"
+        android:id="@+id/createATeamHomePage"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="69dp"
+        android:textColor="#466EDD" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Player"
+        android:id="@+id/createAPlayerHomePage"
+        android:layout_alignTop="@+id/createATeamHomePage"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"
+        android:textColor="#466EDD" />
 </RelativeLayout>

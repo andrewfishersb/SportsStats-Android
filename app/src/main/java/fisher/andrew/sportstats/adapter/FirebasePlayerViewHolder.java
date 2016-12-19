@@ -32,14 +32,14 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder{//maybe cl
         TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
 
         nameTextView.setText(player.getName());
-        fieldGoalsTextView.setText(player.getFieldGoals());
-        threePointsTextView.setText(player.getThreePointers());
-        freeThrowsTextView.setText(player.getFreeThrows());
-        reboundsTextView.setText(player.getRebounds());
-        assistsTextView.setText(player.getAssists());
-        stealsTextView.setText(player.getSteals());
-        blocksTextView.setText(player.getBlocks());
-        totalPointsTextView.setText(player.getTotalPoints());
+        fieldGoalsTextView.setText(player.getFieldGoals()+"");
+        threePointsTextView.setText(player.getThreePointers()+"");
+        freeThrowsTextView.setText(player.getFreeThrows()+"");
+        reboundsTextView.setText(player.getRebounds()+"");
+        assistsTextView.setText(player.getAssists()+"");
+        stealsTextView.setText(player.getSteals()+"");
+        blocksTextView.setText(player.getBlocks()+"");
+        totalPointsTextView.setText(player.getTotalPoints()+"");
 
 
 

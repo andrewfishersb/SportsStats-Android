@@ -6,7 +6,7 @@ import org.parceler.Parcel;
 public class Player {
     String name;
     String height;
-    String age;
+    int age;
     int freeThrows;
     //a regular 2 pt basket
     int fieldGoals;
@@ -18,7 +18,7 @@ public class Player {
 
     public Player(){}
 
-    public Player(String name, String height, String age){
+    public Player(String name, String height, int age){
         this.name = name;
         this.height = height;
         this.age = age;
@@ -47,11 +47,11 @@ public class Player {
         this.height = height;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

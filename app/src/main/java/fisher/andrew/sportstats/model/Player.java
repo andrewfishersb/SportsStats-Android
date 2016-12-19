@@ -4,8 +4,6 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Player {
-
-
     String name;
     String height;
     String age;
@@ -17,6 +15,8 @@ public class Player {
     int blocks;
     int steals;
     int totalPoints;
+
+    public Player(){}
 
     public Player(String name, String height, String age){
         this.name = name;
@@ -102,9 +102,11 @@ public class Player {
     public void addSteal() {
         this.steals++;
     }
-    public int setTotalPoints(int threePointers, int fieldGoals, int freeThrows){
+
+    public void setTotalPoints(int threePointers, int fieldGoals, int freeThrows){
         this.totalPoints = freeThrows + (2*fieldGoals) + (3*threePointers);
     }
+
     public int getTotalPoints(){
         return this.totalPoints;
     }

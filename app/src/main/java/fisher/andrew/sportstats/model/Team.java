@@ -11,6 +11,8 @@ public class Team {
     ArrayList<Player> players;
     String index;
 
+    public Team(){}
+
     public Team(String name, ArrayList<Player> players) {
         this.name = name;
         this.players = players;

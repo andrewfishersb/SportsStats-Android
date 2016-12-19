@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fisher.andrew.sportstats.MainActivity"
+    tools:context="fisher.andrew.sportstats.ui.MainActivity"
     android:background="@drawable/basketball_clipboard">
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create a Team"
-        android:id="@+id/createATeamHomePage"
+        android:id="@+id/createTeamTextViewLinkFromMainActivity"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -38,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create a Player"
-        android:id="@+id/createAPlayerHomePage"
-        android:layout_alignTop="@+id/createATeamHomePage"
+        android:id="@+id/createPlayerTextViewLinkFromMainActivity"
+        android:layout_alignTop="@+id/createTeamTextViewLinkFromMainActivity"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="38dp"

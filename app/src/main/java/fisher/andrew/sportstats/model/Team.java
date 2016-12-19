@@ -1,7 +1,34 @@
 package fisher.andrew.sportstats.model;
 
-/**
- * Created by Guest on 12/19/16.
- */
+import java.util.ArrayList;
+
+
 public class Team {
+
+    private String name;
+    ArrayList<Player> players;
+
+    public Team(String name, ArrayList<Player> players) {
+        this.name = name;
+        this.players = players;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void addPlayer(Player newPlayer){
+        players.add(newPlayer);
+    }
 }
+//add index after generate
+
+// ---TO ADD IF TIME---
+//wins loses
+//sport type
+//overall team score
+//make a team size limit eventually

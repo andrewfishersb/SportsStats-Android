@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "830420071347",
+    "firebase_url": "https://sportstats-bb626.firebaseio.com",
+    "project_id": "sportstats-bb626",
+    "storage_bucket": "sportstats-bb626.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830420071347:android:d7b7fde68f85d13c",
+        "android_client_info": {
+          "package_name": "fisher.andrew.sportstats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830420071347-8e2ufcd7qn23pa6otfc4hj8ksr398465.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fisher.andrew.sportstats",
+            "certificate_hash": "1C80FB86001A053D172488F7351D101943C1179C"
+          }
+        },
+        {
+          "client_id": "830420071347-4bluiq6icn425a3ko1ph0jdb43q7bvnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCoa3y_szI6xi0jafhcbJ98QZix0XW-wM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830420071347-4bluiq6icn425a3ko1ph0jdb43q7bvnf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

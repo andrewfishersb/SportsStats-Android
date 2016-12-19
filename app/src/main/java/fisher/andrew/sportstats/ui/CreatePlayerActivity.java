@@ -64,8 +64,6 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
             DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
             playerReference.push().setValue(newPlayer);
         }
-        if(v == m)
-
 
     }
 

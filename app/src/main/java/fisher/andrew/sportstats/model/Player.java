@@ -60,7 +60,7 @@ public class Player {
         return freeThrows;
     }
 
-    public void addFreeThrow(int freeThrows) {
+    public void addFreeThrow() {
         this.freeThrows = freeThrows;
     }
 
@@ -68,7 +68,7 @@ public class Player {
         return fieldGoals;
     }
 
-    public void addFieldGoal(int fieldGoals) {
+    public void addFieldGoal() {
         this.fieldGoals++;
     }
 

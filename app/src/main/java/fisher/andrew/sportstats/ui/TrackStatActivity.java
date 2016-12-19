@@ -31,6 +31,7 @@ public class TrackStatActivity extends AppCompatActivity {
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
         setUpFirebaseAdapter();
+
     }
 
     private void setUpFirebaseAdapter() {

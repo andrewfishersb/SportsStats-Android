@@ -3,16 +3,23 @@ package fisher.andrew.sportstats.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
-public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder{//maybe click listeners
+public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+
+
     View mView;
     Context mContext;
+
+
 
     public FirebasePlayerViewHolder(View playerView){
         super(playerView);
@@ -21,9 +28,10 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder{//maybe cl
     }
 
     public void bindPlayer(Player player){
+
         TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
         TextView fieldGoalsTextView= (TextView) mView.findViewById(R.id.playerFG);
-        TextView threePointsTextView = (TextView) mView.findViewById(R.id.player3Pts);
+        TextView threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
         TextView freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
         TextView reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
         TextView assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
@@ -41,10 +49,11 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder{//maybe cl
         blocksTextView.setText(player.getBlocks()+"");
         totalPointsTextView.setText(player.getTotalPoints()+"");
 
-
-
-
     }
 
+    @Override
+    public void onClick(View view){
+
+    }
 
 }

@@ -26,13 +26,7 @@
                 android:id="@+id/gameNameHeader"
                 android:textAlignment="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pts."
-                android:background="@drawable/table_cells"
-                android:id="@+id/textView"
-                android:textAlignment="center" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,7 +83,13 @@
                 android:background="@drawable/table_cells"
                 android:id="@+id/textView9"
                 android:textAlignment="center" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pts."
+                android:background="@drawable/table_cells"
+                android:id="@+id/textView"
+                android:textAlignment="center" />
         </TableRow>
     </TableLayout>
 

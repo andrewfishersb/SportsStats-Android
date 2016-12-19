@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fisher.andrew.sportstats.ui.TrackStatActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tableLayoutHeader"
         android:shrinkColumns="*"
         android:stretchColumns="*">
 
@@ -22,24 +15,19 @@
 
             <TextView
                 android:text="Name"
-                android:background="@drawable/table_cells"
-                android:id="@+id/gameNameHeader"
-                android:textAlignment="center" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pts."
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView"
+                android:id="@+id/playerName"
                 android:textAlignment="center" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FG"
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView3"
+                android:id="@+id/playerFG"
                 android:textAlignment="center" />
 
             <TextView
@@ -47,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="3Pts"
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView4"
+                android:id="@+id/player3Pts"
                 android:textAlignment="center" />
 
             <TextView
@@ -55,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="FT"
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView5"
+                android:id="@+id/playerFT"
                 android:textAlignment="center" />
 
             <TextView
@@ -63,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="REB"
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView6"
+                android:id="@+id/playerReb"
                 android:textAlignment="center" />
 
             <TextView
@@ -71,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:text="AST"
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView7"
+                android:id="@+id/playerAst"
                 android:textAlignment="center" />
 
             <TextView
@@ -79,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:text="STL"
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView8"
+                android:id="@+id/playerStl"
                 android:textAlignment="center" />
 
             <TextView
@@ -87,19 +75,16 @@
                 android:layout_height="wrap_content"
                 android:text="BLK"
                 android:background="@drawable/table_cells"
-                android:id="@+id/textView9"
+                android:id="@+id/playerBLK"
                 android:textAlignment="center" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pts."
+                android:background="@drawable/table_cells"
+                android:id="@+id/playerPoints"
+                android:textAlignment="center" />
         </TableRow>
     </TableLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/playerStatRecyclerView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tableLayoutHeader"/>
-
-
-</RelativeLayout>
+</LinearLayout>

@@ -1,6 +1,6 @@
 # Sport Stats Tracker
 
-## An android app meant for tracking basketball stats
+An android app meant for tracking basketball stats
 
 #### By **Andrew Fisher**
 

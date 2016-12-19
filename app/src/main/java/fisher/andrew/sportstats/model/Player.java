@@ -12,6 +12,7 @@ public class Player {
     int fieldGoals;
     int threePointers;
     int assists;
+    int rebounds;
     int blocks;
     int steals;
     int totalPoints;
@@ -109,6 +110,14 @@ public class Player {
 
     public int getTotalPoints(){
         return this.totalPoints;
+    }
+
+    public int getRebounds(){
+        return this.rebounds;
+    }
+
+    public void addRebound(){
+        this.rebounds++;
     }
 
 }

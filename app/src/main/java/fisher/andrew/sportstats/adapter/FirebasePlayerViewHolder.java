@@ -113,7 +113,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                     case R.id.playerFG:
                         selectedPlayer.addFieldGoal();
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_FIELD_GOALS).setValue(selectedPlayer.getFieldGoals());
-
+                        updateTotalScore(selectedPlayer);
 
 
 
@@ -166,9 +166,11 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 //                        .child(Constants.FIREBASE_CHILD_FIELD_GOALS);
 //                addStatRef.setValue(selectedPlayer.getFieldGoals());
 
-                DatabaseReference addTotalPoints = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER).child(selectedPlayer.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
 
-                addTotalPoints.setValue(selectedPlayer.getTotalPoints());
+                //1.either have this at the and run everytime
+                //2. Have its own method that reads in a player and call that in 3pts, fg and ft
+                //3.put these two lines in each
+
 
 
                 //maybe have totalPoints run no matter what?
@@ -180,6 +182,11 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
             }
         });
 
+    }
+
+    private void updateTotalScore(Player player){
+        DatabaseReference addTotalPointsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER).child(player.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
+        addTotalPointsRef.setValue(player.getTotalPoints());
     }
 
 }

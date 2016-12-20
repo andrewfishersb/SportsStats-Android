@@ -3,6 +3,7 @@ package fisher.andrew.sportstats.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -101,6 +102,45 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                 int playerIndex = getLayoutPosition();
                 Player selectedPlayer = players.get(playerIndex);
 
+                //test later if i need the Textviews being stated up to, i may not since i can just call the id
+
+                //Gets the reference of the player. So I can easily append to depending on the switch statement
+                DatabaseReference playerToSelectRef = FirebaseDatabase.getInstance()
+                        .getReference(Constants.FIREBASE_CHILD_PLAYER)
+                        .child(selectedPlayer.getPushId());
+
+                switch(viewId){
+                    case R.id.playerFG:
+                        selectedPlayer.addFieldGoal();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_FIELD_GOALS).setValue(selectedPlayer.getFieldGoals());
+
+
+
+
+                }
+
+
+
+
+
+//                R.id.playerPoints
+//                R.id.playerFG
+//                R.id.player3Pts
+//                R.id.playerFT
+//                R.id.playerReb
+//                R.id.playerAst
+//                R.id.playerStl
+//                R.id.playerBLK
+
+
+
+
+
+
+
+
+
+
 
 
                 //WAS USED TO PASS INFORMATION TO ACTIVITY
@@ -117,14 +157,14 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                 //maybe still need an intent?
 //                mContext.startActivity(intent);
 
-                selectedPlayer.addFieldGoal();
+//                selectedPlayer.addFieldGoal();
 
                 //maybe do this without the last child and use the switch to determine the last child
-                DatabaseReference addStatRef = FirebaseDatabase.getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_PLAYER)
-                        .child(selectedPlayer.getPushId())
-                        .child(Constants.FIREBASE_CHILD_FIELD_GOALS);
-                addStatRef.setValue(selectedPlayer.getFieldGoals());
+//                DatabaseReference addStatRef = FirebaseDatabase.getInstance()
+//                        .getReference(Constants.FIREBASE_CHILD_PLAYER)
+//                        .child(selectedPlayer.getPushId())
+//                        .child(Constants.FIREBASE_CHILD_FIELD_GOALS);
+//                addStatRef.setValue(selectedPlayer.getFieldGoals());
 
                 DatabaseReference addTotalPoints = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER).child(selectedPlayer.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
 

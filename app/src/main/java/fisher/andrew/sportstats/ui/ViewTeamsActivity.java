@@ -3,6 +3,8 @@ package fisher.andrew.sportstats.ui;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,23 +13,59 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
+import fisher.andrew.sportstats.adapter.FirebaseTeamViewHolder;
 import fisher.andrew.sportstats.model.Team;
 
 public class ViewTeamsActivity extends AppCompatActivity{
+    private DatabaseReference mTeamReference;
+    private FirebaseRecyclerAdapter mFirebaseAdapter;
+
+    @Bind(R.id.allTeamsRecyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
+        ButterKnife.bind(this);
+        mTeamReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS);
 
-
+        setUpFirebaseAdapter();
     }
 
+    private void setUpFirebaseAdapter(){
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Team, FirebaseTeamViewHolder>(Team.class,R.layout.team_instance,FirebaseTeamViewHolder.class,mTeamReference) {
+            @Override
+            protected void populateViewHolder(FirebaseTeamViewHolder viewHolder, Team model, int position) {
+                viewHolder.bindTeam(model);
+            }
+
+        };
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mFirebaseAdapter);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.cleanup();
+    }
+
+
+
+
+
+
+    //dialog box code
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -38,7 +76,6 @@ public class ViewTeamsActivity extends AppCompatActivity{
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-//                YourActivity.this.someFunctionInYourActivity();
                 Toast.makeText(ViewTeamsActivity.this, "menu item clicked", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(ViewTeamsActivity.this);
                 View mDialogView = getLayoutInflater().inflate(R.layout.create_a_team_dialog, null);

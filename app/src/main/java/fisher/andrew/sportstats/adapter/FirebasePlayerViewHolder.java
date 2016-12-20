@@ -114,23 +114,32 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                         selectedPlayer.addFieldGoal();
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_FIELD_GOALS).setValue(selectedPlayer.getFieldGoals());
                         updateTotalScore(selectedPlayer);
+                        break;
 
-
-
+                    case R.id.player3Pts:
+                        selectedPlayer.addThreePointer();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
+                        updateTotalScore(selectedPlayer);
+                        break;
+                    case R.id.playerFT:
+                        selectedPlayer.addFreeThrow();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows());
+                        updateTotalScore(selectedPlayer);
+                        break;
                 }
 
 
 
 
 
-//                R.id.playerPoints
-//                R.id.playerFG
-//                R.id.player3Pts
-//                R.id.playerFT
-//                R.id.playerReb
-//                R.id.playerAst
-//                R.id.playerStl
-//                R.id.playerBLK
+//R.id.playerPoints
+//R.id.playerFG
+//R.id.player3Pts
+//R.id.playerFT
+//R.id.playerReb
+//R.id.playerAst
+//R.id.playerStl
+//R.id.playerBLK
 
 
 
@@ -167,13 +176,6 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 //                addStatRef.setValue(selectedPlayer.getFieldGoals());
 
 
-                //1.either have this at the and run everytime
-                //2. Have its own method that reads in a player and call that in 3pts, fg and ft
-                //3.put these two lines in each
-
-
-
-                //maybe have totalPoints run no matter what?
             }
 
             @Override
@@ -184,6 +186,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
     }
 
+    //will update a player score when called, this way I dont have to keep calling these lines of code in three places in the switch. Before I was calling this at the end of the switch statement but that would write to firebase even if i only updated assists
     private void updateTotalScore(Player player){
         DatabaseReference addTotalPointsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER).child(player.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
         addTotalPointsRef.setValue(player.getTotalPoints());

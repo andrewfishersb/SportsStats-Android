@@ -31,6 +31,7 @@ A user will be able to create their own teams and players and in doing so record
 
 
 ## Future Goals and Ideas (will slowly work their way into the Specifications)
+ * Looks like you have no teams click the plus to add one (or just pop a dialog for them to use)
  * First page might just have View teams or View players and then have the top bar available to add new teams and players
  * Height spinner, set a different default value i.e. to 6'2", limit the amount of items shown
  * More stats including 3s FTs attempts, Turnovers, fouls

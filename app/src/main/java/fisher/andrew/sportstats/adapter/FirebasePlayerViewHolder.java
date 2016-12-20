@@ -20,6 +20,8 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
@@ -27,7 +29,16 @@ import fisher.andrew.sportstats.ui.TrackStatActivity;
 
 public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-   public TextView fieldGoalsTextView;
+    //should these be public or private
+    //all boxes that i can click on
+    private TextView fieldGoalsTextView;
+    private TextView threePointsTextView;
+    private TextView freeThrowsTextView;
+    private TextView reboundsTextView;
+    private TextView assistsTextView;
+    private TextView stealsTextView;
+    private TextView blocksTextView;
+
     View mView;
     Context mContext;
 
@@ -39,17 +50,18 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
         mContext = playerView.getContext();
     }
 
-    public void bindPlayer(Player player){
 
+    public void bindPlayer(Player player){
         TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
-         fieldGoalsTextView= (TextView) mView.findViewById(R.id.playerFG);
-        TextView threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
-        TextView freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
-        TextView reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
-        TextView assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
-        TextView stealsTextView = (TextView) mView.findViewById(R.id.playerStl);
-        TextView blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
         TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
+        fieldGoalsTextView= (TextView) mView.findViewById(R.id.playerFG);
+        threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
+        freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
+        reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
+        assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
+        stealsTextView = (TextView) mView.findViewById(R.id.playerStl);
+        blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
+
 
         nameTextView.setText(player.getName());
         fieldGoalsTextView.setText(player.getFieldGoals()+"");
@@ -64,6 +76,14 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
 
         fieldGoalsTextView.setOnClickListener(this);
+        threePointsTextView.setOnClickListener(this);
+        freeThrowsTextView.setOnClickListener(this);
+        reboundsTextView.setOnClickListener(this);
+        assistsTextView.setOnClickListener(this);
+        stealsTextView.setOnClickListener(this);
+        blocksTextView.setOnClickListener(this);
+
+
     }
 
     //possibly click on the item but will then send the id, position and the intent
@@ -99,13 +119,19 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
                 selectedPlayer.addFieldGoal();
 
-                //accesses the fieldGoal of this specific player
+                //maybe do this without the last child and use the switch to determine the last child
                 DatabaseReference addStatRef = FirebaseDatabase.getInstance()
                         .getReference(Constants.FIREBASE_CHILD_PLAYER)
                         .child(selectedPlayer.getPushId())
                         .child(Constants.FIREBASE_CHILD_FIELD_GOALS);
                 addStatRef.setValue(selectedPlayer.getFieldGoals());
-                addStatRef.setValue(selectedPlayer.getTotalPoints());
+
+                DatabaseReference addTotalPoints = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER).child(selectedPlayer.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
+
+                addTotalPoints.setValue(selectedPlayer.getTotalPoints());
+
+
+                //maybe have totalPoints run no matter what?
             }
 
             @Override

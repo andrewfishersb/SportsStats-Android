@@ -5,4 +5,16 @@ package fisher.andrew.sportstats;
  */
 public class Constants {
     public static final String FIREBASE_CHILD_PLAYER = "player";
+
+
+
+    public static final String FIREBASE_CHILD_ASSISTS = "assists";
+    public static final String FIREBASE_CHILD_BLOCKS = "blocks";
+    public static final String FIREBASE_CHILD_FIELD_GOALS = "fieldGoals";
+    public static final String FIREBASE_CHILD_FREE_THROWS = "freeThrows";
+    public static final String FIREBASE_CHILD_REBOUNDS = "rebounds";
+    public static final String FIREBASE_CHILD_STEALS = "steals";
+    public static final String FIREBASE_CHILD_THREE_POINTERS = "threePointers";
+    public static final String FIREBASE_CHILD_TOTAL_POINTS = "totalPoints";
+
 }

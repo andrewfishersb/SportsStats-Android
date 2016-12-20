@@ -80,18 +80,32 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                 }
                 int playerIndex = getLayoutPosition();
                 Player selectedPlayer = players.get(playerIndex);
+
+
+
+                //WAS USED TO PASS INFORMATION TO ACTIVITY
+                // Intent intent = new Intent(mContext, TrackStatActivity.class);
+//                intent.putExtra("view_id",viewId); //
 //
-                Intent intent = new Intent(mContext, TrackStatActivity.class);
-                intent.putExtra("view_id",viewId); //
-
-////                intent.putExtra("index", playerIndex + "");
-                intent.putExtra("player",Parcels.wrap(selectedPlayer));
+//////                intent.putExtra("index", playerIndex + "");
+//                intent.putExtra("player",Parcels.wrap(selectedPlayer));
+////
 //
+//                //this is to differentiate between the two intents on the next page
+//                intent.putExtra("intent_sent_from","FirebasePlayerViewHolder");
 
-                //this is to differentiate between the two intents on the next page
-                intent.putExtra("intent_sent_from","FirebasePlayerViewHolder");
-                mContext.startActivity(intent);
+                //maybe still need an intent?
+//                mContext.startActivity(intent);
 
+                selectedPlayer.addFieldGoal();
+
+                //accesses the fieldGoal of this specific player
+                DatabaseReference addStatRef = FirebaseDatabase.getInstance()
+                        .getReference(Constants.FIREBASE_CHILD_PLAYER)
+                        .child(selectedPlayer.getPushId())
+                        .child(Constants.FIREBASE_CHILD_FIELD_GOALS);
+                addStatRef.setValue(selectedPlayer.getFieldGoals());
+                addStatRef.setValue(selectedPlayer.getTotalPoints());
             }
 
             @Override

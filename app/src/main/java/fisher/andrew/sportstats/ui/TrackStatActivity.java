@@ -1,10 +1,13 @@
 package fisher.andrew.sportstats.ui;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +32,12 @@ public class TrackStatActivity extends AppCompatActivity {
     private DatabaseReference mPlayerReference;
 
     //intent variables
-//    private int viewId;
-//    private Player player;
+    private int viewId;
+    private Player player;
 //    private int playersIndex;
+
+    //test to see if have access to this view
+//    @Bind(R.id.playerFG) TextView mPlayerFieldGoal;
 
     @Bind(R.id.playerStatRecyclerView) RecyclerView mRecyclerView;
     @Override
@@ -44,8 +50,20 @@ public class TrackStatActivity extends AppCompatActivity {
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
 
+        //from here - all works but it reloads the page every time
+    Intent intent = getIntent();
 
+        if(intent.getStringExtra("intent_sent_from")!=null){
+            Toast.makeText(TrackStatActivity.this, "Intent had information", Toast.LENGTH_SHORT).show();
+            viewId = intent.getIntExtra("view_id",0);
+            player = Parcels.unwrap(intent.getParcelableExtra("player"));
 
+            player.addFieldGoal();
+
+            mPlayerReference.child(player.getPushId()).child("fieldGoals").setValue(player.getFieldGoals());
+
+        }
+    //to here
         setUpFirebaseAdapter();
 
 
@@ -59,6 +77,7 @@ public class TrackStatActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(FirebasePlayerViewHolder viewHolder, Player model, int position){
                 viewHolder.bindPlayer(model);
+
             }
         };
         mRecyclerView.setHasFixedSize(true);

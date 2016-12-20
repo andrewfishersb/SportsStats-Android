@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,6 +29,8 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
     @Bind(R.id.addAgeEditText) EditText mAddAgeEditText;
     @Bind(R.id.addNameEditText) EditText mAddNameEditText;
     @Bind(R.id.addPlayerButton) Button mAddPlayerButton;
+
+
 
 
     @Override
@@ -56,13 +60,22 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v){
+
+        //update to hold current user when this includes authentication
         if(v == mAddPlayerButton){
             String name = mAddNameEditText.getText().toString();
             int age = Integer.parseInt(mAddAgeEditText.getText().toString());
             String height = mPlayerHeightSpinner.getSelectedItem().toString();
             Player newPlayer = new Player(name,height,age);
+
+
+            //Data Structure lesson change this area
             DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
-            playerReference.push().setValue(newPlayer);
+
+            DatabaseReference pushRef = playerReference.push();
+            String pushId = pushRef.getKey();
+            newPlayer.setPushId(pushId);
+            pushRef.setValue(newPlayer);
         }
 
     }

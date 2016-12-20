@@ -65,7 +65,8 @@ public class Player {
     }
 
     public void addFreeThrow() {
-        this.freeThrows = freeThrows;
+        this.freeThrows++;
+        this.totalPoints++;
     }
 
     public int getFieldGoals() {
@@ -74,6 +75,7 @@ public class Player {
 
     public void addFieldGoal() {
         this.fieldGoals++;
+        this.totalPoints +=2;
     }
 
     public int getThreePointers() {
@@ -81,6 +83,7 @@ public class Player {
     }
 
     public void addThreePointer() {
+        this.totalPoints += 3;
         this.threePointers++;
     }
 

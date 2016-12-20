@@ -17,6 +17,10 @@ public class Player {
     int steals;
     int totalPoints;
 
+
+
+    private String pushId;
+
     public Player(){}
 
     public Player(String name, String height, int age){
@@ -119,6 +123,15 @@ public class Player {
     public void addRebound(){
         this.rebounds++;
     }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
 
 }
 // ---ADD LATER IF TIME---

@@ -51,6 +51,14 @@ public class ViewTeamsActivity extends AppCompatActivity{
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
+
+        mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver(){
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                mFirebaseAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
@@ -101,14 +109,14 @@ public class ViewTeamsActivity extends AppCompatActivity{
                             String pushId = pushRef.getKey();
                             newTeam.setPushId(pushId);
                             pushRef.setValue(newTeam);
+
                             dialog.dismiss();
+                            setUpFirebaseAdapter();//should this be here, in theory will update when closed
                         }
 
 
                     }
                 });
-                //important
-
                 dialog.show();
 
                 return true;

@@ -79,13 +79,15 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     players.add(snapshot.getValue(Player.class));
                 }
-                int playerIndex = getLayoutPosition();
-                Intent intent = new Intent(mContext, TrackStatActivity.class);
-                intent.putExtra("view_id",viewId);
-                intent.putExtra("index", playerIndex + "");
-                intent.putExtra("restaurants", Parcels.wrap(players));
-
-                mContext.startActivity(intent);
+//                int playerIndex = getLayoutPosition();
+//                Player selectedPlayer = players.get(playerIndex);
+//
+//                Intent intent = new Intent(mContext, TrackStatActivity.class);
+//                intent.putExtra("view_id",viewId);
+////                intent.putExtra("index", playerIndex + "");
+//                intent.putExtra("player",Parcels.wrap(selectedPlayer));
+//
+//                mContext.startActivity(intent);
 
             }
 

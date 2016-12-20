@@ -10,6 +10,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -27,9 +29,9 @@ public class TrackStatActivity extends AppCompatActivity {
     private DatabaseReference mPlayerReference;
 
     //intent variables
-    private int viewId;
-    private ArrayList<Player> players;
-    private int playersIndex;
+//    private int viewId;
+//    private Player player;
+//    private int playersIndex;
 
     @Bind(R.id.playerStatRecyclerView) RecyclerView mRecyclerView;
     @Override
@@ -41,14 +43,6 @@ public class TrackStatActivity extends AppCompatActivity {
 
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
-
-        if(getIntent()!=null){
-            Intent intent = getIntent();
-
-
-
-
-        }
 
 
 

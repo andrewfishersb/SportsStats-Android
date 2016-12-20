@@ -34,11 +34,13 @@ A user will be able to create their own teams and players and in doing so record
  * First page might just have View teams or View players and then have the top bar available to add new teams and players
  * Height spinner, set a different default value i.e. to 6'2", limit the amount of items shown
  * More stats including 3s FTs attempts, Turnovers, fouls
+ * Start a game, resets stats, but at the end of the game sends them to an overall, which can then find an average since they have the games played
+ * Landscape mode have more stats shown? if space
  * Click vs double click to record certain stats
  * Substitutions
  * Record live time
  * expand to other sports
- * Refractor some activities into fragments
+ * Refractor some activities into fragments (ie the format of the statistics)
 
 
 ## Technologies Used

@@ -73,7 +73,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
     public void onClick(final View view){
         final ArrayList<Player> players = new ArrayList<>();
         final int viewId = view.getId();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -87,7 +87,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
                 //Gets the reference of the player. So I can easily append to depending on the switch statement
                 DatabaseReference playerToSelectRef = FirebaseDatabase.getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_PLAYER)
+                        .getReference(Constants.FIREBASE_CHILD_PLAYERS)
                         .child(selectedPlayer.getPushId());
 
                 //check what view was clicked and then update accordingly
@@ -138,7 +138,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
     //will update a player score when called, this way I dont have to keep calling these lines of code in three places in the switch. Before I was calling this at the end of the switch statement but that would write to firebase even if i only updated assists
     private void updateTotalScore(Player player){
-        DatabaseReference addTotalPointsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER).child(player.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
+        DatabaseReference addTotalPointsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(player.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
         addTotalPointsRef.setValue(player.getTotalPoints());
     }
 

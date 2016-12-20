@@ -48,7 +48,7 @@ public class TrackStatActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
+        mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
 
         //from here - all works but it reloads the page every time
 //    Intent intent = getIntent();

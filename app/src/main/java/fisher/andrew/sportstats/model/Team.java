@@ -7,7 +7,7 @@ import java.util.ArrayList;
 @Parcel
 public class Team {
 
-    private String name;
+    String name;
     ArrayList<Player> players;
     //    String index; is this needed?
     private String pushId;
@@ -15,9 +15,9 @@ public class Team {
 
     public Team(){}
 
-    public Team(String name, ArrayList<Player> players) {
+    public Team(String name) {
         this.name = name;
-        this.players = players;
+        this.players = new ArrayList<>();
 //        this.index = "none_specified";
     }
 

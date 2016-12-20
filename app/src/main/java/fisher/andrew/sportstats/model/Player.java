@@ -18,9 +18,6 @@ public class Player {
     int blocks;
     int steals;
     int totalPoints;
-
-
-
     private String pushId;
 
     public Player(){}

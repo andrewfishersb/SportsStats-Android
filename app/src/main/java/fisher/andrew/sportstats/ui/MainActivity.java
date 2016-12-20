@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         //may eventually go in overflow menu
         if(view ==mCreateTeamLink){
-            Intent intent = new Intent(MainActivity.this,CreateTeamActivity.class);
+            Intent intent = new Intent(MainActivity.this,ViewTeamsActivity.class);
             startActivity(intent);
         }
         //may just be in view team eventually

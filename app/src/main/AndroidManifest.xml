@@ -25,7 +25,7 @@
                 android:value="fisher.andrew.sportstats.ui.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.CreateTeamActivity"
+            android:name=".ui.ViewTeamsActivity"
             android:label="Back Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

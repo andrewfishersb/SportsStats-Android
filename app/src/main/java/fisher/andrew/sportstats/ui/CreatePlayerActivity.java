@@ -75,7 +75,7 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
 
 
             //Data Structure lesson change this area
-            DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYER);
+            DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
 
             DatabaseReference pushRef = playerReference.push();
             String pushId = pushRef.getKey();

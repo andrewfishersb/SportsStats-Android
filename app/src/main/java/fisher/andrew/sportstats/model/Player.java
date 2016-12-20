@@ -2,6 +2,8 @@ package fisher.andrew.sportstats.model;
 
 import org.parceler.Parcel;
 
+
+//will this need an index for movement purposes...i think so
 @Parcel
 public class Player {
     String name;

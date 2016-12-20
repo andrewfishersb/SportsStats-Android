@@ -9,14 +9,16 @@ public class Team {
 
     private String name;
     ArrayList<Player> players;
-    String index;
+    //    String index; is this needed?
+    private String pushId;
+
 
     public Team(){}
 
     public Team(String name, ArrayList<Player> players) {
         this.name = name;
         this.players = players;
-        this.index = "none_specified";
+//        this.index = "none_specified";
     }
 
     public String getName() {
@@ -31,13 +33,21 @@ public class Team {
         players.add(newPlayer);
     }
 
-    public String getIndex(){
-        return index;
+    public String getPushId() {
+        return pushId;
     }
 
-    public void setIndex(String index){
-        this.index=index;
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
+
+//    public String getIndex(){
+//        return index;
+//    }
+//
+//    public void setIndex(String index){
+//        this.index=index;
+//    }
 }
 //add index after generate
 

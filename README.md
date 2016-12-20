@@ -19,16 +19,6 @@ A user will be able to create their own teams and players and in doing so record
 
 
 
-# Tomorrow
-Refractor Player to hold an id which is set upon creation of that player
-Possibly pass who was clicked and the view id to determine what to overwrite???
-    or instead do this in the ViewHolder since i wont have access to the recycler view textview ids...unless they are all public?
-        can test this maybe through butterknife but a good chance its wrong???
-
-
-
-
-
 ## Setup/Installation Requirements
 
 ```
@@ -48,7 +38,7 @@ Possibly pass who was clicked and the view id to determine what to overwrite???
  * Substitutions
  * Record live time
  * expand to other sports
-
+ * Refractor some activities into fragments
 
 
 ## Technologies Used

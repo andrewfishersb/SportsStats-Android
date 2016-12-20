@@ -126,16 +126,28 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows());
                         updateTotalScore(selectedPlayer);
                         break;
+                    case R.id.playerReb:
+                        selectedPlayer.addRebound();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(selectedPlayer.getRebounds());
+                        break;
+                    case R.id.playerAst:
+                        selectedPlayer.addAssist();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(selectedPlayer.getAssists());
+                        break;
+
+
+
+
+
+
+
                 }
 
 
 
 
 
-//R.id.playerPoints
-//R.id.playerFG
-//R.id.player3Pts
-//R.id.playerFT
+
 //R.id.playerReb
 //R.id.playerAst
 //R.id.playerStl

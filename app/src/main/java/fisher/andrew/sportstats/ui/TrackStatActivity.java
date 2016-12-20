@@ -42,8 +42,8 @@ public class TrackStatActivity extends AppCompatActivity {
     @Bind(R.id.playerStatRecyclerView) RecyclerView mRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_stat);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_track_stat);
 
         ButterKnife.bind(this);
 

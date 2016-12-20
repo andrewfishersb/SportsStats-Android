@@ -58,9 +58,9 @@ public class TrackStatActivity extends AppCompatActivity {
 //            viewId = intent.getIntExtra("view_id",0);
 //            player = Parcels.unwrap(intent.getParcelableExtra("player"));
 //
-//            player.addFieldGoal();
+//            player.addTwoPoints();
 //
-//            mPlayerReference.child(player.getPushId()).child("fieldGoals").setValue(player.getFieldGoals());
+//            mPlayerReference.child(player.getPushId()).child("fieldGoals").setValue(player.getTwoPointers());
 //
 //        }
     //to here

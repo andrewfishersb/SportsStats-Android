@@ -10,7 +10,7 @@ public class Constants {
 
     public static final String FIREBASE_CHILD_ASSISTS = "assists";
     public static final String FIREBASE_CHILD_BLOCKS = "blocks";
-    public static final String FIREBASE_CHILD_FIELD_GOALS = "fieldGoals";
+    public static final String FIREBASE_CHILD_TWO_POINTERS = "twoPointers";
     public static final String FIREBASE_CHILD_FREE_THROWS = "freeThrows";
     public static final String FIREBASE_CHILD_REBOUNDS = "rebounds";
     public static final String FIREBASE_CHILD_STEALS = "steals";

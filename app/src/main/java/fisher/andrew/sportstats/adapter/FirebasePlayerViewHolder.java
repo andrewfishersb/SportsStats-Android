@@ -2,13 +2,9 @@ package fisher.andrew.sportstats.adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,22 +13,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
-import fisher.andrew.sportstats.ui.TrackStatActivity;
 
 public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     //should these be public or private
     //all boxes that i can click on
-    private TextView fieldGoalsTextView;
+    private TextView twoPointsTextView;
     private TextView threePointsTextView;
     private TextView freeThrowsTextView;
     private TextView reboundsTextView;
@@ -55,7 +46,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
     public void bindPlayer(Player player){
         TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
         TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
-        fieldGoalsTextView= (TextView) mView.findViewById(R.id.playerFG);
+        twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
         threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
         freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
         reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
@@ -65,7 +56,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
 
         nameTextView.setText(player.getName());
-        fieldGoalsTextView.setText(player.getFieldGoals()+"");
+        twoPointsTextView.setText(player.getTwoPointers()+"");
         threePointsTextView.setText(player.getThreePointers()+"");
         freeThrowsTextView.setText(player.getFreeThrows()+"");
         reboundsTextView.setText(player.getRebounds()+"");
@@ -76,7 +67,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
 
 
-        fieldGoalsTextView.setOnClickListener(this);
+        twoPointsTextView.setOnClickListener(this);
         threePointsTextView.setOnClickListener(this);
         freeThrowsTextView.setOnClickListener(this);
         reboundsTextView.setOnClickListener(this);
@@ -109,10 +100,11 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                         .getReference(Constants.FIREBASE_CHILD_PLAYER)
                         .child(selectedPlayer.getPushId());
 
+                //check what view was clicked and then update accordingly
                 switch(viewId){
-                    case R.id.playerFG:
-                        selectedPlayer.addFieldGoal();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_FIELD_GOALS).setValue(selectedPlayer.getFieldGoals());
+                    case R.id.player2Pts:
+                        selectedPlayer.addTwoPoints();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
                         updateTotalScore(selectedPlayer);
                         break;
 
@@ -141,53 +133,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
                     case R.id.playerBLK:
                         selectedPlayer.addBlock();
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks());
-
-
                 }
-
-
-
-
-
-
-//R.id.playerReb
-//R.id.playerAst
-//R.id.playerStl
-//R.id.playerBLK
-
-
-
-
-
-
-
-
-
-
-
-
-                //WAS USED TO PASS INFORMATION TO ACTIVITY
-                // Intent intent = new Intent(mContext, TrackStatActivity.class);
-//                intent.putExtra("view_id",viewId); //
-//
-//////                intent.putExtra("index", playerIndex + "");
-//                intent.putExtra("player",Parcels.wrap(selectedPlayer));
-////
-//
-//                //this is to differentiate between the two intents on the next page
-//                intent.putExtra("intent_sent_from","FirebasePlayerViewHolder");
-
-                //maybe still need an intent?
-//                mContext.startActivity(intent);
-
-//                selectedPlayer.addFieldGoal();
-
-                //maybe do this without the last child and use the switch to determine the last child
-//                DatabaseReference addStatRef = FirebaseDatabase.getInstance()
-//                        .getReference(Constants.FIREBASE_CHILD_PLAYER)
-//                        .child(selectedPlayer.getPushId())
-//                        .child(Constants.FIREBASE_CHILD_FIELD_GOALS);
-//                addStatRef.setValue(selectedPlayer.getFieldGoals());
 
 
             }

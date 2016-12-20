@@ -9,7 +9,7 @@ public class Player {
     int age;
     int freeThrows;
     //a regular 2 pt basket
-    int fieldGoals;
+    int twoPointers;
     int threePointers;
     int assists;
     int rebounds;
@@ -28,7 +28,7 @@ public class Player {
         this.height = height;
         this.age = age;
         this.freeThrows=0;
-        this.fieldGoals=0;
+        this.twoPointers =0;
         this.threePointers=0;
         this.assists=0;
         this.blocks=0;
@@ -69,12 +69,12 @@ public class Player {
         this.totalPoints++;
     }
 
-    public int getFieldGoals() {
-        return fieldGoals;
+    public int getTwoPointers() {
+        return twoPointers;
     }
 
-    public void addFieldGoal() {
-        this.fieldGoals++;
+    public void addTwoPoints() {
+        this.twoPointers++;
         this.totalPoints +=2;
     }
 
@@ -111,8 +111,8 @@ public class Player {
         this.steals++;
     }
 
-    public void setTotalPoints(int threePointers, int fieldGoals, int freeThrows){
-        this.totalPoints = freeThrows + (2*fieldGoals) + (3*threePointers);
+    public void setTotalPoints(int threePointers, int twoPointers, int freeThrows){
+        this.totalPoints = freeThrows + (2*twoPointers) + (3*threePointers);
     }
 
     public int getTotalPoints(){

@@ -64,8 +64,13 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
         //update to hold current user when this includes authentication
         if(v == mAddPlayerButton){
             String name = mAddNameEditText.getText().toString();
+            mAddNameEditText.setText("");
             int age = Integer.parseInt(mAddAgeEditText.getText().toString());
+            mAddAgeEditText.setText("");
             String height = mPlayerHeightSpinner.getSelectedItem().toString();
+
+
+
             Player newPlayer = new Player(name,height,age);
 
 
@@ -82,7 +87,3 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
 
 
 }
-//min 36 inches
-//max 91 inches
-
-//maybe its own method?

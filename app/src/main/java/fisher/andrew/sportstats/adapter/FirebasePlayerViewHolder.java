@@ -20,17 +20,6 @@ import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
 public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-    //should these be public or private
-    //all boxes that i can click on
-    private TextView twoPointsTextView;
-    private TextView threePointsTextView;
-    private TextView freeThrowsTextView;
-    private TextView reboundsTextView;
-    private TextView assistsTextView;
-    private TextView stealsTextView;
-    private TextView blocksTextView;
-
     View mView;
     Context mContext;
 
@@ -46,13 +35,13 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
     public void bindPlayer(Player player){
         TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
         TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
-        twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
-        threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
-        freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
-        reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
-        assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
-        stealsTextView = (TextView) mView.findViewById(R.id.playerStl);
-        blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
+        TextView  twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
+        TextView threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
+        TextView freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
+        TextView reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
+        TextView assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
+        TextView stealsTextView = (TextView) mView.findViewById(R.id.playerStl);
+        TextView blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
 
 
         nameTextView.setText(player.getName());
@@ -64,6 +53,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
         stealsTextView.setText(player.getSteals()+"");
         blocksTextView.setText(player.getBlocks()+"");
         totalPointsTextView.setText(player.getTotalPoints()+"");
+
 
 
 

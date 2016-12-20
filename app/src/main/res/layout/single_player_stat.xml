@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -17,23 +17,25 @@
 
             <TextView
                 android:text="Name"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerName"
+
                 android:textAlignment="center" />
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="2Pts"
                 android:background="@drawable/table_cells"
                 android:id="@+id/player2Pts"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="3Pts"
                 android:background="@drawable/table_cells"
@@ -41,7 +43,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="FT"
                 android:background="@drawable/table_cells"
@@ -49,7 +51,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="REB"
                 android:background="@drawable/table_cells"
@@ -57,7 +59,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="AST"
                 android:background="@drawable/table_cells"
@@ -65,7 +67,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="STL"
                 android:background="@drawable/table_cells"
@@ -73,7 +75,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="BLK"
                 android:background="@drawable/table_cells"
@@ -81,7 +83,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:text="Pts."
                 android:background="@drawable/table_cells"
@@ -89,4 +91,4 @@
                 android:textAlignment="center" />
         </TableRow>
     </TableLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -35,7 +35,6 @@ import fisher.andrew.sportstats.model.Team;
 
 //eventually create menu to add new players
 public class TeamDetailActivity extends AppCompatActivity {
-//    private DatabaseReference mTeamReference;
     private DatabaseReference mPlayerReference;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
 
@@ -54,18 +53,17 @@ public class TeamDetailActivity extends AppCompatActivity {
         mTeamName.setText(currentTeam.getName());
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
-//        mTeamReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS);
 
 
-        final ArrayList<String> testPlayer = new ArrayList<>();
-
+//this block of code will find players on a set team
+        final ArrayList<Player> testPlayer = new ArrayList<>();
         mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     //gets the team id of the current player and compares
                     if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
-                        testPlayer.add(snapshot.getValue(Player.class).getName());
+                        testPlayer.add(snapshot.getValue(Player.class));
                     }
                 }
             }

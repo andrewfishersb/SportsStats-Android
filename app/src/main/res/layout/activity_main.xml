@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create a Team"
+        android:text="View Teams"
         android:id="@+id/createTeamTextViewLinkFromMainActivity"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create a Player"
+        android:text="See all players"
         android:id="@+id/createPlayerTextViewLinkFromMainActivity"
         android:layout_alignTop="@+id/createTeamTextViewLinkFromMainActivity"
         android:layout_alignParentRight="true"

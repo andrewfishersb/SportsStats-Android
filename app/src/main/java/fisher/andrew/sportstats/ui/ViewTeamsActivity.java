@@ -109,9 +109,7 @@ public class ViewTeamsActivity extends AppCompatActivity{
                             String pushId = pushRef.getKey();
                             newTeam.setPushId(pushId);
                             pushRef.setValue(newTeam);
-
                             dialog.dismiss();
-                            setUpFirebaseAdapter();//should this be here, in theory will update when closed
                         }
 
 

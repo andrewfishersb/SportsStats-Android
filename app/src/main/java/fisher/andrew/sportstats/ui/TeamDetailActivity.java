@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,8 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
@@ -31,6 +35,7 @@ import fisher.andrew.sportstats.model.Team;
 
 //eventually create menu to add new players
 public class TeamDetailActivity extends AppCompatActivity {
+//    private DatabaseReference mTeamReference;
     private DatabaseReference mPlayerReference;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
 
@@ -49,11 +54,26 @@ public class TeamDetailActivity extends AppCompatActivity {
         mTeamName.setText(currentTeam.getName());
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+//        mTeamReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS);
 
 
-        ArrayList<Player> test = new ArrayList<>();
+        final ArrayList<String> testPlayer = new ArrayList<>();
 
+        mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    //gets the team id of the current player and compares
+                    if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
+                        testPlayer.add(snapshot.getValue(Player.class).getName());
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
 
         setUpFirebaseAdapter();
@@ -72,7 +92,7 @@ public class TeamDetailActivity extends AppCompatActivity {
             }
         };
         mAllPlayerRecyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//maybe have to call activity
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//linear layout instead?
         mAllPlayerRecyclerView.setLayoutManager(gridLayoutManager);
         mAllPlayerRecyclerView.setAdapter(mFirebaseAdapter);
     }

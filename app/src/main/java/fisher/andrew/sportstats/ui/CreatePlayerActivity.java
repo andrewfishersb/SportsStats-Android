@@ -84,13 +84,16 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
             DatabaseReference pushRef = playerReference.push();
             String pushId = pushRef.getKey();
             newPlayer.setPushId(pushId);
-            pushRef.setValue(newPlayer);
 
+            //adds a players pushId to an arraylist of players from the Team model
+            playersTeam.addPlayer(newPlayer.getPushId());
             //assigns a team id to the player object
             newPlayer.setTeamId(playersTeam.getPushId());
 
-            //adds a player to the chosen Teams Array then store into database
-            playersTeam.addPlayer(newPlayer.getPushId());
+            //adds player to firebase
+            pushRef.setValue(newPlayer);
+
+            //over writes same team in firebase this time with an arraylist of players
             DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
                     .getReference(Constants.FIREBASE_CHILD_TEAMS)
                     .child(playersTeam.getPushId());

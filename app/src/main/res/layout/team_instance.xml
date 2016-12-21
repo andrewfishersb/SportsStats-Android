@@ -11,5 +11,8 @@
         android:text="Later Add Remove Buttons"
         android:id="@+id/teamInRecyclerView"
         android:layout_gravity="center_horizontal"
-        android:textSize="20sp" />
+
+        android:textColor="#AA1916"
+        android:textSize="20sp"
+        android:textAlignment="center" />
 </LinearLayout>

@@ -9,12 +9,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="174dp"
-
+        android:layout_height="230dp"
+        android:layout_marginTop="190dp"
         android:id="@+id/allTeamsRecyclerView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
+        android:layout_centerHorizontal="true"
+        android:background="#1FF57C00" />
 
 </RelativeLayout>

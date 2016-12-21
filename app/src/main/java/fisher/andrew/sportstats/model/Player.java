@@ -20,6 +20,10 @@ public class Player {
     int totalPoints;
     private String pushId;
 
+    //have just team id or team name? with id ill still be able to access their name (try id for now)
+    String teamId;
+
+
     public Player(){}
 
     public Player(String name, String height, int age){
@@ -33,6 +37,7 @@ public class Player {
         this.blocks=0;
         this.steals=0;
         this.totalPoints =0 ;
+        this.teamId = "free_agent";
     }
 
     public String getName() {
@@ -134,7 +139,13 @@ public class Player {
         this.pushId = pushId;
     }
 
+    public void setTeamId(String id){
+        this.teamId = id;
+    }
 
+    public String getTeamId(){
+        return this.teamId;
+    }
 }
 // ---ADD LATER IF TIME---
 //more stats

@@ -17,11 +17,11 @@
 
             <TextView
                 android:text="Name"
-                android:layout_width="50dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerName"
-
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
 
@@ -32,6 +32,7 @@
                 android:background="@drawable/table_cells"
                 android:id="@+id/player2Pts"
                 android:textAlignment="center"
+                android:layout_weight="1"
                 />
 
             <TextView
@@ -40,7 +41,8 @@
                 android:text="3Pts"
                 android:background="@drawable/table_cells"
                 android:id="@+id/player3Pts"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="20dp"
@@ -48,7 +50,8 @@
                 android:text="FT"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerFT"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="20dp"
@@ -56,7 +59,8 @@
                 android:text="REB"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerReb"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="20dp"
@@ -64,7 +68,8 @@
                 android:text="AST"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerAst"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="20dp"
@@ -72,7 +77,8 @@
                 android:text="STL"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerStl"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="20dp"
@@ -80,7 +86,8 @@
                 android:text="BLK"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerBLK"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="20dp"
@@ -88,7 +95,8 @@
                 android:text="Pts."
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerPoints"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1"/>
         </TableRow>
     </TableLayout>
 </RelativeLayout>

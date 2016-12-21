@@ -77,14 +77,13 @@ public class ViewTeamsActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_add_team, menu);
-        MenuItem item = menu.findItem(R.id.action_addTeamMenu);
+        inflater.inflate(R.menu.menu_add, menu);
+        MenuItem item = menu.findItem(R.id.action_addMenu);
 
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(ViewTeamsActivity.this, "menu item clicked", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(ViewTeamsActivity.this);
                 View mDialogView = getLayoutInflater().inflate(R.layout.create_a_team_dialog, null);
                 final EditText mName = (EditText) mDialogView.findViewById(R.id.createTeamNameEditText);
@@ -100,7 +99,6 @@ public class ViewTeamsActivity extends AppCompatActivity{
                         if(mName.getText().toString().isEmpty()){
                             Toast.makeText(ViewTeamsActivity.this, "No Name Entered", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(ViewTeamsActivity.this,"Submit", Toast.LENGTH_SHORT).show();
                             String teamName = mName.getText().toString();
                             Team newTeam = new Team(teamName);
 

@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view){
         //may eventually go in overflow menu
-        if(view == mCreatePlayerLink){
-            Intent intent = new Intent(MainActivity.this,CreatePlayerActivity.class);
-            startActivity(intent);
-        }
+//        if(view == mCreatePlayerLink){
+//            Intent intent = new Intent(MainActivity.this,CreatePlayerActivity.class);
+//            startActivity(intent);
+//        }
         //may eventually go in overflow menu
         if(view ==mCreateTeamLink){
             Intent intent = new Intent(MainActivity.this,ViewTeamsActivity.class);

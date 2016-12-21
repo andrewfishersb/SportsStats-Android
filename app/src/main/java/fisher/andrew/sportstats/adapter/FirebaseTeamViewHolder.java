@@ -51,8 +51,10 @@ public class FirebaseTeamViewHolder extends RecyclerView.ViewHolder implements V
                 int itemPosition = getLayoutPosition();
 
                 Intent intent = new Intent(mContext, TeamDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("teams", Parcels.wrap(teams));
+
+                Team selectedTeam = teams.get(itemPosition);
+
+                intent.putExtra("team", Parcels.wrap(selectedTeam));
 
                 mContext.startActivity(intent);
             }

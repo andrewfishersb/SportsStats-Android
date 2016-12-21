@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
@@ -48,11 +49,7 @@ public class TeamDetailActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(TeamDetailActivity.this,CreatePlayerActivity.class);
-
-
-
-
-
+                intent.putExtra("add_to_team", Parcels.wrap(currentTeam));
                 startActivity(intent);
                 return false;
             }

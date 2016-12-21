@@ -13,7 +13,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <TextView
                 android:text="Name"
@@ -33,7 +34,7 @@
                 android:id="@+id/player2Pts"
                 android:textAlignment="center"
                 android:layout_weight="1"
-                />
+                android:singleLine="false" />
 
             <TextView
                 android:layout_width="20dp"

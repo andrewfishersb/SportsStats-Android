@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -22,6 +24,7 @@ import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
+import fisher.andrew.sportstats.model.Team;
 
 public class CreatePlayerActivity extends AppCompatActivity implements View.OnClickListener{
     private ArrayList<String> playerHeightOptions = new ArrayList<>();
@@ -30,6 +33,8 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
     @Bind(R.id.addNameEditText) EditText mAddNameEditText;
     @Bind(R.id.addPlayerButton) Button mAddPlayerButton;
 
+    //assigned team
+    Team playersTeam;
 
 
 
@@ -69,10 +74,19 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
             mAddAgeEditText.setText("");
             String height = mPlayerHeightSpinner.getSelectedItem().toString();
 
-
+            playersTeam = Parcels.unwrap(getIntent().getParcelableExtra("add_to_team"));
 
             Player newPlayer = new Player(name,height,age);
 
+            //assigns a team id to the player object
+            newPlayer.setTeamId(playersTeam.getPushId());
+
+            //adds a player to the chosen Teams Array then store into database
+            playersTeam.addPlayer(newPlayer);
+            DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_TEAMS)
+                    .child(playersTeam.getPushId());
+            teamPlayerReference.setValue(playersTeam);
 
             //Data Structure lesson change this area
             DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);

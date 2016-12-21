@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Team {
 
     String name;
-    ArrayList<Player> players;
+    ArrayList<Player> players= new ArrayList<>();;
     //    String index; is this needed?
     private String pushId;
 
@@ -17,7 +17,7 @@ public class Team {
 
     public Team(String name) {
         this.name = name;
-        this.players = new ArrayList<>();
+//        this.players
 //        this.index = "none_specified";
     }
 

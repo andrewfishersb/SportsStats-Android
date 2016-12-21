@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -69,35 +70,42 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
         //update to hold current user when this includes authentication
         if(v == mAddPlayerButton){
             String name = mAddNameEditText.getText().toString();
-            mAddNameEditText.setText("");
-            int age = Integer.parseInt(mAddAgeEditText.getText().toString());
-            mAddAgeEditText.setText("");
-            String height = mPlayerHeightSpinner.getSelectedItem().toString();
 
-            playersTeam = Parcels.unwrap(getIntent().getParcelableExtra("add_to_team"));
+            if(name.equals("")||mAddAgeEditText.getText().toString().equals("")){
+                Toast.makeText(CreatePlayerActivity.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
+            }else{
+                mAddNameEditText.setText("");
+                int age = Integer.parseInt(mAddAgeEditText.getText().toString());
+                mAddAgeEditText.setText("");
+                String height = mPlayerHeightSpinner.getSelectedItem().toString();
 
-            Player newPlayer = new Player(name,height,age);
+                playersTeam = Parcels.unwrap(getIntent().getParcelableExtra("add_to_team"));
 
-            //Data Structure lesson change this area
-            DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+                Player newPlayer = new Player(name,height,age);
 
-            DatabaseReference pushRef = playerReference.push();
-            String pushId = pushRef.getKey();
-            newPlayer.setPushId(pushId);
+                //Data Structure lesson change this area
+                DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
 
-            //adds a players pushId to an arraylist of players from the Team model
-            playersTeam.addPlayer(newPlayer.getPushId());
-            //assigns a team id to the player object
-            newPlayer.setTeamId(playersTeam.getPushId());
+                DatabaseReference pushRef = playerReference.push();
+                String pushId = pushRef.getKey();
+                newPlayer.setPushId(pushId);
 
-            //adds player to firebase
-            pushRef.setValue(newPlayer);
+                //adds a players pushId to an arraylist of players from the Team model
+                playersTeam.addPlayer(newPlayer.getPushId());
+                //assigns a team id to the player object
+                newPlayer.setTeamId(playersTeam.getPushId());
 
-            //over writes same team in firebase this time with an arraylist of players
-            DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_TEAMS)
-                    .child(playersTeam.getPushId());
-            teamPlayerReference.setValue(playersTeam);
+                //adds player to firebase
+                pushRef.setValue(newPlayer);
+
+                //over writes same team in firebase this time with an arraylist of players
+                DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
+                        .getReference(Constants.FIREBASE_CHILD_TEAMS)
+                        .child(playersTeam.getPushId());
+                teamPlayerReference.setValue(playersTeam);
+            }
+
+
         }
 
     }

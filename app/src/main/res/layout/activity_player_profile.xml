@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="fisher.andrew.sportstats.ui.PlayerProfileActivity">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/profilePicture"
+        android:src="@drawable/me"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Name"
+        android:id="@+id/profileName"
+        android:textSize="25sp"
+        android:textAlignment="center"
+
+        android:layout_alignRight="@+id/profilePicture"
+        android:layout_alignEnd="@+id/profilePicture"
+        android:layout_alignLeft="@+id/profilePicture"
+        android:layout_alignStart="@+id/profilePicture" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Team I&apos;m On"
+        android:id="@+id/profileTeam"
+        android:layout_below="@+id/profilePicture"
+        android:layout_alignRight="@+id/profilePicture"
+        android:layout_alignEnd="@+id/profilePicture"
+        android:layout_alignLeft="@+id/profilePicture"
+        android:layout_alignStart="@+id/profilePicture"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height"
+        android:id="@+id/profileHeight"
+        android:layout_below="@+id/profileTeam"
+        android:layout_alignRight="@+id/profileTeam"
+        android:layout_alignEnd="@+id/profileTeam"
+        android:layout_alignLeft="@+id/profileTeam"
+        android:layout_alignStart="@+id/profileTeam" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        android:id="@+id/profileAge"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/profileHeight"
+        android:layout_alignStart="@+id/profileHeight"
+        android:layout_alignRight="@+id/profileHeight"
+        android:layout_alignEnd="@+id/profileHeight" />
+
+</RelativeLayout>

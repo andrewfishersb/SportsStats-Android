@@ -3,6 +3,7 @@ package fisher.andrew.sportstats.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,37 +44,36 @@ public class TeamDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_detail);
         ButterKnife.bind(this);
-        //unwrap player
+
         currentTeam = Parcels.unwrap(getIntent().getParcelableExtra("team"));
         mTeamName.setText(currentTeam.getName());
 
-
-
-
-
-
-
-
-
-
-
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+
+
+        ArrayList<Player> test = new ArrayList<>();
+
+
+
+
         setUpFirebaseAdapter();
 
     }
 
-
+//maybe data snapshot
     private void setUpFirebaseAdapter(){
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerViewHolder>(Player.class,R.layout.single_player_recyclerview, FirebasePlayerViewHolder.class,mPlayerReference){
 
             @Override
             protected void populateViewHolder(FirebasePlayerViewHolder viewHolder,
                                               Player model, int position) {
-                viewHolder.bindPlayer(model);
+                    viewHolder.bindPlayer(model);
+
             }
         };
         mAllPlayerRecyclerView.setHasFixedSize(true);
-        mAllPlayerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//maybe have to call activity
+        mAllPlayerRecyclerView.setLayoutManager(gridLayoutManager);
         mAllPlayerRecyclerView.setAdapter(mFirebaseAdapter);
     }
 

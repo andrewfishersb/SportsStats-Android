@@ -48,7 +48,7 @@ A user will be able to create their own teams and players and in doing so record
  * Record live time
  * expand to other sports
  * Refractor some activities into fragments (ie the format of the statistics)
-
+* Change around the database where player can hold a teamId but not need to wrapped in a team id on the outside
 
 ## Technologies Used
 
@@ -60,7 +60,7 @@ A user will be able to create their own teams and players and in doing so record
 
 
 ## Known Bugs or Improvements
-
+* On Team detail in landscape mode the players may disappear if not when you turn back to portrait the same may happen
 
 ### License
 

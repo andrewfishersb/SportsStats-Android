@@ -5,14 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
-/**
- * Created by Guest on 12/20/16.
- */
+
 public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     View mView;
     Context mContext;
@@ -33,6 +33,7 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
         playerName.setText(player.getName());
         playerAge.setText("Age: " + player.getAge());
         playerHeight.setText("Height: " + player.getHeight());
+        //eventually add a pic?
 
     }
 

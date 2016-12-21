@@ -149,9 +149,9 @@ public class Player {
 }
 // ---ADD LATER IF TIME---
 //more stats
-//rank players
+//rank playerIds
 //personal information, age, height, weight? dob
 //eventually have overall stats versus current game stats
 //refractor add methods;
-//set methods once game is over to change the players overall stats
+//set methods once game is over to change the playerIds overall stats
 //export as csv file

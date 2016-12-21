@@ -78,16 +78,6 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
 
             Player newPlayer = new Player(name,height,age);
 
-            //assigns a team id to the player object
-            newPlayer.setTeamId(playersTeam.getPushId());
-
-            //adds a player to the chosen Teams Array then store into database
-            playersTeam.addPlayer(newPlayer);
-            DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_TEAMS)
-                    .child(playersTeam.getPushId());
-            teamPlayerReference.setValue(playersTeam);
-
             //Data Structure lesson change this area
             DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
 
@@ -95,6 +85,16 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
             String pushId = pushRef.getKey();
             newPlayer.setPushId(pushId);
             pushRef.setValue(newPlayer);
+
+            //assigns a team id to the player object
+            newPlayer.setTeamId(playersTeam.getPushId());
+
+            //adds a player to the chosen Teams Array then store into database
+            playersTeam.addPlayer(newPlayer.getPushId());
+            DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_TEAMS)
+                    .child(playersTeam.getPushId());
+            teamPlayerReference.setValue(playersTeam);
         }
 
     }

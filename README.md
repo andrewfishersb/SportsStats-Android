@@ -18,8 +18,7 @@ A user will be able to create their own teams and players and in doing so record
 
 #Tomorrow Tasks
 * Finish recycler view for players on one team
-* Fix database so a player is added to a team at creation
-* If done properly we should see all players in a grid layout
+* If done properly we should see all players in a grid layout maybe
 * Player detail page for now just have overall stats
 * a view all players section?
 * Take a photo?

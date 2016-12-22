@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -61,9 +62,19 @@ public class TeamDetailActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     //gets the team id of the current player and compares
                     if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
+                        Log.d("Player", snapshot.getValue(Player.class).getName());
                         filterPlayer.add(snapshot.getValue(Player.class));
                     }
                 }
+
+                PlayerAdapter playerAdapter = new PlayerAdapter(TeamDetailActivity.this,filterPlayer);
+                Log.d("is getting","here every time");
+
+                mRecyclerView.setHasFixedSize(true);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(TeamDetailActivity.this,2);
+                mRecyclerView.setLayoutManager(gridLayoutManager);
+                mRecyclerView.setAdapter(playerAdapter);
+
             }
 
             @Override
@@ -71,13 +82,7 @@ public class TeamDetailActivity extends AppCompatActivity {
             }
         });
 
-        PlayerAdapter playerAdapter = new PlayerAdapter(this,filterPlayer);
 
-
-        mRecyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        mRecyclerView.setAdapter(playerAdapter);
 
 
 

@@ -44,6 +44,8 @@ import fisher.andrew.sportstats.model.Team;
 public class TeamDetailActivity extends AppCompatActivity {
     private DatabaseReference mPlayerReference;
 //    private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private PlayerAdapter playerAdapter;
+    final ArrayList<Player>filterPlayer = new ArrayList<>();
 
     @Bind(R.id.teamNameDetailTextView) TextView mTeamName;
     @Bind(R.id.teamPlayersRecyclerView) RecyclerView mRecyclerView;
@@ -66,25 +68,23 @@ public class TeamDetailActivity extends AppCompatActivity {
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
 
         //this block of code will find players on a set team
-        final ArrayList<Player>filterPlayer = new ArrayList<>();
         mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     //gets the team id of the current player and compares
                     if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
-                        Log.d("Player", snapshot.getValue(Player.class).getName());
                         filterPlayer.add(snapshot.getValue(Player.class));
                     }
                 }
-
-                PlayerAdapter playerAdapter = new PlayerAdapter(TeamDetailActivity.this,filterPlayer);
-                Log.d("is getting","here every time");
-
+                playerAdapter = new PlayerAdapter(TeamDetailActivity.this,filterPlayer);
                 mRecyclerView.setHasFixedSize(true);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(TeamDetailActivity.this,2);
                 mRecyclerView.setLayoutManager(gridLayoutManager);
                 mRecyclerView.setAdapter(playerAdapter);
+
+
+
 
             }
 
@@ -95,62 +95,8 @@ public class TeamDetailActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//code can be used for displaying all players...but can also use the above code to dothe same
-
-//        setUpFirebaseAdapter();
-
     }
 
-//maybe data snapshot
-//    private void setUpFirebaseAdapter(){
-//        mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerViewHolder>(Player.class,R.layout.single_player_recyclerview, FirebasePlayerViewHolder.class,mPlayerReference){
-//
-//            @Override
-//            protected void populateViewHolder(FirebasePlayerViewHolder viewHolder,
-//                                              Player model, int position) {
-//                    viewHolder.bindPlayer(model);
-//
-//            }
-//        };
-////        mAllPlayerRecyclerView.setHasFixedSize(true);
-////        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//linear layout instead?
-////        mAllPlayerRecyclerView.setLayoutManager(gridLayoutManager);
-////        mAllPlayerRecyclerView.setAdapter(mFirebaseAdapter);
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        mFirebaseAdapter.cleanup();
-//    }
 
 
 
@@ -163,7 +109,6 @@ public class TeamDetailActivity extends AppCompatActivity {
     //add a new player to the team with dialog
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_add, menu);
@@ -186,7 +131,7 @@ public class TeamDetailActivity extends AppCompatActivity {
                 //does it go down here or up above try both
                 ArrayList<String> playerHeightOptions = new ArrayList<>();
 
-                for(int i=36;i<92;i++){
+                for(int i=60;i<92;i++){
                     int feet = i/12;
                     int inches = i%12;
                     String height = feet + "' "+inches+ "\"";
@@ -244,6 +189,13 @@ public class TeamDetailActivity extends AppCompatActivity {
                                     .child(currentTeam.getPushId());
                             teamPlayerReference.setValue(currentTeam);
 
+
+                            //add new player to the array associated and reset the adapter
+                            filterPlayer.add(newPlayer);
+                            mRecyclerView.setAdapter(playerAdapter);
+
+
+
                             dialog.dismiss();
 
                         }
@@ -252,21 +204,11 @@ public class TeamDetailActivity extends AppCompatActivity {
 
                 dialog.show();
 
-
-
-
-
-
-
-
-
-
-//                Intent intent = new Intent(TeamDetailActivity.this,CreatePlayerActivity.class);
-//                intent.putExtra("add_to_team", Parcels.wrap(currentTeam));
-//                startActivity(intent);
                 return true;//why return true or false
             }
         });
+
+
         return true;
     }
 
@@ -276,3 +218,29 @@ public class TeamDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+//code can be used for displaying all players...but can also use the above code to dothe same
+
+//        setUpFirebaseAdapter();
+//}
+//maybe data snapshot
+//    private void setUpFirebaseAdapter(){
+//        mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerViewHolder>(Player.class,R.layout.single_player_recyclerview, FirebasePlayerViewHolder.class,mPlayerReference){
+//
+//            @Override
+//            protected void populateViewHolder(FirebasePlayerViewHolder viewHolder,
+//                                              Player model, int position) {
+//                    viewHolder.bindPlayer(model);
+//
+//            }
+//        };
+////        mAllPlayerRecyclerView.setHasFixedSize(true);
+////        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//linear layout instead?
+////        mAllPlayerRecyclerView.setLayoutManager(gridLayoutManager);
+////        mAllPlayerRecyclerView.setAdapter(mFirebaseAdapter);
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mFirebaseAdapter.cleanup();
+//    }

@@ -43,6 +43,7 @@
         android:layout_marginTop="39dp"
         android:background="#ffffff"
         android:hint="Enter Age"
+        android:maxLength="3"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingLeft="5dp"

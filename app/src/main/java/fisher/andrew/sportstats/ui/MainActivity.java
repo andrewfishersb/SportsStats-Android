@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import fisher.andrew.sportstats.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    @Bind(R.id.createPlayerTextViewLinkFromMainActivity) TextView mCreatePlayerLink;
+//    @Bind(R.id.createPlayerTextViewLinkFromMainActivity) TextView mCreatePlayerLink;
     @Bind(R.id.createTeamTextViewLinkFromMainActivity) TextView mCreateTeamLink;
     @Bind(R.id.startGameLinkTextViewMainActivity) TextView mStartGame;
     @Override
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mCreatePlayerLink.setOnClickListener(this);
+//        mCreatePlayerLink.setOnClickListener(this);
         mCreateTeamLink.setOnClickListener(this);
         mStartGame.setOnClickListener(this);
     }

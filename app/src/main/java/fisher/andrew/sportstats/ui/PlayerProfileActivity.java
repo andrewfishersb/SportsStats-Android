@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
+import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,6 +27,15 @@ public class PlayerProfileActivity extends AppCompatActivity {
     @Bind(R.id.profileAge) TextView mProfileAge;
     @Bind(R.id.profileHeight) TextView mProfileHeight;
     @Bind(R.id.profileTeam) TextView mProfileTeam;
+    @Bind(R.id.player2Pts) TextView mTwoPointers;
+    @Bind(R.id.playerPoints) TextView mPlayerPointers;
+    @Bind(R.id.player3Pts) TextView mThreePointers;
+    @Bind(R.id.playerFT) TextView mFreeThrows;
+    @Bind(R.id.playerReb) TextView mRebounds;
+    @Bind(R.id.playerAst) TextView mAssists;
+    @Bind(R.id.playerStl) TextView mSteals;
+    @Bind(R.id.playerBLK) TextView mBlocks;
+
 
     private Player currentPlayer;
     @Override
@@ -37,15 +47,26 @@ public class PlayerProfileActivity extends AppCompatActivity {
         currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
         mProfileName.setText(currentPlayer.getName());
-        mProfileHeight.setText(currentPlayer.getHeight());
-        mProfileAge.setText(Integer.toString(currentPlayer.getAge()));
+        mProfileHeight.setText("Height " +currentPlayer.getHeight());
+        mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
+        mTwoPointers.setText("2Pts.\n"+currentPlayer.getTwoPointers()+"");
+        mThreePointers.setText("3pts.\n"+ currentPlayer.getThreePointers()+"");
+        mFreeThrows.setText("FT\n" + currentPlayer.getFreeThrows()+"");
+        mRebounds.setText("REB\n" + currentPlayer.getRebounds()+"");
+        mAssists.setText("AST\n"+currentPlayer.getAssists()+"");
+        mSteals.setText("STL\n" + currentPlayer.getSteals()+"");
+        mBlocks.setText("BLK\n"+currentPlayer.getBlocks()+"");
+        mPlayerPointers.setText("TOT\n"+ currentPlayer.getTotalPoints()+"");
+
+
+
 
         DatabaseReference teamRef = FirebaseDatabase.getInstance()
                 .getReference(Constants.FIREBASE_CHILD_TEAMS)
                 .child(currentPlayer.getTeamId());
 
 
-        //do i have to loop to get an item out of firebase even if its just one item???
+        //what is this line for?
         teamRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

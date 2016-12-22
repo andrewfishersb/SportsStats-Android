@@ -34,24 +34,26 @@
         android:layout_marginTop="69dp"
         android:textColor="#466EDD" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="See all players"
-        android:id="@+id/createPlayerTextViewLinkFromMainActivity"
-        android:layout_alignTop="@+id/createTeamTextViewLinkFromMainActivity"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="38dp"
-        android:layout_marginEnd="38dp"
-        android:textColor="#466EDD" />
+    <!--was in the left area-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="See all players"-->
+        <!--android:id="@+id/createPlayerTextViewLinkFromMainActivity"-->
+        <!--android:layout_alignTop="@+id/createTeamTextViewLinkFromMainActivity"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginRight="38dp"-->
+        <!--android:layout_marginEnd="38dp"-->
+        <!--android:textColor="#466EDD" />-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play Ball"
         android:id="@+id/startGameLinkTextViewMainActivity"
-        android:layout_below="@+id/createTeamTextViewLinkFromMainActivity"
-        android:layout_centerHorizontal="true"
-        android:textColor="#0f349a" />
+        android:textColor="#0f349a"
+        android:layout_alignTop="@+id/createTeamTextViewLinkFromMainActivity"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
 </RelativeLayout>

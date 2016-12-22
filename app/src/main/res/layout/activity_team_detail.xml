@@ -4,35 +4,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fisher.andrew.sportstats.ui.TeamDetailActivity">
+    tools:context="fisher.andrew.sportstats.ui.TeamDetailActivity"
+    android:background="@drawable/court3">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TEAM NAME GOES HERE"
-        android:id="@+id/teamNameDetailTextView"
-        android:textSize="30sp"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        card_view:cardUseCompatPadding="true"
+        android:id="@+id/headerLayout"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="3dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="est.2016"
-        android:layout_marginTop="5dp"
-        android:textSize="20sp"
-        android:id="@+id/dateTextView"
-        android:layout_below="@+id/teamNameDetailTextView"
-        android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="12dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="9dp"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEAM NAME GOES HERE"
+                android:id="@+id/teamNameDetailTextView"
+                android:textSize="30sp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="est. 2016"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:id="@+id/dateTextView"
+                android:layout_below="@+id/teamNameDetailTextView"
+                android:layout_centerHorizontal="true" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/teamPlayersRecyclerView"
-        android:layout_below="@+id/dateTextView"
+        android:layout_below="@+id/headerLayout"
         android:layout_marginTop="10dp"/>
 </RelativeLayout>

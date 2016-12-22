@@ -35,6 +35,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
     @Bind(R.id.playerAst) TextView mAssists;
     @Bind(R.id.playerStl) TextView mSteals;
     @Bind(R.id.playerBLK) TextView mBlocks;
+    @Bind(R.id.playerName) TextView mStatHeader;
 
 
     private Player currentPlayer;
@@ -57,7 +58,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
         mSteals.setText("STL\n" + currentPlayer.getSteals()+"");
         mBlocks.setText("BLK\n"+currentPlayer.getBlocks()+"");
         mPlayerPointers.setText("TOT\n"+ currentPlayer.getTotalPoints()+"");
-
+        mStatHeader.setText(currentPlayer.getName()+"'s Career Stats");
 
 
 

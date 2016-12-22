@@ -19,10 +19,8 @@
         </activity>
         <activity
             android:name=".ui.CreatePlayerActivity"
-            android:label="Back Home">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="fisher.andrew.sportstats.ui.MainActivity" />
+            >
+
         </activity>
         <activity
             android:name=".ui.ViewTeamsActivity"
@@ -45,7 +43,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ViewTeamsActivity" />
         </activity>
-        <activity android:name=".ui.PlayerProfileActivity"></activity>
+        <activity android:name=".ui.PlayerProfileActivity">
+
+
+        </activity>
     </application>
 
 </manifest>

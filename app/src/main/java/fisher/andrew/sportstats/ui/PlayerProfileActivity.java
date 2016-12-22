@@ -20,6 +20,7 @@ import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 import fisher.andrew.sportstats.model.Team;
 
+//need to send back to previous page but cant do it through the manifest???
 public class PlayerProfileActivity extends AppCompatActivity {
     @Bind(R.id.profileName) TextView mProfileName;
     @Bind(R.id.profileAge) TextView mProfileAge;

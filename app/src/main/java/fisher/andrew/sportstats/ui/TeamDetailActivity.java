@@ -1,6 +1,7 @@
 package fisher.andrew.sportstats.ui;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,7 +11,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +55,10 @@ public class TeamDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_detail);
         ButterKnife.bind(this);
+
+
+
+
 
         currentTeam = Parcels.unwrap(getIntent().getParcelableExtra("team"));
         mTeamName.setText(currentTeam.getName());
@@ -149,9 +160,11 @@ public class TeamDetailActivity extends AppCompatActivity {
 
 
 
-    //add a new player to the team
+    //add a new player to the team with dialog
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_add, menu);
         MenuItem item = menu.findItem(R.id.action_addMenu);
@@ -159,10 +172,99 @@ public class TeamDetailActivity extends AppCompatActivity {
 
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(TeamDetailActivity.this,CreatePlayerActivity.class);
-                intent.putExtra("add_to_team", Parcels.wrap(currentTeam));
-                startActivity(intent);
-                return false;
+
+                //Builds alert and connects it to the view
+                AlertDialog.Builder createPlayerDialogBuilder = new AlertDialog.Builder(TeamDetailActivity.this);
+                View createPlayerDialogView = getLayoutInflater().inflate(R.layout.create_a_player_dialog,null);
+
+                //user provided information
+                final Spinner mPlayerHeightSpinner = (Spinner) createPlayerDialogView.findViewById(R.id.heightSpinner);
+                final EditText mAddAgeEditText = (EditText) createPlayerDialogView.findViewById(R.id.addAgeEditText);
+                final EditText mAddNameEditText = (EditText) createPlayerDialogView.findViewById(R.id.addNameEditText);
+                Button mAddPlayerButton = (Button) createPlayerDialogView.findViewById(R.id.addPlayerButton);
+
+                //does it go down here or up above try both
+                ArrayList<String> playerHeightOptions = new ArrayList<>();
+
+                for(int i=36;i<92;i++){
+                    int feet = i/12;
+                    int inches = i%12;
+                    String height = feet + "' "+inches+ "\"";
+                    playerHeightOptions.add(height);
+                }
+
+                //attaches the heights to a spinner
+                ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(TeamDetailActivity.this,android.R.layout.simple_spinner_item,playerHeightOptions);
+//        mPlayerHeightSpinner.setSelection(39); <-this may be used to set an initial position value
+                mPlayerHeightSpinner.setAdapter(heightAdapter);
+
+                //ends here
+
+
+                //attaches builder to a new Dialog
+                createPlayerDialogBuilder.setView(createPlayerDialogView);
+                final AlertDialog dialog = createPlayerDialogBuilder.create();
+
+                mAddPlayerButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(mAddAgeEditText.getText().toString().isEmpty() || mAddNameEditText.getText().toString().isEmpty()){
+                            Toast.makeText(TeamDetailActivity.this, "Please Provide All Information", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String name = mAddNameEditText.getText().toString();
+                            mAddNameEditText.setText("");
+                            int age = Integer.parseInt(mAddAgeEditText.getText().toString());
+                            mAddAgeEditText.setText("");
+                            String height = mPlayerHeightSpinner.getSelectedItem().toString();
+
+
+                            //dont think it knows the team
+//                            Team playersTeam = Parcels.unwrap(getIntent().getParcelableExtra("add_to_team"));
+
+                            Player newPlayer = new Player(name,height,age);
+
+                            //Data Structure lesson change this area
+                            DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+
+                            DatabaseReference pushRef = playerReference.push();
+                            String pushId = pushRef.getKey();
+                            newPlayer.setPushId(pushId);
+
+                            //adds a players pushId to an arraylist of players from the Team model
+                            currentTeam.addPlayer(newPlayer.getPushId());
+                            //assigns a team id to the player object
+                            newPlayer.setTeamId(currentTeam.getPushId());
+
+                            //adds player to firebase
+                            pushRef.setValue(newPlayer);
+
+                            //over writes same team in firebase this time with an arraylist of players
+                            DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
+                                    .getReference(Constants.FIREBASE_CHILD_TEAMS)
+                                    .child(currentTeam.getPushId());
+                            teamPlayerReference.setValue(currentTeam);
+
+                            dialog.dismiss();
+
+                        }
+                    }
+                });
+
+                dialog.show();
+
+
+
+
+
+
+
+
+
+
+//                Intent intent = new Intent(TeamDetailActivity.this,CreatePlayerActivity.class);
+//                intent.putExtra("add_to_team", Parcels.wrap(currentTeam));
+//                startActivity(intent);
+                return true;//why return true or false
             }
         });
         return true;

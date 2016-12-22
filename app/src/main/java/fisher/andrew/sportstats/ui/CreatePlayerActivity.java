@@ -1,5 +1,6 @@
 package fisher.andrew.sportstats.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,17 +48,7 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
         ButterKnife.bind(this);
 
         //will load an array and format heights from 36 inches to 91 inches in format 3'0" to 7'7"
-        for(int i=36;i<92;i++){
-            int feet = i/12;
-            int inches = i%12;
-            String height = feet + "' "+inches+ "\"";
-            playerHeightOptions.add(height);
-        }
 
-        //attaches the heights to a spinner
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,playerHeightOptions);
-//        mPlayerHeightSpinner.setSelection(39); <-this may be used to set an initial position value
-        mPlayerHeightSpinner.setAdapter(heightAdapter);
 
 
 
@@ -103,6 +94,10 @@ public class CreatePlayerActivity extends AppCompatActivity implements View.OnCl
                         .getReference(Constants.FIREBASE_CHILD_TEAMS)
                         .child(playersTeam.getPushId());
                 teamPlayerReference.setValue(playersTeam);
+
+//                //probably wont work as they dont know where i an sending them, need to send back the proper team to display, may first try and use a dialog instead
+//                Intent intent = new Intent(CreatePlayerActivity.this,TeamDetailActivity.class);
+//                startActivity(intent);
             }
 
 

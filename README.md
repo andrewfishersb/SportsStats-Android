@@ -42,13 +42,13 @@ A user will be able to create their own teams and players and in doing so record
  * Height spinner, set a different default value i.e. to 6'2", limit the amount of items shown
  * More stats including 3s FTs attempts, Turnovers, fouls
  * Start a game, resets stats, but at the end of the game sends them to an overall, which can then find an average since they have the games played
- * Landscape mode have more stats shown? if space
  * Click vs double click to record certain stats
  * Substitutions
  * Record live time
  * expand to other sports
  * Refractor some activities into fragments (ie the format of the statistics)
-* Change around the database where player can hold a teamId but not need to wrapped in a team id on the outside
+ * Change CreateAPlayerActivity into a DialogFragment
+ * Change around the database where player can hold a teamId but not need to wrapped in a team id on the outside
 
 ## Technologies Used
 

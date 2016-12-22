@@ -53,8 +53,6 @@ public class TeamDetailActivity extends AppCompatActivity {
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
 
-
-
         //this block of code will find players on a set team
         final ArrayList<Player>filterPlayer = new ArrayList<>();
         mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -109,7 +107,7 @@ public class TeamDetailActivity extends AppCompatActivity {
 
 
 
-
+//code can be used for displaying all players...but can also use the above code to dothe same
 
 //        setUpFirebaseAdapter();
 

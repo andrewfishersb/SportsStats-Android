@@ -16,9 +16,9 @@ A user will be able to create their own teams and players and in doing so record
 |3. User can create see an overview of said player|
 |4. User can create a team|
 
-#Tomorrow Tasks
-* Finish recycler view for players on one team
-* If done properly we should see all players in a grid layout maybe
+#POSSIBLY Tomorrow Tasks
+* double click vs single click
+* start a game of only players for that team
 * Player detail page for now just have overall stats
 * a view all players section?
 * Take a photo?

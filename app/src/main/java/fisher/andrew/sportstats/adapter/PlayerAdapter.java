@@ -2,6 +2,7 @@ package fisher.andrew.sportstats.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
+import fisher.andrew.sportstats.ui.PlayerProfileActivity;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder> {
-    private ArrayList<Player> mPlayers;
+    ArrayList<Player> mPlayers = new ArrayList<>();
     private Context mContext;
 
     public PlayerAdapter(Context context, ArrayList<Player> players){
@@ -52,7 +56,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
 
 
-
     }
 
     @Override
@@ -60,7 +63,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         return mPlayers.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    //was static will this mess everything up?
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //not sure what to do here, they just initialized ids from the layout
         public TextView playerName;
         public TextView  playerAge;
@@ -78,7 +82,16 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext, "Clicked on the player", Toast.LENGTH_SHORT).show();
+            int index = getLayoutPosition();
+            Player sendPlayer = mPlayers.get(index);
+            Intent intent = new Intent(mContext, PlayerProfileActivity.class);
+                intent.putExtra("player", Parcels.wrap(sendPlayer));
+                mContext.startActivity(intent);
+
         }
     }
 }
+
+
+
+

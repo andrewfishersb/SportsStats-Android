@@ -53,37 +53,37 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
-        //make an array list
-        final ArrayList<Player> players = new ArrayList<>();
-        // get a reference
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
-            //attach a listener
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //loop a snapshot to fill arraylist
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    players.add(snapshot.getValue(Player.class));
-                }
-
-                int playerIndex = getLayoutPosition();
-
-                Player clickedPlayer = players.get(playerIndex);
-
-                Intent intent = new Intent(mContext, PlayerProfileActivity.class);
-                intent.putExtra("player", Parcels.wrap(clickedPlayer));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
+//        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
+//        //make an array list
+//        final ArrayList<Player> players = new ArrayList<>();
+//        // get a reference
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+//            //attach a listener
+//            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                //loop a snapshot to fill arraylist
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    players.add(snapshot.getValue(Player.class));
+//                }
+//
+//                int playerIndex = getLayoutPosition();
+//
+//                Player clickedPlayer = players.get(playerIndex);
+//
+//                Intent intent = new Intent(mContext, PlayerProfileActivity.class);
+//                intent.putExtra("player", Parcels.wrap(clickedPlayer));
+//
+//                mContext.startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//
+//
     }
 }

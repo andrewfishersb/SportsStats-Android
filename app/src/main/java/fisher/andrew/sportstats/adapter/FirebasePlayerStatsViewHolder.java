@@ -3,8 +3,12 @@ package fisher.andrew.sportstats.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +24,7 @@ import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
 public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    View mView;
+        View mView;
     Context mContext;
 
 
@@ -64,6 +68,56 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
         assistsTextView.setOnClickListener(this);
         stealsTextView.setOnClickListener(this);
         blocksTextView.setOnClickListener(this);
+
+
+        final GestureDetector gd = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener(){
+
+
+            //here is the method for double tap
+
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+
+                //your action here for double tap e.g.
+                Log.d("OnDoubleTapListener", "onDoubleTap");
+
+                return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+                super.onLongPress(e);
+                Log.d("Press","Longpress");
+            }
+
+            @Override
+            public boolean onDoubleTapEvent(MotionEvent e) {
+                Log.d("what does","double tap event do");
+                return true;
+            }
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                Log.d("what does","onDown");
+                return true;
+            }
+
+
+        });
+
+//here yourView is the View on which you want to set the double tap action
+
+        twoPointsTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                return gd.onTouchEvent(event);
+            }
+        });
+
+
+
 
 
     }
@@ -139,5 +193,6 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
         DatabaseReference addTotalPointsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(player.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
         addTotalPointsRef.setValue(player.getTotalPoints());
     }
+
 
 }

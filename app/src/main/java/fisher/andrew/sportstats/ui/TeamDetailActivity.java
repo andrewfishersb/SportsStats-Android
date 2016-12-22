@@ -40,27 +40,19 @@ import fisher.andrew.sportstats.model.Player;
 import fisher.andrew.sportstats.model.Team;
 
 
-//eventually create menu to add new players
 public class TeamDetailActivity extends AppCompatActivity {
     private DatabaseReference mPlayerReference;
-//    private FirebaseRecyclerAdapter mFirebaseAdapter;
     private PlayerAdapter playerAdapter;
     final ArrayList<Player>filterPlayer = new ArrayList<>();
-
     @Bind(R.id.teamNameDetailTextView) TextView mTeamName;
     @Bind(R.id.teamPlayersRecyclerView) RecyclerView mRecyclerView;
     private Team currentTeam;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_detail);
         ButterKnife.bind(this);
-
-
-
-
 
         currentTeam = Parcels.unwrap(getIntent().getParcelableExtra("team"));
         mTeamName.setText(currentTeam.getName());
@@ -83,9 +75,6 @@ public class TeamDetailActivity extends AppCompatActivity {
                 mRecyclerView.setLayoutManager(gridLayoutManager);
                 mRecyclerView.setAdapter(playerAdapter);
 
-
-
-
             }
 
             @Override
@@ -93,23 +82,11 @@ public class TeamDetailActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
-
-
-
-
-
-
-
-
-
 
     //add a new player to the team with dialog
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_add, menu);
         MenuItem item = menu.findItem(R.id.action_addMenu);
@@ -117,7 +94,6 @@ public class TeamDetailActivity extends AppCompatActivity {
 
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
                 //Builds alert and connects it to the view
                 AlertDialog.Builder createPlayerDialogBuilder = new AlertDialog.Builder(TeamDetailActivity.this);
                 View createPlayerDialogView = getLayoutInflater().inflate(R.layout.create_a_player_dialog,null);
@@ -127,8 +103,6 @@ public class TeamDetailActivity extends AppCompatActivity {
                 final EditText mAddAgeEditText = (EditText) createPlayerDialogView.findViewById(R.id.addAgeEditText);
                 final EditText mAddNameEditText = (EditText) createPlayerDialogView.findViewById(R.id.addNameEditText);
                 Button mAddPlayerButton = (Button) createPlayerDialogView.findViewById(R.id.addPlayerButton);
-
-                //does it go down here or up above try both
                 ArrayList<String> playerHeightOptions = new ArrayList<>();
 
                 for(int i=60;i<92;i++){
@@ -138,13 +112,8 @@ public class TeamDetailActivity extends AppCompatActivity {
                     playerHeightOptions.add(height);
                 }
 
-                //attaches the heights to a spinner
                 ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(TeamDetailActivity.this,android.R.layout.simple_spinner_item,playerHeightOptions);
-//        mPlayerHeightSpinner.setSelection(39); <-this may be used to set an initial position value
                 mPlayerHeightSpinner.setAdapter(heightAdapter);
-
-                //ends here
-
 
                 //attaches builder to a new Dialog
                 createPlayerDialogBuilder.setView(createPlayerDialogView);
@@ -161,10 +130,6 @@ public class TeamDetailActivity extends AppCompatActivity {
                             int age = Integer.parseInt(mAddAgeEditText.getText().toString());
                             mAddAgeEditText.setText("");
                             String height = mPlayerHeightSpinner.getSelectedItem().toString();
-
-
-                            //dont think it knows the team
-//                            Team playersTeam = Parcels.unwrap(getIntent().getParcelableExtra("add_to_team"));
 
                             Player newPlayer = new Player(name,height,age);
 
@@ -194,17 +159,13 @@ public class TeamDetailActivity extends AppCompatActivity {
                             filterPlayer.add(newPlayer);
                             mRecyclerView.setAdapter(playerAdapter);
 
-
-
                             dialog.dismiss();
 
                         }
                     }
                 });
-
                 dialog.show();
-
-                return true;//why return true or false
+                return true;
             }
         });
 
@@ -218,29 +179,4 @@ public class TeamDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-//code can be used for displaying all players...but can also use the above code to dothe same
 
-//        setUpFirebaseAdapter();
-//}
-//maybe data snapshot
-//    private void setUpFirebaseAdapter(){
-//        mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerViewHolder>(Player.class,R.layout.single_player_recyclerview, FirebasePlayerViewHolder.class,mPlayerReference){
-//
-//            @Override
-//            protected void populateViewHolder(FirebasePlayerViewHolder viewHolder,
-//                                              Player model, int position) {
-//                    viewHolder.bindPlayer(model);
-//
-//            }
-//        };
-////        mAllPlayerRecyclerView.setHasFixedSize(true);
-////        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//linear layout instead?
-////        mAllPlayerRecyclerView.setLayoutManager(gridLayoutManager);
-////        mAllPlayerRecyclerView.setAdapter(mFirebaseAdapter);
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        mFirebaseAdapter.cleanup();
-//    }

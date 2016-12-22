@@ -25,7 +25,7 @@ import fisher.andrew.sportstats.model.Player;
 import fisher.andrew.sportstats.ui.MainActivity;
 import fisher.andrew.sportstats.ui.PlayerProfileActivity;
 
-
+//maybe keep to display all?
 public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     View mView;
     Context mContext;
@@ -58,8 +58,8 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
         final ArrayList<Player> players = new ArrayList<>();
         // get a reference
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
-        //attach a listener
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            //attach a listener
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //loop a snapshot to fill arraylist
@@ -71,7 +71,6 @@ public class FirebasePlayerViewHolder extends RecyclerView.ViewHolder implements
 
                 Player clickedPlayer = players.get(playerIndex);
 
-                //parce up and send object
                 Intent intent = new Intent(mContext, PlayerProfileActivity.class);
                 intent.putExtra("player", Parcels.wrap(clickedPlayer));
 

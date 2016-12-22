@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +27,7 @@ import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.adapter.FirebasePlayerViewHolder;
+import fisher.andrew.sportstats.adapter.PlayerAdapter;
 import fisher.andrew.sportstats.model.Player;
 import fisher.andrew.sportstats.model.Team;
 
@@ -36,10 +35,10 @@ import fisher.andrew.sportstats.model.Team;
 //eventually create menu to add new players
 public class TeamDetailActivity extends AppCompatActivity {
     private DatabaseReference mPlayerReference;
-    private FirebaseRecyclerAdapter mFirebaseAdapter;
+//    private FirebaseRecyclerAdapter mFirebaseAdapter;
 
     @Bind(R.id.teamNameDetailTextView) TextView mTeamName;
-    @Bind(R.id.allPlayersRecyclerView) RecyclerView mAllPlayerRecyclerView;
+    @Bind(R.id.teamPlayersRecyclerView) RecyclerView mRecyclerView;
     private Team currentTeam;
 
 
@@ -55,15 +54,16 @@ public class TeamDetailActivity extends AppCompatActivity {
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
 
 
-//this block of code will find players on a set team
-        final ArrayList<Player> testPlayer = new ArrayList<>();
+
+        //this block of code will find players on a set team
+        final ArrayList<Player>filterPlayer = new ArrayList<>();
         mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     //gets the team id of the current player and compares
                     if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
-                        testPlayer.add(snapshot.getValue(Player.class));
+                        filterPlayer.add(snapshot.getValue(Player.class));
                     }
                 }
             }
@@ -73,33 +73,70 @@ public class TeamDetailActivity extends AppCompatActivity {
             }
         });
 
+        PlayerAdapter playerAdapter = new PlayerAdapter(this,filterPlayer);
 
-        setUpFirebaseAdapter();
+
+        mRecyclerView.setHasFixedSize(true);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mRecyclerView.setAdapter(playerAdapter);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        setUpFirebaseAdapter();
 
     }
 
 //maybe data snapshot
-    private void setUpFirebaseAdapter(){
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerViewHolder>(Player.class,R.layout.single_player_recyclerview, FirebasePlayerViewHolder.class,mPlayerReference){
-
-            @Override
-            protected void populateViewHolder(FirebasePlayerViewHolder viewHolder,
-                                              Player model, int position) {
-                    viewHolder.bindPlayer(model);
-
-            }
-        };
-        mAllPlayerRecyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//linear layout instead?
-        mAllPlayerRecyclerView.setLayoutManager(gridLayoutManager);
-        mAllPlayerRecyclerView.setAdapter(mFirebaseAdapter);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.cleanup();
-    }
+//    private void setUpFirebaseAdapter(){
+//        mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerViewHolder>(Player.class,R.layout.single_player_recyclerview, FirebasePlayerViewHolder.class,mPlayerReference){
+//
+//            @Override
+//            protected void populateViewHolder(FirebasePlayerViewHolder viewHolder,
+//                                              Player model, int position) {
+//                    viewHolder.bindPlayer(model);
+//
+//            }
+//        };
+////        mAllPlayerRecyclerView.setHasFixedSize(true);
+////        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);//linear layout instead?
+////        mAllPlayerRecyclerView.setLayoutManager(gridLayoutManager);
+////        mAllPlayerRecyclerView.setAdapter(mFirebaseAdapter);
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mFirebaseAdapter.cleanup();
+//    }
 
 
 

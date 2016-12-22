@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
-public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder>{
+public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder> {
     private ArrayList<Player> mPlayers;
     private Context mContext;
 
@@ -22,16 +23,14 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         mPlayers = players;
     }
 
-    private Context getContext() {
-        return mContext;
-    }
+
 
     @Override
     public PlayerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View playerView = inflater.inflate(R.layout.single_player_recyclerview,parent,false);
-        ViewHolder viewHolder = new ViewHolder(playerView);
+        ViewHolder viewHolder = new ViewHolder(playerView,context);
 
         return viewHolder;
     }
@@ -61,17 +60,25 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         return mPlayers.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //not sure what to do here, they just initialized ids from the layout
         public TextView playerName;
         public TextView  playerAge;
         public TextView playerHeight;
+        private Context mContext;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, Context context) {
             super(itemView);
-             playerName = (TextView) itemView.findViewById(R.id.recyclerPlayerName);
-             playerAge = (TextView) itemView.findViewById(R.id.recyclerPlayerAge);
-             playerHeight = (TextView) itemView.findViewById(R.id.recyclerPlayerHeight);
+            mContext = context;
+            playerName = (TextView) itemView.findViewById(R.id.recyclerPlayerName);
+            playerAge = (TextView) itemView.findViewById(R.id.recyclerPlayerAge);
+            playerHeight = (TextView) itemView.findViewById(R.id.recyclerPlayerHeight);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(mContext, "Clicked on the player", Toast.LENGTH_SHORT).show();
         }
     }
 }

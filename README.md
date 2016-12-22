@@ -49,6 +49,10 @@ A user will be able to create their own teams and players and in doing so record
  * Refractor some activities into fragments (ie the format of the statistics)
  * Change CreateAPlayerActivity into a DialogFragment
  * Change around the database where player can hold a teamId but not need to wrapped in a team id on the outside
+ * Swipe a player to sub, this may launch a dialog box where a user will choose a player to switch then with
+ * Finish a game and once done see stats for everyone who took part
+
+
 
 ## Technologies Used
 

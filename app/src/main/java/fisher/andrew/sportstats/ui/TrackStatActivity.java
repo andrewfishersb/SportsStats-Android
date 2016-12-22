@@ -37,6 +37,7 @@ public class TrackStatActivity extends AppCompatActivity {
 
     }
 
+    //may use player adapter instead to send the correct players and have team detail send here as well so if
     private void setUpFirebaseAdapter() {
 
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerStatsViewHolder>(Player.class, R.layout.single_player_stat, FirebasePlayerStatsViewHolder.class,mPlayerReference){

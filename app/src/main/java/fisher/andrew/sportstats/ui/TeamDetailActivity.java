@@ -40,12 +40,13 @@ import fisher.andrew.sportstats.model.Player;
 import fisher.andrew.sportstats.model.Team;
 
 
-public class TeamDetailActivity extends AppCompatActivity {
+public class TeamDetailActivity extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mPlayerReference;
     private PlayerAdapter playerAdapter;
     final ArrayList<Player>filterPlayer = new ArrayList<>();
     @Bind(R.id.teamNameDetailTextView) TextView mTeamName;
     @Bind(R.id.teamPlayersRecyclerView) RecyclerView mRecyclerView;
+    @Bind(R.id.startGame) Button mStartTheGame;
     private Team currentTeam;
 
     @Override
@@ -81,8 +82,16 @@ public class TeamDetailActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
+    mStartTheGame.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View v){
+        //wont really start a game but for now this will display all players and their stats section
+        Intent intent = new Intent(TeamDetailActivity.this,TrackStatActivity.class);
+        startActivity(intent);
+    }
+
 
     //add a new player to the team with dialog
     @Override

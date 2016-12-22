@@ -10,25 +10,26 @@
         android:stretchColumns="*"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp">
-
+        <TextView
+            android:text="Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:background="@drawable/table_cells"
+            android:id="@+id/playerName"
+            android:layout_weight="1"
+            android:textAlignment="center" />
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
+<!--80dp-->
 
+
+<!--20dp for the rest-->
             <TextView
-                android:text="Name"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/table_cells"
-                android:id="@+id/playerName"
-                android:layout_weight="1"
-                android:textAlignment="center" />
-
-
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:text="2Pts"
                 android:background="@drawable/table_cells"
                 android:id="@+id/player2Pts"
@@ -37,8 +38,8 @@
                 android:singleLine="false" />
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:text="3Pts"
                 android:background="@drawable/table_cells"
                 android:id="@+id/player3Pts"
@@ -46,8 +47,8 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:text="FT"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerFT"
@@ -55,17 +56,24 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:text="REB"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="Pts."
                 android:background="@drawable/table_cells"
-                android:id="@+id/playerReb"
+                android:id="@+id/playerPoints"
                 android:textAlignment="center"
                 android:layout_weight="1"/>
 
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:text="AST"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerAst"
@@ -73,8 +81,17 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="REB"
+                android:background="@drawable/table_cells"
+                android:id="@+id/playerReb"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:text="STL"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerStl"
@@ -82,22 +99,19 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:text="BLK"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerBLK"
                 android:textAlignment="center"
                 android:layout_weight="1"/>
 
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:text="Pts."
-                android:background="@drawable/table_cells"
-                android:id="@+id/playerPoints"
-                android:textAlignment="center"
-                android:layout_weight="1"/>
+
+
+
         </TableRow>
+
+
     </TableLayout>
 </RelativeLayout>

@@ -1,34 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
 
     >
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/playerRecyclerPicture"
-        android:src="@drawable/me" />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Andrew Fisher"
-        android:id="@+id/recyclerPlayerName" />
+        android:id="@+id/cv"
+        android:layout_margin="10dp"
+        >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Age: 25"
-        android:id="@+id/recyclerPlayerAge" />
+        <RelativeLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            card_view:cardElevation="14dp"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/playerRecyclerPicture"
+                android:src="@drawable/me"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Height: 6'2"
-        android:id="@+id/recyclerPlayerHeight" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Andrew Fisher"
+                android:id="@+id/recyclerPlayerName"
+                android:layout_below="@+id/playerRecyclerPicture"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height: 6'2"
+                android:id="@+id/recyclerPlayerHeight"
+                android:layout_below="@id/recyclerPlayerName"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age: 25"
+                android:id="@+id/recyclerPlayerAge"
+                android:layout_below="@id/recyclerPlayerHeight"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
 </LinearLayout>

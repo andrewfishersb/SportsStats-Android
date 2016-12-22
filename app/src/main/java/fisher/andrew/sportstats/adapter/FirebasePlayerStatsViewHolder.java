@@ -45,14 +45,14 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
 
         nameTextView.setText(player.getName());
-        twoPointsTextView.setText(player.getTwoPointers()+"");
-        threePointsTextView.setText(player.getThreePointers()+"");
-        freeThrowsTextView.setText(player.getFreeThrows()+"");
-        reboundsTextView.setText(player.getRebounds()+"");
-        assistsTextView.setText(player.getAssists()+"");
-        stealsTextView.setText(player.getSteals()+"");
-        blocksTextView.setText(player.getBlocks()+"");
-        totalPointsTextView.setText(player.getTotalPoints()+"");
+        twoPointsTextView.setText("2Pts.\n"+player.getTwoPointers()+"");
+        threePointsTextView.setText("3pts.\n"+ player.getThreePointers()+"");
+        freeThrowsTextView.setText("FT\n" + player.getFreeThrows()+"");
+        reboundsTextView.setText("REB\n" + player.getRebounds()+"");
+        assistsTextView.setText("AST\n"+player.getAssists()+"");
+        stealsTextView.setText("STL\n" + player.getSteals()+"");
+        blocksTextView.setText("BLK\n"+player.getBlocks()+"");
+        totalPointsTextView.setText("TOT\n"+ player.getTotalPoints()+"");
 
 
 

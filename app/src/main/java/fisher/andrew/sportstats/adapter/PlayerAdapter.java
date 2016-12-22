@@ -3,6 +3,7 @@ package fisher.andrew.sportstats.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,11 +31,14 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
 
     @Override
-    public PlayerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View playerView = inflater.inflate(R.layout.single_player_recyclerview,parent,false);
-        ViewHolder viewHolder = new ViewHolder(playerView,context);
+    public PlayerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+//        Context context = parent.getContext();
+//        LayoutInflater inflater = LayoutInflater.from(context);
+//        View playerView = inflater.inflate(R.layout.single_player_recyclerview,viewGroup,false); //see if this works?
+//        View playerView = LayoutInflater.from(parent.getContext().inflate(R.layout.single_player_recyclerview, parent,false);
+        View playerView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.single_player_recyclerview, viewGroup, false);
+
+        ViewHolder viewHolder = new ViewHolder(playerView,viewGroup.getContext());
 
         return viewHolder;
     }
@@ -54,18 +58,22 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         bindPlayerAge.setText("Age: " + player.getAge());
         bindPlayerHeight.setText("Height: " + player.getHeight());
 
-
-
     }
+
+    //needed?
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
 
     @Override
     public int getItemCount() {
         return mPlayers.size();
     }
 
-    //was static will this mess everything up?
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        //not sure what to do here, they just initialized ids from the layout
+        CardView cv; //maybe dont need?
         public TextView playerName;
         public TextView  playerAge;
         public TextView playerHeight;
@@ -74,6 +82,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         public ViewHolder(View itemView, Context context) {
             super(itemView);
             mContext = context;
+            //maybe dont need
+            cv = (CardView)itemView.findViewById(R.id.cv);
+
             playerName = (TextView) itemView.findViewById(R.id.recyclerPlayerName);
             playerAge = (TextView) itemView.findViewById(R.id.recyclerPlayerAge);
             playerHeight = (TextView) itemView.findViewById(R.id.recyclerPlayerHeight);

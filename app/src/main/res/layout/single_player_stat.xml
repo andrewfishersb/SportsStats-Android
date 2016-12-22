@@ -10,26 +10,23 @@
         android:stretchColumns="*"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp">
+
         <TextView
             android:text="Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:background="@drawable/table_cells"
             android:id="@+id/playerName"
             android:layout_weight="1"
             android:textAlignment="center" />
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-<!--80dp-->
+            android:layout_height="wrap_content">
 
-
-<!--20dp for the rest-->
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="2Pts"
                 android:background="@drawable/table_cells"
                 android:id="@+id/player2Pts"
@@ -39,7 +36,7 @@
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="3Pts"
                 android:background="@drawable/table_cells"
                 android:id="@+id/player3Pts"
@@ -48,7 +45,7 @@
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="FT"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerFT"
@@ -57,7 +54,7 @@
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="Pts."
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerPoints"
@@ -73,7 +70,7 @@
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="AST"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerAst"
@@ -82,7 +79,7 @@
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="REB"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerReb"
@@ -91,7 +88,7 @@
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="STL"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerStl"
@@ -100,18 +97,12 @@
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="BLK"
                 android:background="@drawable/table_cells"
                 android:id="@+id/playerBLK"
                 android:textAlignment="center"
                 android:layout_weight="1"/>
-
-
-
-
         </TableRow>
-
-
     </TableLayout>
 </RelativeLayout>

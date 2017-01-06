@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
@@ -42,10 +42,13 @@
         android:id="@+id/createEmail"
         android:elevation="8dp"
         android:background="#ffffff"
-        android:hint="Enter Email"/>
+        android:hint="Enter Email"
+        android:paddingLeft="5dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -55,10 +58,13 @@
         android:layout_marginTop="30dp"
         android:background="#ffffff"
         android:hint="Enter a Password"
-        android:id="@+id/createPassword"/>
+        android:id="@+id/createPassword"
+        android:paddingLeft="5dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -68,7 +74,10 @@
         android:layout_marginTop="30dp"
         android:background="#ffffff"
         android:hint="Confirm Password"
-        android:id="@+id/confirmPassword"/>
+        android:id="@+id/confirmPassword"
+        android:paddingLeft="5dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
 
     <Button
         android:layout_width="match_parent"

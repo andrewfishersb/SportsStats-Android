@@ -1,5 +1,6 @@
 package fisher.andrew.sportstats.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +33,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    private ProgressDialog mAuthProgressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
         createAuthStateListener();
+        createAuthProgressDialog();
+
 
         mCreateAccountButton.setOnClickListener(this);
         mLoginTextView.setOnClickListener(this);
@@ -77,13 +84,22 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String password = mCreatePass.getText().toString().trim();
         String confirmPassword = mConfirmPass.getText().toString().trim();
 
+        boolean validEmail = isValidEmail(email);
+        boolean matchingPasswords = isValidPassword(password,confirmPassword);
+
+        if(!validEmail || !matchingPasswords) return;
+
+        //all below happens when passwords match and valid email
+        mAuthProgressDialog.show();
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                mAuthProgressDialog.dismiss();
+
                 if(task.isSuccessful()){
-
                 }else{
-
+                    Toast.makeText(CreateAccountActivity.this, "Cannot Create Account/An Account With This Email May Already Exist.",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -105,7 +121,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             mCreatePass.setError("Please create a password containing at least 6 characters");
             return false;
         }else if(!password.equals(confirmPassword)){
-            mCreatePass.setError("Please create a password containing at least 6 characters");
+            mCreatePass.setError("Passwords do not match");
             return false;
         }
         return true;
@@ -113,8 +129,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
 
 
-
-
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Creating Account...");
+//        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
+    }
 
 
 

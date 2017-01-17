@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                mAuthProgressDialog.hide();
+                mAuthProgressDialog.dismiss();
                 if(!task.isSuccessful()){
                     Toast.makeText(LoginActivity.this, "Invalid Email and/or Password.",
                             Toast.LENGTH_SHORT).show();

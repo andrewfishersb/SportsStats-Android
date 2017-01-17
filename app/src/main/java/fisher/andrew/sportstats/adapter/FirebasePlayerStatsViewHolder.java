@@ -3,14 +3,11 @@ package fisher.andrew.sportstats.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +23,6 @@ import fisher.andrew.sportstats.model.Player;
 public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     View mView;
     Context mContext;
-
 
 
     public FirebasePlayerStatsViewHolder(View playerView){
@@ -74,7 +70,11 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
     public void onClick(final View view){
         final ArrayList<Player> players = new ArrayList<>();
         final int viewId = view.getId();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,8 +85,9 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                 Player selectedPlayer = players.get(playerIndex);
 
                 //Gets the reference of the player. So I can easily append to depending on the switch statement
+
                 DatabaseReference playerToSelectRef = FirebaseDatabase.getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_PLAYERS)
+                        .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
                         .child(selectedPlayer.getPushId());
 
                 //check what view was clicked and then update accordingly
@@ -137,7 +138,8 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
     //will update a player score when called, this way I dont have to keep calling these lines of code in three places in the switch. Before I was calling this at the end of the switch statement but that would write to firebase even if i only updated assists
     private void updateTotalScore(Player player){
-        DatabaseReference addTotalPointsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(player.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference addTotalPointsRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid).child(player.getPushId()).child(Constants.FIREBASE_CHILD_TOTAL_POINTS);
         addTotalPointsRef.setValue(player.getTotalPoints());
     }
 

@@ -33,35 +33,38 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
 
     public void bindPlayer(Player player){
-        TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
-        TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
-        TextView  twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
-        TextView threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
-        TextView freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
-        TextView reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
-        TextView assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
-        TextView stealsTextView = (TextView) mView.findViewById(R.id.playerStl);
-        TextView blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
+
+            TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
+            TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
+            TextView  twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
+            TextView threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
+            TextView freeThrowsTextView = (TextView) mView.findViewById(R.id.playerFT);
+            TextView reboundsTextView = (TextView) mView.findViewById(R.id.playerReb);
+            TextView assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
+            TextView stealsTextView = (TextView) mView.findViewById(R.id.playerStl);
+            TextView blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
 
 
-        nameTextView.setText(player.getName());
-        twoPointsTextView.setText("2Pts.\n"+player.getTwoPointers()+"");
-        threePointsTextView.setText("3pts.\n"+ player.getThreePointers()+"");
-        freeThrowsTextView.setText("FT\n" + player.getFreeThrows()+"");
-        reboundsTextView.setText("REB\n" + player.getRebounds()+"");
-        assistsTextView.setText("AST\n"+player.getAssists()+"");
-        stealsTextView.setText("STL\n" + player.getSteals()+"");
-        blocksTextView.setText("BLK\n"+player.getBlocks()+"");
-        totalPointsTextView.setText("TOT\n"+ player.getTotalPoints()+"");
+            nameTextView.setText(player.getName());
+            twoPointsTextView.setText("2Pts.\n"+player.getTwoPointers()+"");
+            threePointsTextView.setText("3pts.\n"+ player.getThreePointers()+"");
+            freeThrowsTextView.setText("FT\n" + player.getFreeThrows()+"");
+            reboundsTextView.setText("REB\n" + player.getRebounds()+"");
+            assistsTextView.setText("AST\n"+player.getAssists()+"");
+            stealsTextView.setText("STL\n" + player.getSteals()+"");
+            blocksTextView.setText("BLK\n"+player.getBlocks()+"");
+            totalPointsTextView.setText("TOT\n"+ player.getTotalPoints()+"");
 
 
-        twoPointsTextView.setOnClickListener(this);
-        threePointsTextView.setOnClickListener(this);
-        freeThrowsTextView.setOnClickListener(this);
-        reboundsTextView.setOnClickListener(this);
-        assistsTextView.setOnClickListener(this);
-        stealsTextView.setOnClickListener(this);
-        blocksTextView.setOnClickListener(this);
+            twoPointsTextView.setOnClickListener(this);
+            threePointsTextView.setOnClickListener(this);
+            freeThrowsTextView.setOnClickListener(this);
+            reboundsTextView.setOnClickListener(this);
+            assistsTextView.setOnClickListener(this);
+            stealsTextView.setOnClickListener(this);
+            blocksTextView.setOnClickListener(this);
+
+
 
     }
 
@@ -75,6 +78,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
         final String uid = user.getUid();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
+
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

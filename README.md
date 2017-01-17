@@ -33,7 +33,6 @@ A user will be able to create their own teams and players and in doing so record
  * Turn add a player into a DialogFragment - https://developer.android.com/reference/android/app/DialogFragment.html
  * First page might just have View teams or View players and then have the top bar available to add new teams and players
  * Height spinner, set a different default value i.e. to 6'2", limit the amount of items shown
- * More stats including 3s FTs attempts, Turnovers, fouls
  * Start a game, resets stats, but at the end of the game sends them to an overall, which can then find an average since they have the games played
  * Click vs double click to record certain stats
  * Substitutions
@@ -41,7 +40,6 @@ A user will be able to create their own teams and players and in doing so record
  * expand to other sports
  * Refractor some activities into fragments (ie the format of the statistics)
  * Change CreateAPlayerActivity into a DialogFragment
- * Change around the database where player can hold a teamId but not need to wrapped in a team id on the outside
  * Swipe a player to sub, this may launch a dialog box where a user will choose a player to switch then with
  * Finish a game and once done see stats for everyone who took part
 

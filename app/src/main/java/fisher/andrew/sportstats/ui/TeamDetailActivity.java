@@ -61,7 +61,7 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
         mTeamName.setText(currentTeam.getName());
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
+        uid = user.getUid();
 
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
@@ -153,8 +153,9 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
 
                             //Data Structure lesson change this area
 
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            String uid = user.getUid();
+                            //used to have the declarations - or set down here as well as above
+//                            user = FirebaseAuth.getInstance().getCurrentUser();
+//                            uid = user.getUid();
 
                             DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
@@ -171,10 +172,11 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
                             //adds player to firebase
                             pushRef.setValue(newPlayer);
 
+
                             //THIS AREA MAY NEED TO EDIT AS WELL
                             //over writes same team in firebase this time with an arraylist of players
                             DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
-                                    .getReference(Constants.FIREBASE_CHILD_TEAMS)
+                                    .getReference(Constants.FIREBASE_CHILD_TEAMS).child(uid)
                                     .child(currentTeam.getPushId());
                             teamPlayerReference.setValue(currentTeam);
 

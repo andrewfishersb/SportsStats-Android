@@ -13,8 +13,6 @@
         <activity android:name=".ui.MainActivity">
 
         </activity>
-        <activity android:name=".ui.CreatePlayerActivity">
-        </activity>
         <activity
             android:name=".ui.ViewTeamsActivity"
             android:label="Back Home">

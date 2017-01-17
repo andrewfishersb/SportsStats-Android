@@ -69,10 +69,6 @@ public class ViewTeamsActivity extends AppCompatActivity{
     }
 
 
-
-
-
-
     //dialog box code
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

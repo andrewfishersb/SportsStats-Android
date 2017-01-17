@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,6 +30,11 @@ public class ViewTeamsActivity extends AppCompatActivity{
     private DatabaseReference mTeamReference;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
 
+    //firebase uid
+    private FirebaseUser user;
+    private String uid;
+
+
     @Bind(R.id.allTeamsRecyclerView) RecyclerView mRecyclerView;
 
     @Override
@@ -35,7 +42,11 @@ public class ViewTeamsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
         ButterKnife.bind(this);
-        mTeamReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+
+        mTeamReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS).child(uid);
 
         setUpFirebaseAdapter();
     }
@@ -98,7 +109,16 @@ public class ViewTeamsActivity extends AppCompatActivity{
                             String teamName = mName.getText().toString();
                             Team newTeam = new Team(teamName);
 
-                            DatabaseReference teamRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS);
+
+
+                            // MAY OR MAY NOT NEED
+//                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                            String uid = user.getUid();
+
+                            DatabaseReference teamRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS).child(uid);
+
+
+
                             DatabaseReference pushRef = teamRef.push();
                             String pushId = pushRef.getKey();
                             newTeam.setPushId(pushId);

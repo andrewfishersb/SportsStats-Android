@@ -1,13 +1,11 @@
 package fisher.andrew.sportstats.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +33,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
-import fisher.andrew.sportstats.adapter.FirebasePlayerViewHolder;
 import fisher.andrew.sportstats.adapter.PlayerAdapter;
 import fisher.andrew.sportstats.model.Player;
 import fisher.andrew.sportstats.model.Team;
@@ -49,6 +47,10 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
     @Bind(R.id.startGame) Button mStartTheGame;
     private Team currentTeam;
 
+    //firebase user and uid
+    private FirebaseUser user;
+    private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +60,14 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
         currentTeam = Parcels.unwrap(getIntent().getParcelableExtra("team"));
         mTeamName.setText(currentTeam.getName());
 
-        mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+
+        mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
+
+
+
 
         //this block of code will find players on a set team
         mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -143,11 +152,16 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
                             Player newPlayer = new Player(name,height,age);
 
                             //Data Structure lesson change this area
-                            DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS);
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = user.getUid();
+
+                            DatabaseReference playerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
                             DatabaseReference pushRef = playerReference.push();
                             String pushId = pushRef.getKey();
                             newPlayer.setPushId(pushId);
+                            pushRef.setValue(newPlayer);
 
                             //adds a players pushId to an arraylist of players from the Team model
                             currentTeam.addPlayer(newPlayer.getPushId());
@@ -157,6 +171,7 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
                             //adds player to firebase
                             pushRef.setValue(newPlayer);
 
+                            //THIS AREA MAY NEED TO EDIT AS WELL
                             //over writes same team in firebase this time with an arraylist of players
                             DatabaseReference teamPlayerReference = FirebaseDatabase.getInstance()
                                     .getReference(Constants.FIREBASE_CHILD_TEAMS)

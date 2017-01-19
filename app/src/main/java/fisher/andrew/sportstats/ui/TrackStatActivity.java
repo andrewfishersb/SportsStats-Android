@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -73,9 +72,8 @@ public class TrackStatActivity extends AppCompatActivity {
             //this was moved in the last lesson so I do not know if it will be moved later?
             @Override
             protected void populateViewHolder(FirebasePlayerStatsViewHolder viewHolder, Player model, int position){
-                Toast.makeText(TrackStatActivity.this, team, Toast.LENGTH_SHORT).show();
 
-                    viewHolder.bindPlayer(model);
+                    viewHolder.bindPlayer(model,team);
             }
         };
             mRecyclerView.setHasFixedSize(true);

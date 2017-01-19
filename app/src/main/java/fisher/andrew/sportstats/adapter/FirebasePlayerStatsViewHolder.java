@@ -24,7 +24,7 @@ import fisher.andrew.sportstats.model.Player;
 public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     View mView;
     Context mContext;
-
+String teamId;
 
     public FirebasePlayerStatsViewHolder(View playerView){
         super(playerView);
@@ -33,8 +33,9 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
     }
 
 
-    public void bindPlayer(Player player){
-
+    public void bindPlayer(Player player, String teamId){
+            //sent the teamId to the bind in order to check for team id when clicked
+            this.teamId=teamId;
             TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
             TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
             TextView  twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
@@ -83,17 +84,16 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
-        //ref.orderByChild("teamId").addListenerForSingleValueEvent(new ValueEventListener() {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Toast.makeText(mContext, Integer.toString(getLayoutPosition()), Toast.LENGTH_SHORT).show();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
-
-//                    if(snapshot.getValue(Player.class).getTeamId().equals("-Kai0SjjMJ4S_YYGspHl")){
+                    //checks the player belongs to the current team
+                    if(snapshot.getValue(Player.class).getTeamId().equals(teamId)){
                         players.add(snapshot.getValue(Player.class));
-//                    }
+                    }
 
 
                 }

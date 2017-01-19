@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,6 +69,9 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
     }
 
+
+    //THIS MAY BE WHERE WRONG INFO IS BEING PASSED
+            //EITHER QUERY OR SOMETHING TO DO WITH THE players.get(playerIndex)
     //possibly click on the item but will then send the id, position and the intent
     @Override
     public void onClick(final View view){
@@ -79,11 +83,19 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
+        //ref.orderByChild("teamId").addListenerForSingleValueEvent(new ValueEventListener() {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Toast.makeText(mContext, Integer.toString(getLayoutPosition()), Toast.LENGTH_SHORT).show();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    players.add(snapshot.getValue(Player.class));
+
+
+//                    if(snapshot.getValue(Player.class).getTeamId().equals("-Kai0SjjMJ4S_YYGspHl")){
+                        players.add(snapshot.getValue(Player.class));
+//                    }
+
+
                 }
                 int playerIndex = getLayoutPosition();
                 Player selectedPlayer = players.get(playerIndex);

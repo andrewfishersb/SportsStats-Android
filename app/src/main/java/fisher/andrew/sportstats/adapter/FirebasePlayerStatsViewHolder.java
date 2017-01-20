@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,10 +20,11 @@ import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
-public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
     View mView;
     Context mContext;
-String teamId;
+    String teamId;
+
 
     public FirebasePlayerStatsViewHolder(View playerView){
         super(playerView);
@@ -58,6 +58,10 @@ String teamId;
             totalPointsTextView.setText("TOT\n"+ player.getTotalPoints()+"");
 
 
+
+        //Could i be weird and loop
+
+//Click to add
             twoPointsTextView.setOnClickListener(this);
             threePointsTextView.setOnClickListener(this);
             freeThrowsTextView.setOnClickListener(this);
@@ -67,10 +71,19 @@ String teamId;
             blocksTextView.setOnClickListener(this);
 
 
+            twoPointsTextView.setOnLongClickListener(this);
+            threePointsTextView.setOnLongClickListener(this);
+            freeThrowsTextView.setOnLongClickListener(this);
+            reboundsTextView.setOnLongClickListener(this);
+            assistsTextView.setOnLongClickListener(this);
+            stealsTextView.setOnLongClickListener(this);
+            blocksTextView.setOnLongClickListener(this);
+
 
     }
 
 
+    //THIS WAS THE CODE I HAD WHEN I WOULD CLICK ON USER TO ADD STAT
     //THIS MAY BE WHERE WRONG INFO IS BEING PASSED
             //EITHER QUERY OR SOMETHING TO DO WITH THE players.get(playerIndex)
     //possibly click on the item but will then send the id, position and the intent
@@ -78,6 +91,7 @@ String teamId;
     public void onClick(final View view){
         final ArrayList<Player> players = new ArrayList<>();
         final int viewId = view.getId();
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
@@ -87,9 +101,7 @@ String teamId;
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Toast.makeText(mContext, Integer.toString(getLayoutPosition()), Toast.LENGTH_SHORT).show();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-
                     //checks the player belongs to the current team
                     if(snapshot.getValue(Player.class).getTeamId().equals(teamId)){
                         players.add(snapshot.getValue(Player.class));
@@ -113,7 +125,6 @@ String teamId;
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
                         updateTotalScore(selectedPlayer);
                         break;
-
                     case R.id.player3Pts:
                         selectedPlayer.addThreePointer();
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
@@ -160,4 +171,78 @@ String teamId;
     }
 
 
+    @Override
+    public boolean onLongClick(View view) {
+        final ArrayList<Player> players = new ArrayList<>();
+        final int viewId = view.getId();
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    //checks the player belongs to the current team
+                    if(snapshot.getValue(Player.class).getTeamId().equals(teamId)){
+                        players.add(snapshot.getValue(Player.class));
+                    }
+
+
+                }
+                int playerIndex = getLayoutPosition();
+                Player selectedPlayer = players.get(playerIndex);
+
+                //Gets the reference of the player. So I can easily append to depending on the switch statement
+
+                DatabaseReference playerToSelectRef = FirebaseDatabase.getInstance()
+                        .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
+                        .child(selectedPlayer.getPushId());
+
+                //check what view was clicked and then update accordingly
+                switch(viewId){
+                    case R.id.player2Pts:
+//                        selectedPlayer.addTwoPoints();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers()-2);
+                        updateTotalScore(selectedPlayer);
+                        break;
+                    case R.id.player3Pts:
+//                        selectedPlayer.addThreePointer();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers()-3);
+                        updateTotalScore(selectedPlayer);
+                        break;
+                    case R.id.playerFT:
+//                        selectedPlayer.addFreeThrow();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows()-1);
+                        updateTotalScore(selectedPlayer);
+                        break;
+                    case R.id.playerReb:
+//                        selectedPlayer.addRebound();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(selectedPlayer.getRebounds()-1);
+                        break;
+                    case R.id.playerAst:
+//                        selectedPlayer.addAssist();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(selectedPlayer.getAssists()-1);
+                        break;
+                    case R.id.playerStl:
+//                        selectedPlayer.addSteal();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(selectedPlayer.getSteals()-1);
+                        break;
+                    case R.id.playerBLK:
+//                        selectedPlayer.addBlock();
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks()-1);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });        return true;
+    }
 }

@@ -46,17 +46,13 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     public void onBindViewHolder(PlayerAdapter.ViewHolder holder, int position) {
         Player player = mPlayers.get(position);
 
-
-
         TextView bindPlayerName = holder.playerName;
         TextView bindPlayerAge = holder.playerAge;
         TextView bindPlayerHeight = holder.playerHeight;
 
-
         bindPlayerName.setText(player.getName());
         bindPlayerAge.setText("Age: " + player.getAge());
         bindPlayerHeight.setText("Height: " + player.getHeight());
-
     }
 
     //needed?

@@ -63,7 +63,6 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
 
-
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
 

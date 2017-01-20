@@ -121,12 +121,12 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                 //check what view was clicked and then update accordingly
                 switch(viewId){
                     case R.id.player2Pts:
-                        selectedPlayer.setTwoPoints(2);
+                        selectedPlayer.setTwoPoints(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.player3Pts:
-                        selectedPlayer.setThreePointer(3);
+                        selectedPlayer.setThreePointer(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
                         updateTotalScore(selectedPlayer);
                         break;
@@ -205,12 +205,12 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                 //check what view was clicked and then update accordingly
                 switch(viewId){
                     case R.id.player2Pts:
-                        selectedPlayer.setTwoPoints(-2);
+                        selectedPlayer.setTwoPoints(-1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.player3Pts:
-                        selectedPlayer.setThreePointer(-3);
+                        selectedPlayer.setThreePointer(-1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
                         updateTotalScore(selectedPlayer);
                         break;

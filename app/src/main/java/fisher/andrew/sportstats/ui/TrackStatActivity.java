@@ -29,6 +29,8 @@ public class TrackStatActivity extends AppCompatActivity {
     String team;
 
     @Bind(R.id.playerStatRecyclerView) RecyclerView mRecyclerView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -49,6 +51,11 @@ public class TrackStatActivity extends AppCompatActivity {
 
         //didnt have parameter
         setUpFirebaseAdapter(team);
+
+
+
+        //when game ends, loop through all players of this team id, then reset stats and add to overall...maybe have methods for these
+
 
 
 

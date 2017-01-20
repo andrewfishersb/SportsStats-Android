@@ -26,6 +26,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
     @Bind(R.id.profileAge) TextView mProfileAge;
     @Bind(R.id.profileHeight) TextView mProfileHeight;
     @Bind(R.id.profileTeam) TextView mProfileTeam;
+
+    //MAY HAVE TO CHANGE ID NAMES SO I CAN REUSE for the grid layout
     @Bind(R.id.player2Pts) TextView mTwoPointers;
     @Bind(R.id.playerPoints) TextView mPlayerPointers;
     @Bind(R.id.player3Pts) TextView mThreePointers;
@@ -45,6 +47,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
+
+
 
         mProfileName.setText(currentPlayer.getName());
         mProfileHeight.setText("Height " +currentPlayer.getHeight());

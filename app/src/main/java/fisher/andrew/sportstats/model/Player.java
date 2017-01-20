@@ -6,11 +6,16 @@ import org.parceler.Parcel;
 //will this need an index for movement purposes...i think so
 @Parcel
 public class Player {
+    //Player info
     String name;
     String height;
     int age;
+    private String pushId;
+    //have just team id or team name? with id ill still be able to access their name (try id for now)
+    String teamId;
+
+    //playerStats
     int freeThrows;
-    //a regular 2 pt basket
     int twoPointers;
     int threePointers;
     int assists;
@@ -18,10 +23,20 @@ public class Player {
     int blocks;
     int steals;
     int totalPoints;
-    private String pushId;
 
-    //have just team id or team name? with id ill still be able to access their name (try id for now)
-    String teamId;
+    //Overall instance variables
+     int overallTwoPointers;
+     int overallThreePointers;
+     int overallFreeThrows;
+     int overallAssists;
+     int overallRebounds;
+     int overallBlocks;
+     int overallSteals;
+     int overallPoints;
+     int gamesPlayed;
+
+
+
 
 
     public Player(){}
@@ -36,7 +51,17 @@ public class Player {
         this.assists=0;
         this.blocks=0;
         this.steals=0;
-        this.totalPoints =0 ;
+        this.totalPoints =0;
+        this.rebounds = 0;
+        this.overallTwoPointers = 0;
+        this.overallThreePointers = 0;
+        this.overallFreeThrows = 0;
+        this.overallAssists = 0;
+        this.overallRebounds = 0;
+        this.overallBlocks = 0;
+        this.overallSteals = 0;
+        this.overallPoints = 0;
+        this.gamesPlayed = 0;
         this.teamId = "free_agent";
     }
 
@@ -78,8 +103,8 @@ public class Player {
     }
 
     public void setTwoPoints(int points) {
-        this.twoPointers+=points;
-        this.totalPoints+=points;
+        this.twoPointers+= points;
+        this.totalPoints+= (points*2);
     }
 
     public int getThreePointers() {
@@ -87,8 +112,8 @@ public class Player {
     }
 
     public void setThreePointer(int points) {
-        this.threePointers+=points;
-        this.totalPoints+=points;
+        this.threePointers+= points;
+        this.totalPoints+= (points*3);
     }
 
     public int getAssists() {
@@ -104,7 +129,7 @@ public class Player {
     }
 
     public void setBlock(int block) {
-        this.blocks+=blocks;
+        this.blocks+=block;
     }
 
     public int getSteals() {
@@ -128,10 +153,106 @@ public class Player {
     }
 
     public void setRebound(int rebound){
-        this.rebounds+= rebounds;
+        this.rebounds+= rebound;
     }
 
 
+    public void endGameResetStats(){
+        this.freeThrows=0;
+        this.twoPointers =0;
+        this.threePointers=0;
+        this.assists=0;
+        this.blocks=0;
+        this.steals=0;
+        this.totalPoints =0;
+    }
+
+    public void endGameAddStatsToOverall(int twoPts, int threePts, int ft, int ast, int rbd, int blk, int stl, int totPts){
+        this.overallTwoPointers = twoPts;
+        this.overallThreePointers = threePts;
+        this.overallFreeThrows = ft;
+        this.overallAssists = ast;
+        this.overallRebounds = rbd;
+        this.overallBlocks = blk;
+        this.overallSteals = stl;
+        this.overallPoints = totPts;
+        this.gamesPlayed++;
+    }
+
+
+
+
+    public int getOverallTwoPointers() {
+        return overallTwoPointers;
+    }
+
+    public void setOverallTwoPointers(int overallTwoPointers) {
+        this.overallTwoPointers = overallTwoPointers;
+    }
+
+    public int getOverallThreePointers() {
+        return overallThreePointers;
+    }
+
+    public void setOverallThreePointers(int overallThreePointers) {
+        this.overallThreePointers = overallThreePointers;
+    }
+
+    public int getOverallFreeThrows() {
+        return overallFreeThrows;
+    }
+
+    public void setOverallFreeThrows(int overallFreeThrows) {
+        this.overallFreeThrows = overallFreeThrows;
+    }
+
+    public int getOverallAssists() {
+        return overallAssists;
+    }
+
+    public void setOverallAssists(int overallAssists) {
+        this.overallAssists = overallAssists;
+    }
+
+    public int getOverallRebounds() {
+        return overallRebounds;
+    }
+
+    public void setOverallRebounds(int overallRebounds) {
+        this.overallRebounds = overallRebounds;
+    }
+
+    public int getOverallBlocks() {
+        return overallBlocks;
+    }
+
+    public void setOverallBlocks(int overallBlocks) {
+        this.overallBlocks = overallBlocks;
+    }
+
+    public int getOverallSteals() {
+        return overallSteals;
+    }
+
+    public void setOverallSteals(int overallSteals) {
+        this.overallSteals = overallSteals;
+    }
+
+    public int getOverallPoints() {
+        return overallPoints;
+    }
+
+    public void setOverallPoints(int overallPoints) {
+        this.overallPoints = overallPoints;
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        this.gamesPlayed = gamesPlayed;
+    }
 
     public String getPushId() {
         return pushId;

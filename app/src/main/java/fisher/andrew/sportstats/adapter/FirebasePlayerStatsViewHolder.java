@@ -121,34 +121,34 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                 //check what view was clicked and then update accordingly
                 switch(viewId){
                     case R.id.player2Pts:
-                        selectedPlayer.addTwoPoints();
+                        selectedPlayer.setTwoPoints(2);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.player3Pts:
-                        selectedPlayer.addThreePointer();
+                        selectedPlayer.setThreePointer(3);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.playerFT:
-                        selectedPlayer.addFreeThrow();
+                        selectedPlayer.setFreeThrow(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.playerReb:
-                        selectedPlayer.addRebound();
+                        selectedPlayer.setRebound(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(selectedPlayer.getRebounds());
                         break;
                     case R.id.playerAst:
-                        selectedPlayer.addAssist();
+                        selectedPlayer.setAssist(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(selectedPlayer.getAssists());
                         break;
                     case R.id.playerStl:
-                        selectedPlayer.addSteal();
+                        selectedPlayer.setSteals(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(selectedPlayer.getSteals());
                         break;
                     case R.id.playerBLK:
-                        selectedPlayer.addBlock();
+                        selectedPlayer.setBlock(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks());
                 }
 
@@ -205,35 +205,35 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                 //check what view was clicked and then update accordingly
                 switch(viewId){
                     case R.id.player2Pts:
-//                        selectedPlayer.addTwoPoints();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers()-2);
+                        selectedPlayer.setTwoPoints(-2);
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.player3Pts:
-//                        selectedPlayer.addThreePointer();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers()-3);
+                        selectedPlayer.setThreePointer(-3);
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.playerFT:
-//                        selectedPlayer.addFreeThrow();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows()-1);
+                        selectedPlayer.setFreeThrow(-1);
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows());
                         updateTotalScore(selectedPlayer);
                         break;
                     case R.id.playerReb:
-//                        selectedPlayer.addRebound();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(selectedPlayer.getRebounds()-1);
+                        selectedPlayer.setRebound(-1);
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(selectedPlayer.getRebounds());
                         break;
                     case R.id.playerAst:
-//                        selectedPlayer.addAssist();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(selectedPlayer.getAssists()-1);
+                        selectedPlayer.setAssist(-1);
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(selectedPlayer.getAssists());
                         break;
                     case R.id.playerStl:
-//                        selectedPlayer.addSteal();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(selectedPlayer.getSteals()-1);
+                        selectedPlayer.setSteals(-1);
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(selectedPlayer.getSteals());
                         break;
                     case R.id.playerBLK:
-//                        selectedPlayer.addBlock();
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks()-1);
+                        selectedPlayer.setBlock(-1);
+                        playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks());
                 }
 
 

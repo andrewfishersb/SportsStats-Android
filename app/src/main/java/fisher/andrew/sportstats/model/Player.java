@@ -68,51 +68,51 @@ public class Player {
         return freeThrows;
     }
 
-    public void addFreeThrow() {
-        this.freeThrows++;
-        this.totalPoints++;
+    public void setFreeThrow(int points) {
+        this.freeThrows+=points;
+        this.totalPoints+=points;
     }
 
     public int getTwoPointers() {
         return twoPointers;
     }
 
-    public void addTwoPoints() {
-        this.twoPointers++;
-        this.totalPoints +=2;
+    public void setTwoPoints(int points) {
+        this.twoPointers+=points;
+        this.totalPoints+=points;
     }
 
     public int getThreePointers() {
         return threePointers;
     }
 
-    public void addThreePointer() {
-        this.totalPoints += 3;
-        this.threePointers++;
+    public void setThreePointer(int points) {
+        this.threePointers+=points;
+        this.totalPoints+=points;
     }
 
     public int getAssists() {
         return assists;
     }
 
-    public void addAssist() {
-        this.assists++;
+    public void setAssist(int assist) {
+        this.assists+= assist;
     }
 
     public int getBlocks() {
         return blocks;
     }
 
-    public void addBlock() {
-        this.blocks++;
+    public void setBlock(int block) {
+        this.blocks+=blocks;
     }
 
     public int getSteals() {
         return steals;
     }
 
-    public void addSteal() {
-        this.steals++;
+    public void setSteals(int steal) {
+        this.steals+=steal;
     }
 
     public void setTotalPoints(int threePointers, int twoPointers, int freeThrows){
@@ -127,9 +127,11 @@ public class Player {
         return this.rebounds;
     }
 
-    public void addRebound(){
-        this.rebounds++;
+    public void setRebound(int rebound){
+        this.rebounds+= rebounds;
     }
+
+
 
     public String getPushId() {
         return pushId;

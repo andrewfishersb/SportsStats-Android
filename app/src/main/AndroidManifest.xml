@@ -22,17 +22,20 @@
         </activity>
         <activity
             android:name=".ui.TrackStatActivity"
-            android:label="Back home">
+            android:label="Back to Teams">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity"/>
+                android:value=".ui.ViewTeamsActivity"/>
         </activity>
         <activity
             android:name=".ui.TeamDetailActivity"
             android:label="Back to Teams">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ViewTeamsActivity"/>
+                android:value=".ui.ViewTeamsActivity"
+
+
+                />
         </activity>
         <activity android:name=".ui.PlayerProfileActivity">
         </activity>

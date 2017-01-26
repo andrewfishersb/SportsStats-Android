@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         //may just be in view team eventually
-        if(view ==mStartGame){
-            //wont really start a game but for now this will display all players and their stats section
-            Intent intent = new Intent(MainActivity.this,TrackStatActivity.class);
-            startActivity(intent);
-        }
+//        if(view ==mStartGame){
+//            //wont really start a game but for now this will display all players and their stats section
+//            Intent intent = new Intent(MainActivity.this,TrackStatActivity.class);
+//            startActivity(intent);
+//        }
     }
 
 

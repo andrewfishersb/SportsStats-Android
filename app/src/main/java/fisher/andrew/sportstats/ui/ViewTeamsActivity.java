@@ -80,7 +80,7 @@ public class ViewTeamsActivity extends AppCompatActivity{
     }
 
 
-    //dialog box code
+    //dialog box code, maybe make a fragment if this is slowin this page down???
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();

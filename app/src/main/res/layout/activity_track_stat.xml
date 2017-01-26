@@ -17,16 +17,16 @@
         android:id="@+id/playerStatRecyclerView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_above="@+id/finishGameButton"
      />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        android:id="@+id/finishGame"
+        android:id="@+id/finishGameButton"
         android:textColor="#ffffff"
         android:text="End Game"
-        android:layout_below="@+id/playerStatRecyclerView"
-        />
+android:layout_alignParentBottom="true"        />
 
 </RelativeLayout>

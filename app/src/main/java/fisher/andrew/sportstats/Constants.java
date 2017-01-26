@@ -15,4 +15,12 @@ public class Constants {
     public static final String FIREBASE_CHILD_THREE_POINTERS = "threePointers";
     public static final String FIREBASE_CHILD_TOTAL_POINTS = "totalPoints";
 
+    public static final String FIREBASE_CHILD_ASSISTS_OVERALL = "overallAssists";
+    public static final String FIREBASE_CHILD_BLOCKS_OVERALL = "overallBlocks";
+    public static final String FIREBASE_CHILD_TWO_POINTERS_OVERALL = "overallTwoPointers";
+    public static final String FIREBASE_CHILD_FREE_THROWS_OVERALL = "overallFreeThrows";
+    public static final String FIREBASE_CHILD_REBOUNDS_OVERALL = "overallRebounds";
+    public static final String FIREBASE_CHILD_STEALS_OVERALL = "overallSteals";
+    public static final String FIREBASE_CHILD_THREE_POINTERS_OVERALL = "overallThreePointers";
+    public static final String FIREBASE_CHILD_TOTAL_POINTS_OVERALL = "overallPoints";
 }

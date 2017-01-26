@@ -99,7 +99,7 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v){
         //wont really start a game but for now this will display all players and their stats section
         Intent intent = new Intent(TeamDetailActivity.this,TrackStatActivity.class);
-        intent.putExtra("teamId",currentTeam.getPushId());
+        intent.putExtra("currentTeam",Parcels.wrap(currentTeam));
         startActivity(intent);
     }
 

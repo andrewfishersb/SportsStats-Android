@@ -16,12 +16,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.adapter.FirebasePlayerStatsViewHolder;
 import fisher.andrew.sportstats.model.Player;
+import fisher.andrew.sportstats.model.Team;
 
 
 //MAYBE RESET THE FIREADAPTER after the page loads
@@ -30,8 +35,10 @@ import fisher.andrew.sportstats.model.Player;
 public class TrackStatActivity extends AppCompatActivity implements View.OnClickListener{
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     private DatabaseReference mPlayerReference;
-
-    String team ;
+    private ArrayList<Player> currentPlayers = new ArrayList<Player>();
+    private Team currentTeam;
+    private String team;
+    private String uid;
 
     @Bind(R.id.playerStatRecyclerView) RecyclerView mStatRecyclerView;
     @Bind(R.id.finishGameButton) Button mEndGame;
@@ -44,24 +51,36 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         ButterKnife.bind(this);
 
         //get users players
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        String uid = user.getUid();
-//
-//
-//
-//        mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+
+        mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
+
 
         Intent intent = getIntent();
-         team = intent.getStringExtra("teamId");
-//        Toast.makeText(this, team, Toast.LENGTH_SHORT).show();
-        //didnt have parameter
+        currentTeam = Parcels.unwrap(getIntent().getParcelableExtra("currentTeam"));
+        team = currentTeam.getPushId();
 
-        if(!team.isEmpty()){//this seems to work THE MANIFEST BUTTON IS FUCKING UP
-            setUpFirebaseAdapter(team); //this works if i force a value
+        if(!team.isEmpty()){//
+            setUpFirebaseAdapter("-KbRiHnv16LG_HVPdOdB"); //Works all except for the initial time...and maybe no back buttons
         }
 
-
-
+        //Get the players on the current team
+//        mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+//                    //gets the team id of the current player and compares
+//                    if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
+//                        currentPlayers.add(snapshot.getValue(Player.class));
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
 
 
 
@@ -80,6 +99,20 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent(this,ViewTeamsActivity.class);
         //this resets the value so a new team can be set each time this activity is called
         team=null;
+        //when the game finishes
+
+
+        for(Player player : currentPlayers){
+            mPlayerReference = FirebaseDatabase.getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
+                    .child(player.getPushId());
+
+
+            player.endGameAddStatsToOverall(mPlayerReference);
+            player.endGameResetStats(mPlayerReference);
+        }
+
+
         startActivity(intent);
 
     }
@@ -104,6 +137,7 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
             protected void populateViewHolder(FirebasePlayerStatsViewHolder viewHolder, Player model, int position){
 
                     viewHolder.bindPlayer(model,teamId);
+                currentPlayers.add(model);
             }
         };
         mStatRecyclerView.setHasFixedSize(true);

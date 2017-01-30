@@ -29,7 +29,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
     //MAY HAVE TO CHANGE ID NAMES SO I CAN REUSE for the grid layout
     @Bind(R.id.player2Pts) TextView mTwoPointers;
-    @Bind(R.id.playerPoints) TextView mPlayerPointers;
+    @Bind(R.id.playerPoints) TextView mPlayerPoints;
     @Bind(R.id.player3Pts) TextView mThreePointers;
     @Bind(R.id.playerFT) TextView mFreeThrows;
     @Bind(R.id.playerReb) TextView mRebounds;
@@ -50,17 +50,24 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
 
 
+
+
+
         mProfileName.setText(currentPlayer.getName());
         mProfileHeight.setText("Height " +currentPlayer.getHeight());
         mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
-        mTwoPointers.setText("2Pts.\n"+currentPlayer.getTwoPointers()+"");
-        mThreePointers.setText("3pts.\n"+ currentPlayer.getThreePointers()+"");
-        mFreeThrows.setText("FT\n" + currentPlayer.getFreeThrows()+"");
-        mRebounds.setText("REB\n" + currentPlayer.getRebounds()+"");
-        mAssists.setText("AST\n"+currentPlayer.getAssists()+"");
-        mSteals.setText("STL\n" + currentPlayer.getSteals()+"");
-        mBlocks.setText("BLK\n"+currentPlayer.getBlocks()+"");
-        mPlayerPointers.setText("TOT\n"+ currentPlayer.getTotalPoints()+"");
+
+
+
+
+        mTwoPointers.setText("2pt PG.\n"+round(currentPlayer.getOverallTwoPointers(), currentPlayer.getGamesPlayed())+"");
+        mThreePointers.setText("3pt PG.\n"+ round(currentPlayer.getOverallThreePointers(),currentPlayer.getGamesPlayed())+"");
+        mFreeThrows.setText("FTPG\n" + round(currentPlayer.getOverallFreeThrows(),currentPlayer.getGamesPlayed())+"");
+        mRebounds.setText("RPG\n" + round(currentPlayer.getOverallRebounds(),currentPlayer.getGamesPlayed())+"");
+        mAssists.setText("APG\n"+round(currentPlayer.getOverallAssists(),currentPlayer.getGamesPlayed())+"");
+        mSteals.setText("STLPG\n" + round(currentPlayer.getOverallSteals(),currentPlayer.getGamesPlayed())+"");
+        mBlocks.setText("BLKPG\n"+round(currentPlayer.getOverallBlocks(),currentPlayer.getGamesPlayed())+"");
+        mPlayerPoints.setText("PPG\n"+ round(currentPlayer.getOverallPoints(),currentPlayer.getGamesPlayed())+"");
         mStatHeader.setText(currentPlayer.getName()+"'s Career Stats");
 
 
@@ -87,5 +94,11 @@ public class PlayerProfileActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    public double round(int topNumber, int bottomNumber){
+//        return  Math.round((topNumber/bottomNumber * 100)*10)/10.0;
+        return (double) Math.round(topNumber/(float) bottomNumber * 10) /10;
     }
 }

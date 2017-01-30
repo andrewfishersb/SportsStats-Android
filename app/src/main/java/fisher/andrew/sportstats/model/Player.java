@@ -188,10 +188,7 @@ public class Player {
     public void endGameAddStatsToOverall(DatabaseReference playerToSelectRef){
         //set overall -> may eventually do division
         this.overallTwoPointers += getTwoPointers();
-
         this.twoPointers = getTwoPointers();
-
-
         this.overallThreePointers += getThreePointers();
         this.overallFreeThrows += getFreeThrows();
         this.overallAssists += getAssists();
@@ -199,7 +196,6 @@ public class Player {
         this.overallBlocks += getBlocks();
         this.overallSteals += getSteals();
         this.overallPoints += getTotalPoints();
-        this.gamesPlayed++;
 
         Log.d("Total Points",Integer.toString(getTotalPoints()));
 
@@ -285,8 +281,8 @@ public class Player {
         return gamesPlayed;
     }
 
-    public void setGamesPlayed(int gamesPlayed) {
-        this.gamesPlayed = gamesPlayed;
+    public void addGamesPlayed() {
+        this.gamesPlayed++;
     }
 
     public String getPushId() {
@@ -304,6 +300,8 @@ public class Player {
     public String getTeamId(){
         return this.teamId;
     }
+
+
 }
 // ---ADD LATER IF TIME---
 //more stats

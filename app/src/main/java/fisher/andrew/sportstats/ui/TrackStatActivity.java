@@ -102,19 +102,28 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent(this,ViewTeamsActivity.class);
         //this resets the value so a new team can be set each time this activity is called
         team=null;
-        //when the game finishes
 
 
-//        for(Player player : currentPlayers){
-////            statsRecorded = false;
-//            mPlayerReference = FirebaseDatabase.getInstance()
-//                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
-//                    .child(player.getPushId());
-//
-//                player.endGameAddStatsToOverall(mPlayerReference);
-//
-//
-//        }
+
+        //need to add a game for each player
+        //test the reset and set overall
+
+        for(Player player : currentPlayers){
+            mPlayerReference = FirebaseDatabase.getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
+                    .child(player.getPushId());
+            player.addGamesPlayed();
+//            player.endGameResetStats(mPlayerReference);
+            mPlayerReference.child(Constants.FIREBASE_CHILD_GAMES_PLAYED).setValue(player.getGamesPlayed());
+        }
+
+
+        //end all
+
+
+
+
+
 
 
         startActivity(intent);

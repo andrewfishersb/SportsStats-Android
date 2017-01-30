@@ -65,17 +65,35 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
 
         mPlayerReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
+        //test the reset and set overall
+
+//        for(Player player : filterPlayer){
+//            mPlayerReference = FirebaseDatabase.getInstance()
+//                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
+//                    .child(player.getPushId());
+//
+//            player.endGameAddStatsToOverall(mPlayerReference);
+//            player.endGameResetStats(mPlayerReference);
+//        }
 
 
+        //end all
 
-        //this block of code will find players on a set team
+
+        //this block of code will find players on a set team THIS BLOCK ALSO RESETS STATS AND ADDS TO OVERALLS
         mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     //gets the team id of the current player and compares
                     if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
-                        filterPlayer.add(snapshot.getValue(Player.class));
+
+                        Player currentPlayer =snapshot.getValue(Player.class);
+                        DatabaseReference currPlayerReference = mPlayerReference.child(currentPlayer.getPushId());
+                        currentPlayer.endGameAddStatsToOverall(currPlayerReference);
+                        currentPlayer.endGameResetStats(currPlayerReference);
+
+                        filterPlayer.add(currentPlayer);
                     }
                 }
                 playerAdapter = new PlayerAdapter(TeamDetailActivity.this,filterPlayer);
@@ -91,11 +109,6 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-
-
-
-
-
         mStartTheGame.setOnClickListener(this);
 
     }
@@ -106,19 +119,7 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
         Intent intent = new Intent(TeamDetailActivity.this,TrackStatActivity.class);
         intent.putExtra("currentTeam",Parcels.wrap(currentTeam));
 
-        //test the reset and set overall
 
-        for(Player player : filterPlayer){
-            mPlayerReference = FirebaseDatabase.getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
-                    .child(player.getPushId());
-
-            player.endGameAddStatsToOverall(mPlayerReference);
-            player.endGameResetStats(mPlayerReference);
-        }
-
-
-        //end all
 
 
         startActivity(intent);

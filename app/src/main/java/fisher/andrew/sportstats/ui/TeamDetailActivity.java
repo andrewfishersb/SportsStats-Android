@@ -91,6 +91,11 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+
+
+
+
+
         mStartTheGame.setOnClickListener(this);
 
     }
@@ -100,6 +105,22 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
         //wont really start a game but for now this will display all players and their stats section
         Intent intent = new Intent(TeamDetailActivity.this,TrackStatActivity.class);
         intent.putExtra("currentTeam",Parcels.wrap(currentTeam));
+
+        //test the reset and set overall
+
+        for(Player player : filterPlayer){
+            mPlayerReference = FirebaseDatabase.getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
+                    .child(player.getPushId());
+
+            player.endGameAddStatsToOverall(mPlayerReference);
+            player.endGameResetStats(mPlayerReference);
+        }
+
+
+        //end all
+
+
         startActivity(intent);
     }
 

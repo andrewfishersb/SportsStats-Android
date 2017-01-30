@@ -1,5 +1,7 @@
 package fisher.andrew.sportstats.model;
 
+import android.util.Log;
+
 import com.google.firebase.database.DatabaseReference;
 
 import org.parceler.Parcel;
@@ -171,54 +173,48 @@ public class Player {
         this.steals=0;
         this.totalPoints =0;
 
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(0);
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_TOTAL_POINTS).setValue(0);
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(0);
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(0);
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(0);
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(0);
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(0);
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(0);
 
 
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(this.getTwoPointers());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(this.getThreePointers());
-
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(this.getFreeThrows());
-
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(this.getRebounds());
-
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(this.getAssists());
-
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(this.getSteals());
-
-
-    }
+}
 
     public void endGameAddStatsToOverall(DatabaseReference playerToSelectRef){
         //set overall -> may eventually do division
-        this.overallTwoPointers = getTwoPointers();
-        this.overallThreePointers = getThreePointers();
-        this.overallFreeThrows = getFreeThrows();
-        this.overallAssists = getAssists();
-        this.overallRebounds = getRebounds();
-        this.overallBlocks = getBlocks();
-        this.overallSteals = getSteals();
-        this.overallPoints = getTotalPoints();
+        this.overallTwoPointers += getTwoPointers();
+
+        this.twoPointers = getTwoPointers();
+
+
+        this.overallThreePointers += getThreePointers();
+        this.overallFreeThrows += getFreeThrows();
+        this.overallAssists += getAssists();
+        this.overallRebounds += getRebounds();
+        this.overallBlocks += getBlocks();
+        this.overallSteals += getSteals();
+        this.overallPoints += getTotalPoints();
         this.gamesPlayed++;
 
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS_OVERALL).setValue(this.getTwoPointers());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_TOTAL_POINTS_OVERALL).setValue(this.getTotalPoints());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS_OVERALL).setValue(this.getThreePointers());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS_OVERALL).setValue(this.getFreeThrows());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS_OVERALL).setValue(this.getRebounds());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS_OVERALL).setValue(this.getAssists());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS_OVERALL).setValue(this.getSteals());
-        playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS_OVERALL).setValue(this.getBlocks());
+        Log.d("Total Points",Integer.toString(getTotalPoints()));
+
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS_OVERALL).setValue(this.getOverallTwoPointers());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_TOTAL_POINTS_OVERALL).setValue(this.getOverallPoints());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS_OVERALL).setValue(this.getOverallThreePointers());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS_OVERALL).setValue(this.getOverallFreeThrows());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS_OVERALL).setValue(this.getOverallRebounds());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS_OVERALL).setValue(this.getOverallAssists());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS_OVERALL).setValue(this.getOverallSteals());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS_OVERALL).setValue(this.getOverallBlocks());
+        playerToSelectRef.child(Constants.FIREBASE_CHILD_GAMES_PLAYED).setValue(this.getGamesPlayed());
+
 
     }
-
-//    public static final String FIREBASE_CHILD_ASSISTS_OVERALL = "overallAssists";
-//    public static final String FIREBASE_CHILD_BLOCKS_OVERALL = "overallBlocks";
-//    public static final String FIREBASE_CHILD_TWO_POINTERS_OVERALL = "overallTwoPointers";
-//    public static final String FIREBASE_CHILD_FREE_THROWS_OVERALL = "overallFreeThrows";
-//    public static final String FIREBASE_CHILD_REBOUNDS_OVERALL = "overallRebounds";
-//    public static final String FIREBASE_CHILD_STEALS_OVERALL = "overallSteals";
-//    public static final String FIREBASE_CHILD_THREE_POINTERS_OVERALL = "overallThreePointers";
-//    public static final String FIREBASE_CHILD_TOTAL_POINTS_OVERALL = "overallPoints";
-
 
 
     public int getOverallTwoPointers() {

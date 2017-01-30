@@ -23,4 +23,6 @@ public class Constants {
     public static final String FIREBASE_CHILD_STEALS_OVERALL = "overallSteals";
     public static final String FIREBASE_CHILD_THREE_POINTERS_OVERALL = "overallThreePointers";
     public static final String FIREBASE_CHILD_TOTAL_POINTS_OVERALL = "overallPoints";
+    public static final String FIREBASE_CHILD_GAMES_PLAYED = "gamesPlayed";
+
 }

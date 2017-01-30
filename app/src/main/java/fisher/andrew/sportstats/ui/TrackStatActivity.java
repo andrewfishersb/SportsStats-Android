@@ -12,9 +12,12 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
@@ -39,7 +42,7 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
     private Team currentTeam;
     private String team;
     private String uid;
-
+//    private boolean statsRecorded;
     @Bind(R.id.playerStatRecyclerView) RecyclerView mStatRecyclerView;
     @Bind(R.id.finishGameButton) Button mEndGame;
 
@@ -62,25 +65,25 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         team = currentTeam.getPushId();
 
         if(!team.isEmpty()){//
-            setUpFirebaseAdapter("-KbRiHnv16LG_HVPdOdB"); //Works all except for the initial time...and maybe no back buttons
+            setUpFirebaseAdapter("-KbWGUnteT2NAOOI9S7S"); //Works all except for the initial time...and maybe no back buttons
         }
 
         //Get the players on the current team
-//        mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-//                    //gets the team id of the current player and compares
-//                    if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
-//                        currentPlayers.add(snapshot.getValue(Player.class));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//            }
-//        });
+        mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    //gets the team id of the current player and compares
+                    if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
+                        currentPlayers.add(snapshot.getValue(Player.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
 
 
@@ -102,15 +105,16 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         //when the game finishes
 
 
-        for(Player player : currentPlayers){
-            mPlayerReference = FirebaseDatabase.getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
-                    .child(player.getPushId());
-
-
-            player.endGameAddStatsToOverall(mPlayerReference);
-            player.endGameResetStats(mPlayerReference);
-        }
+//        for(Player player : currentPlayers){
+////            statsRecorded = false;
+//            mPlayerReference = FirebaseDatabase.getInstance()
+//                    .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
+//                    .child(player.getPushId());
+//
+//                player.endGameAddStatsToOverall(mPlayerReference);
+//
+//
+//        }
 
 
         startActivity(intent);
@@ -137,7 +141,6 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
             protected void populateViewHolder(FirebasePlayerStatsViewHolder viewHolder, Player model, int position){
 
                     viewHolder.bindPlayer(model,teamId);
-                currentPlayers.add(model);
             }
         };
         mStatRecyclerView.setHasFixedSize(true);
@@ -152,21 +155,3 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         mFirebaseAdapter.cleanup();
     }
 }
-
-
-
-
-//    private void setUpFirebaseAdapter(final String teamId) {
-//
-//        mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerStatsViewHolder>(Player.class, R.layout.single_player_stat, FirebasePlayerStatsViewHolder.class,mPlayerReference){
-//            //this was moved in the last lesson so I do not know if it will be moved later?
-//            @Override
-//            protected void populateViewHolder(FirebasePlayerStatsViewHolder viewHolder, Player model, int position){
-//                viewHolder.bindPlayer(model);
-//            }
-//        };
-//        mRecyclerView.setHasFixedSize(true);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        mRecyclerView.setAdapter(mFirebaseAdapter);
-//    }

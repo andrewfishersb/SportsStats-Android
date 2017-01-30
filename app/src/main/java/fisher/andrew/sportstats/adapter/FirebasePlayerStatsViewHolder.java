@@ -24,7 +24,8 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
     View mView;
     Context mContext;
     String teamId;
-
+    DatabaseReference ref;
+    DatabaseReference playerToSelectRef;
 
     public FirebasePlayerStatsViewHolder(View playerView){
         super(playerView);
@@ -96,7 +97,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
+        ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -114,7 +115,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
                 //Gets the reference of the player. So I can easily append to depending on the switch statement
 
-                DatabaseReference playerToSelectRef = FirebaseDatabase.getInstance()
+                 playerToSelectRef = FirebaseDatabase.getInstance()
                         .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
                         .child(selectedPlayer.getPushId());
 
@@ -180,7 +181,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
+         ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -198,7 +199,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
                 //Gets the reference of the player. So I can easily append to depending on the switch statement
 
-                DatabaseReference playerToSelectRef = FirebaseDatabase.getInstance()
+                playerToSelectRef = FirebaseDatabase.getInstance()
                         .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
                         .child(selectedPlayer.getPushId());
 

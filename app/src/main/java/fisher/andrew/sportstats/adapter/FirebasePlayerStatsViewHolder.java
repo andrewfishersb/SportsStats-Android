@@ -4,7 +4,9 @@ package fisher.andrew.sportstats.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,10 +17,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
+
+
+// HAVE AN ARRAY OF 2 INDEX'S, CLICK ONE PUTS IN A NUMBER
+//CLICK TWO ADDS ANOTHER NUMBER AND THEN SWAPS
+//
+//
+
 
 public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
     View mView;
@@ -27,10 +37,15 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
     DatabaseReference ref;
     DatabaseReference playerToSelectRef;
 
+//    int [] switchArray = new int[2];
+    int subOutPlayer;
+
+
     public FirebasePlayerStatsViewHolder(View playerView){
         super(playerView);
         mView = playerView;
         mContext = playerView.getContext();
+        subOutPlayer=-1;
     }
 
 
@@ -46,6 +61,9 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             TextView assistsTextView = (TextView) mView.findViewById(R.id.playerAst);
             TextView stealsTextView = (TextView) mView.findViewById(R.id.playerStl);
             TextView blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
+
+            //might not need
+            ImageView subsitution = (ImageView) mView.findViewById(R.id.subsituteButton);
 
 
             nameTextView.setText(player.getName());
@@ -80,6 +98,9 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             stealsTextView.setOnLongClickListener(this);
             blocksTextView.setOnLongClickListener(this);
 
+        //might not need
+        subsitution.setOnClickListener(this);
+
 
     }
 
@@ -102,6 +123,9 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                //IF IMPLEMENT SUBS, ONLY
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     //checks the player belongs to the current team
                     if(snapshot.getValue(Player.class).getTeamId().equals(teamId)){
@@ -151,6 +175,18 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                     case R.id.playerBLK:
                         selectedPlayer.setBlock(1);
                         playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks());
+                        break;
+                    case R.id.subsituteButton:
+
+                        if(subOutPlayer==-1){
+                            subOutPlayer = playerIndex;
+                            Toast.makeText(mContext, "initial click", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Collections.swap(players,subOutPlayer,playerIndex);
+                            Toast.makeText(mContext, players.get(1).getName(), Toast.LENGTH_SHORT).show();
+                            subOutPlayer=-1;
+                        }
+                        break;
                 }
 
 

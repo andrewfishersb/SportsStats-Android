@@ -40,7 +40,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="est. 2016"
+                android:text="est. 2017"
                 android:layout_marginTop="5dp"
                 android:textSize="20sp"
                 android:id="@+id/dateTextView"

@@ -60,7 +60,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
 
 
-        mTwoPointers.setText("2pt PG.\n"+round(currentPlayer.getOverallTwoPointers(), currentPlayer.getGamesPlayed())+"");
+        mTwoPointers.setText("Games\n"+currentPlayer.getGamesPlayed()+"");
         mThreePointers.setText("3pt PG.\n"+ round(currentPlayer.getOverallThreePointers(),currentPlayer.getGamesPlayed())+"");
         mFreeThrows.setText("FTPG\n" + round(currentPlayer.getOverallFreeThrows(),currentPlayer.getGamesPlayed())+"");
         mRebounds.setText("RPG\n" + round(currentPlayer.getOverallRebounds(),currentPlayer.getGamesPlayed())+"");

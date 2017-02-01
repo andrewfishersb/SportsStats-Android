@@ -46,6 +46,7 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
     @Bind(R.id.playerStatRecyclerView) RecyclerView mStatRecyclerView;
     @Bind(R.id.finishGameButton) Button mEndGame;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         team = currentTeam.getPushId();
 
         if(!team.isEmpty()){//
-            setUpFirebaseAdapter("-KbWGUnteT2NAOOI9S7S"); //Works all except for the initial time...and maybe no back buttons
+            setUpFirebaseAdapter(team);
         }
 
         //Get the players on the current team
@@ -104,27 +105,14 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         team=null;
 
 
-
-        //need to add a game for each player
-        //test the reset and set overall
-
+        //adds a game to each player
         for(Player player : currentPlayers){
             mPlayerReference = FirebaseDatabase.getInstance()
                     .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
                     .child(player.getPushId());
             player.addGamesPlayed();
-//            player.endGameResetStats(mPlayerReference);
             mPlayerReference.child(Constants.FIREBASE_CHILD_GAMES_PLAYED).setValue(player.getGamesPlayed());
         }
-
-
-        //end all
-
-
-
-
-
-
 
         startActivity(intent);
 

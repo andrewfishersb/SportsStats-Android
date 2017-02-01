@@ -26,13 +26,11 @@
         android:layout_height="wrap_content"
         android:text="View Teams"
         android:id="@+id/createTeamTextViewLinkFromMainActivity"
+        android:layout_marginTop="90dp"
+        android:textColor="#466EDD"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="69dp"
-        android:textColor="#466EDD" />
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"/>
 
     <!--was in the left area-->
     <!--<TextView-->
@@ -47,13 +45,4 @@
         <!--android:layout_marginEnd="38dp"-->
         <!--android:textColor="#466EDD" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play Ball"
-        android:id="@+id/startGameLinkTextViewMainActivity"
-        android:textColor="#0f349a"
-        android:layout_alignTop="@+id/createTeamTextViewLinkFromMainActivity"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
 </RelativeLayout>

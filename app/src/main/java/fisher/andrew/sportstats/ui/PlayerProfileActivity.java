@@ -38,7 +38,6 @@ public class PlayerProfileActivity extends AppCompatActivity {
     @Bind(R.id.playerBLK) TextView mBlocks;
     @Bind(R.id.playerName) TextView mStatHeader;
 
-
     private Player currentPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +47,9 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
         currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
-
-
-
-
-
         mProfileName.setText(currentPlayer.getName());
         mProfileHeight.setText("Height " +currentPlayer.getHeight());
         mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
-
-
 
 
         mTwoPointers.setText("Games\n"+currentPlayer.getGamesPlayed()+"");
@@ -69,7 +61,6 @@ public class PlayerProfileActivity extends AppCompatActivity {
         mBlocks.setText("BLKPG\n"+round(currentPlayer.getOverallBlocks(),currentPlayer.getGamesPlayed())+"");
         mPlayerPoints.setText("PPG\n"+ round(currentPlayer.getOverallPoints(),currentPlayer.getGamesPlayed())+"");
         mStatHeader.setText(currentPlayer.getName()+"'s Career Stats");
-
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

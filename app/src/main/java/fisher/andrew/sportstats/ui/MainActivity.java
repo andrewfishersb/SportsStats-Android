@@ -18,7 +18,6 @@ import fisher.andrew.sportstats.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 //    @Bind(R.id.createPlayerTextViewLinkFromMainActivity) TextView mCreatePlayerLink;
     @Bind(R.id.createTeamTextViewLinkFromMainActivity) TextView mCreateTeamLink;
-    @Bind(R.id.startGameLinkTextViewMainActivity) TextView mStartGame;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        mCreatePlayerLink.setOnClickListener(this);
         mCreateTeamLink.setOnClickListener(this);
-        mStartGame.setOnClickListener(this);
     }
 
 

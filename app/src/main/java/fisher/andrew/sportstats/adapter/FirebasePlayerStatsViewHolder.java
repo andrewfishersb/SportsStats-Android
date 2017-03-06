@@ -3,6 +3,7 @@ package fisher.andrew.sportstats.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -135,59 +136,65 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
                 }
                 int playerIndex = getLayoutPosition();
-                Player selectedPlayer = players.get(playerIndex);
+                Log.d("Index",""+playerIndex);
 
-                //Gets the reference of the player. So I can easily append to depending on the switch statement
+                //maybe need an if statement to block a negative index
+                if(playerIndex >= 0 ){
+                    Player selectedPlayer = players.get(playerIndex);
 
-                 playerToSelectRef = FirebaseDatabase.getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
-                        .child(selectedPlayer.getPushId());
+                    //Gets the reference of the player. So I can easily append to depending on the switch statement
 
-                //check what view was clicked and then update accordingly
-                switch(viewId){
-                    case R.id.player2Pts:
-                        selectedPlayer.setTwoPoints(1);
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
-                        updateTotalScore(selectedPlayer);
-                        break;
-                    case R.id.player3Pts:
-                        selectedPlayer.setThreePointer(1);
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
-                        updateTotalScore(selectedPlayer);
-                        break;
-                    case R.id.playerFT:
-                        selectedPlayer.setFreeThrow(1);
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows());
-                        updateTotalScore(selectedPlayer);
-                        break;
-                    case R.id.playerReb:
-                        selectedPlayer.setRebound(1);
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(selectedPlayer.getRebounds());
-                        break;
-                    case R.id.playerAst:
-                        selectedPlayer.setAssist(1);
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(selectedPlayer.getAssists());
-                        break;
-                    case R.id.playerStl:
-                        selectedPlayer.setSteals(1);
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(selectedPlayer.getSteals());
-                        break;
-                    case R.id.playerBLK:
-                        selectedPlayer.setBlock(1);
-                        playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks());
-                        break;
-                    case R.id.subsituteButton:
+                    playerToSelectRef = FirebaseDatabase.getInstance()
+                            .getReference(Constants.FIREBASE_CHILD_PLAYERS).child(uid)
+                            .child(selectedPlayer.getPushId());
 
-                        if(subOutPlayer==-1){
-                            subOutPlayer = playerIndex;
-                            Toast.makeText(mContext, "initial click", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Collections.swap(players,subOutPlayer,playerIndex);
-                            Toast.makeText(mContext, players.get(1).getName(), Toast.LENGTH_SHORT).show();
-                            subOutPlayer=-1;
-                        }
-                        break;
+                    //check what view was clicked and then update accordingly
+                    switch(viewId){
+                        case R.id.player2Pts:
+                            selectedPlayer.setTwoPoints(1);
+                            playerToSelectRef.child(Constants.FIREBASE_CHILD_TWO_POINTERS).setValue(selectedPlayer.getTwoPointers());
+                            updateTotalScore(selectedPlayer);
+                            break;
+                        case R.id.player3Pts:
+                            selectedPlayer.setThreePointer(1);
+                            playerToSelectRef.child(Constants.FIREBASE_CHILD_THREE_POINTERS).setValue(selectedPlayer.getThreePointers());
+                            updateTotalScore(selectedPlayer);
+                            break;
+                        case R.id.playerFT:
+                            selectedPlayer.setFreeThrow(1);
+                            playerToSelectRef.child(Constants.FIREBASE_CHILD_FREE_THROWS).setValue(selectedPlayer.getFreeThrows());
+                            updateTotalScore(selectedPlayer);
+                            break;
+                        case R.id.playerReb:
+                            selectedPlayer.setRebound(1);
+                            playerToSelectRef.child(Constants.FIREBASE_CHILD_REBOUNDS).setValue(selectedPlayer.getRebounds());
+                            break;
+                        case R.id.playerAst:
+                            selectedPlayer.setAssist(1);
+                            playerToSelectRef.child(Constants.FIREBASE_CHILD_ASSISTS).setValue(selectedPlayer.getAssists());
+                            break;
+                        case R.id.playerStl:
+                            selectedPlayer.setSteals(1);
+                            playerToSelectRef.child(Constants.FIREBASE_CHILD_STEALS).setValue(selectedPlayer.getSteals());
+                            break;
+                        case R.id.playerBLK:
+                            selectedPlayer.setBlock(1);
+                            playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks());
+                            break;
+                        case R.id.subsituteButton:
+
+                            if(subOutPlayer==-1){
+                                subOutPlayer = playerIndex;
+                                Toast.makeText(mContext, "initial click", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Collections.swap(players,subOutPlayer,playerIndex);
+                                Toast.makeText(mContext, players.get(1).getName(), Toast.LENGTH_SHORT).show();
+                                subOutPlayer=-1;
+                            }
+                            break;
+                    }
                 }
+
 
 
             }

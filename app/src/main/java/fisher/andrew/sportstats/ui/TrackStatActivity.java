@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -124,7 +123,7 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        Toast.makeText(this, "Team id: " + teamId, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Team id: " + teamId, Toast.LENGTH_SHORT).show();
         Query query = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PLAYERS)
                 .child(uid).orderByChild("teamId").equalTo(teamId);
 
@@ -134,10 +133,10 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
 //        mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerStatsViewHolder>(Player.class, R.layout.single_player_stat, FirebasePlayerStatsViewHolder.class,mPlayerReference){
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Player, FirebasePlayerStatsViewHolder>(Player.class, R.layout.single_player_stat, FirebasePlayerStatsViewHolder.class,query){
             //this was moved in the last lesson so I do not know if it will be moved later?
+
             @Override
             protected void populateViewHolder(FirebasePlayerStatsViewHolder viewHolder, Player model, int position){
-
-                    viewHolder.bindPlayer(model,teamId);
+                viewHolder.bindPlayer(model,teamId);
             }
         };
         mStatRecyclerView.setHasFixedSize(true);

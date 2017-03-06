@@ -110,7 +110,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_swap_horiz_black_24dp"
         android:id="@+id/subsituteButton"
         android:paddingRight="10dp"
         android:layout_alignTop="@+id/tableLayout"

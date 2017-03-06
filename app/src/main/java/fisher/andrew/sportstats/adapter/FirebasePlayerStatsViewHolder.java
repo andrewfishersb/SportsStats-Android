@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +23,8 @@ import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
+import static fisher.andrew.sportstats.R.id.playerName;
+
 
 // HAVE AN ARRAY OF 2 INDEX'S, CLICK ONE PUTS IN A NUMBER
 //CLICK TWO ADDS ANOTHER NUMBER AND THEN SWAPS
@@ -40,6 +41,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
 //    int [] switchArray = new int[2];
     int subOutPlayer;
+    final ArrayList<Player> players = new ArrayList<>();
 
 
     public FirebasePlayerStatsViewHolder(View playerView){
@@ -59,6 +61,9 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             test.height=0;
             test.width=0;
             mView.setLayoutParams(test);
+        }else{
+            //Might need to have something to set the height and width to what they should be...not sure what subing will do
+            //http://stackoverflow.com/questions/27574805/hiding-views-in-recyclerview
         }
 
 
@@ -68,7 +73,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             //sent the teamId to the bind in order to check for team id when clicked
             this.teamId=teamId;
 
-            TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
+            TextView nameTextView = (TextView) mView.findViewById(playerName);
             TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
             TextView  twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
             TextView threePointsTextView= (TextView) mView.findViewById(R.id.player3Pts);
@@ -79,7 +84,8 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             TextView blocksTextView = (TextView) mView.findViewById(R.id.playerBLK);
 
             //might not need
-            ImageView subsitution = (ImageView) mView.findViewById(R.id.subsituteButton);
+//            ImageView subsitution = (ImageView) mView.findViewById(R.id.subsituteButton);
+            TextView playerNameTextView = (TextView) mView.findViewById(R.id.playerName);
 
 
             nameTextView.setText(player.getName());
@@ -115,7 +121,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             blocksTextView.setOnLongClickListener(this);
 
         //might not need
-        subsitution.setOnClickListener(this);
+        playerNameTextView.setOnClickListener(this);
 
 
     }
@@ -127,7 +133,6 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
     //possibly click on the item but will then send the id, position and the intent
     @Override
     public void onClick(final View view){
-        final ArrayList<Player> players = new ArrayList<>();
         final int viewId = view.getId();
 
 
@@ -140,15 +145,16 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        //checks the player belongs to the current team
+                        if(snapshot.getValue(Player.class).getTeamId().equals(teamId)){
+                            players.add(snapshot.getValue(Player.class));
+                        }
 
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    //checks the player belongs to the current team
-                    if(snapshot.getValue(Player.class).getTeamId().equals(teamId)){
-                        players.add(snapshot.getValue(Player.class));
+
                     }
 
 
-                }
                 int playerIndex = getLayoutPosition();
 
                 if(playerIndex >= 0 ){
@@ -193,17 +199,27 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                             selectedPlayer.setBlock(1);
                             playerToSelectRef.child(Constants.FIREBASE_CHILD_BLOCKS).setValue(selectedPlayer.getBlocks());
                             break;
-                        case R.id.subsituteButton:
+                        case R.id.playerName:
+                            Toast.makeText(mContext, players.get(playerIndex).getName(), Toast.LENGTH_SHORT).show();
+                            Collections.swap(players,5,playerIndex);
 
-                            if(subOutPlayer==-1){
-                                subOutPlayer = playerIndex;
-                                Toast.makeText(mContext, "initial click", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Collections.swap(players,subOutPlayer,playerIndex);
-                                Toast.makeText(mContext, players.get(1).getName(), Toast.LENGTH_SHORT).show();
-                                subOutPlayer=-1;
-                            }
-                            break;
+
+
+
+
+
+//                            for (Player player: players) {
+//                                Log.d("Player/Id ", player.getName());
+//                            }
+//                            if(subOutPlayer==-1){
+//                                subOutPlayer = playerIndex;
+//                                Toast.makeText(mContext, "initial click", Toast.LENGTH_SHORT).show();
+//                            }else{
+//                                Collections.swap(players,subOutPlayer,playerIndex);
+//                                Toast.makeText(mContext, players.get(1).getName(), Toast.LENGTH_SHORT).show();
+//                                subOutPlayer=-1;
+//                            }
+//                            break;
                     }
                 }
 

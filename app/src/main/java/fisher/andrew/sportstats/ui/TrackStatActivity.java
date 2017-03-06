@@ -68,6 +68,8 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
             setUpFirebaseAdapter(team);
         }
 
+
+
         //Get the players on the current team
         mPlayerReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -141,6 +143,7 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
 
             }
         };
+
         mStatRecyclerView.setHasFixedSize(true);
         mStatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

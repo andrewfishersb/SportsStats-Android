@@ -3,8 +3,8 @@ package fisher.andrew.sportstats.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,9 +50,24 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
     }
 
 
-    public void bindPlayer(Player player, String teamId){
+    public void bindPlayer(Player player, String teamId, int position){
+
+        //This block here will hide certain players after 5
+        ViewGroup.LayoutParams test = mView.getLayoutParams();
+        if(position>4){
+            mView.setVisibility(View.INVISIBLE);
+            test.height=0;
+            test.width=0;
+            mView.setLayoutParams(test);
+        }
+
+
+
+
+
             //sent the teamId to the bind in order to check for team id when clicked
             this.teamId=teamId;
+
             TextView nameTextView = (TextView) mView.findViewById(R.id.playerName);
             TextView totalPointsTextView = (TextView) mView.findViewById(R.id.playerPoints);
             TextView  twoPointsTextView = (TextView) mView.findViewById(R.id.player2Pts);
@@ -126,7 +141,6 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                //IF IMPLEMENT SUBS, ONLY
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     //checks the player belongs to the current team
                     if(snapshot.getValue(Player.class).getTeamId().equals(teamId)){
@@ -136,9 +150,7 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
 
                 }
                 int playerIndex = getLayoutPosition();
-                Log.d("Index",""+playerIndex);
 
-                //maybe need an if statement to block a negative index
                 if(playerIndex >= 0 ){
                     Player selectedPlayer = players.get(playerIndex);
 
@@ -194,8 +206,6 @@ public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder imple
                             break;
                     }
                 }
-
-
 
             }
 

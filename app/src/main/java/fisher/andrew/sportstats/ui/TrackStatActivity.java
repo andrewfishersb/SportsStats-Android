@@ -136,7 +136,9 @@ public class TrackStatActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             protected void populateViewHolder(FirebasePlayerStatsViewHolder viewHolder, Player model, int position){
-                viewHolder.bindPlayer(model,teamId);
+//                    viewHolder.bindPlayer(model,teamId);
+                viewHolder.bindPlayer(model,teamId,position);
+
             }
         };
         mStatRecyclerView.setHasFixedSize(true);

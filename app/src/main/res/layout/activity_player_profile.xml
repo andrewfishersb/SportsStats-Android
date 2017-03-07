@@ -65,12 +65,20 @@
         android:layout_marginLeft="100dp"
         android:textSize="15sp" />
 
-    <include layout="@layout/single_player_stat"
-        android:id="@+id/profileStats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <!--<include layout="@layout/single_player_stat"-->
+        <!--android:id="@+id/profileStats"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/profileHeight"-->
+        <!--android:layout_alignLeft="@+id/profileTeam"-->
+        <!--android:layout_alignStart="@+id/profileTeam"-->
+        <!--android:layout_marginTop="54dp" />-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/playerViewPager"
+        android:layout_width="wrap_content"
         android:layout_below="@+id/profileHeight"
-        android:layout_alignLeft="@+id/profileTeam"
-        android:layout_alignStart="@+id/profileTeam"
-        android:layout_marginTop="54dp" />
+        android:layout_height="186dp"
+        android:fadingEdge="vertical" />
+
 </RelativeLayout>

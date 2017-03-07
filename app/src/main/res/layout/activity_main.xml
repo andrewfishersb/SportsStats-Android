@@ -32,6 +32,14 @@
         android:layout_centerHorizontal="true"
         android:textSize="20sp"/>
 
+    <TextView
+        android:text="Leader Board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createTeamTextViewLinkFromMainActivity"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/leaderBoardTextView"/>
+
     <!--was in the left area-->
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->

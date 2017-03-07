@@ -1,6 +1,7 @@
 package fisher.andrew.sportstats.ui;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
+import fisher.andrew.sportstats.adapter.PlayerStatPagerAdapter;
 import fisher.andrew.sportstats.model.Player;
 import fisher.andrew.sportstats.model.Team;
 
@@ -45,22 +47,34 @@ public class PlayerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player_profile);
         ButterKnife.bind(this);
 
+
+        //testing the stat swipe
+        ViewPager myPager;
+
+        PlayerStatPagerAdapter adapter = new PlayerStatPagerAdapter();
+        myPager = (ViewPager) findViewById(R.id.playerViewPager);
+        myPager.setAdapter(adapter);
+        myPager.setCurrentItem(3);
+
+
+        //end of test stat swipe
+
         currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
         mProfileName.setText(currentPlayer.getName());
         mProfileHeight.setText("Height " +currentPlayer.getHeight());
         mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
 
-
-        mTwoPointers.setText("Games\n"+currentPlayer.getGamesPlayed()+"");
-        mThreePointers.setText("3pt PG.\n"+ round(currentPlayer.getOverallThreePointers(),currentPlayer.getGamesPlayed())+"");
-        mFreeThrows.setText("FTPG\n" + round(currentPlayer.getOverallFreeThrows(),currentPlayer.getGamesPlayed())+"");
-        mRebounds.setText("RPG\n" + round(currentPlayer.getOverallRebounds(),currentPlayer.getGamesPlayed())+"");
-        mAssists.setText("APG\n"+round(currentPlayer.getOverallAssists(),currentPlayer.getGamesPlayed())+"");
-        mSteals.setText("STLPG\n" + round(currentPlayer.getOverallSteals(),currentPlayer.getGamesPlayed())+"");
-        mBlocks.setText("BLKPG\n"+round(currentPlayer.getOverallBlocks(),currentPlayer.getGamesPlayed())+"");
-        mPlayerPoints.setText("PPG\n"+ round(currentPlayer.getOverallPoints(),currentPlayer.getGamesPlayed())+"");
-        mStatHeader.setText(currentPlayer.getName()+"'s Career Stats");
+//the brute force option
+//        mTwoPointers.setText("Games\n"+currentPlayer.getGamesPlayed()+"");
+//        mThreePointers.setText("3pt PG.\n"+ round(currentPlayer.getOverallThreePointers(),currentPlayer.getGamesPlayed())+"");
+//        mFreeThrows.setText("FTPG\n" + round(currentPlayer.getOverallFreeThrows(),currentPlayer.getGamesPlayed())+"");
+//        mRebounds.setText("RPG\n" + round(currentPlayer.getOverallRebounds(),currentPlayer.getGamesPlayed())+"");
+//        mAssists.setText("APG\n"+round(currentPlayer.getOverallAssists(),currentPlayer.getGamesPlayed())+"");
+//        mSteals.setText("STLPG\n" + round(currentPlayer.getOverallSteals(),currentPlayer.getGamesPlayed())+"");
+//        mBlocks.setText("BLKPG\n"+round(currentPlayer.getOverallBlocks(),currentPlayer.getGamesPlayed())+"");
+//        mPlayerPoints.setText("PPG\n"+ round(currentPlayer.getOverallPoints(),currentPlayer.getGamesPlayed())+"");
+//        mStatHeader.setText(currentPlayer.getName()+"'s Career Stats");
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

@@ -18,6 +18,7 @@ import fisher.andrew.sportstats.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 //    @Bind(R.id.createPlayerTextViewLinkFromMainActivity) TextView mCreatePlayerLink;
     @Bind(R.id.createTeamTextViewLinkFromMainActivity) TextView mCreateTeamLink;
+    @Bind(R.id.leaderBoardTextView) TextView mLeaderBoardTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +27,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-//        mCreatePlayerLink.setOnClickListener(this);
+        mLeaderBoardTextView.setOnClickListener(this);
         mCreateTeamLink.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View view){
+
+        if(view == mLeaderBoardTextView){
+            Intent intent = new Intent(MainActivity.this,LeaderboardActivity.class);
+            startActivity(intent);
+        }
+
+
         //may eventually go in overflow menu
 //        if(view == mCreatePlayerLink){
 //            Intent intent = new Intent(MainActivity.this,CreatePlayerActivity.class);

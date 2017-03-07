@@ -1,6 +1,7 @@
 package fisher.andrew.sportstats.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -15,15 +16,18 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.adapter.PlayerStatPagerAdapter;
 import fisher.andrew.sportstats.model.Player;
-import fisher.andrew.sportstats.model.Team;
 
 //need to send back to previous page but cant do it through the manifest???
 public class PlayerProfileActivity extends AppCompatActivity {
+
+    //may not need if i stop this fragment bizz
+    FragmentPagerAdapter adapterViewPager;
+
+
     @Bind(R.id.profileName) TextView mProfileName;
     @Bind(R.id.profileAge) TextView mProfileAge;
     @Bind(R.id.profileHeight) TextView mProfileHeight;
@@ -45,15 +49,19 @@ public class PlayerProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
 
 
         //testing the stat swipe
         ViewPager myPager;
 
-        PlayerStatPagerAdapter adapter = new PlayerStatPagerAdapter();
+//        PlayerStatPagerAdapter adapter = new PlayerStatPagerAdapter();
         myPager = (ViewPager) findViewById(R.id.playerViewPager);
-        myPager.setAdapter(adapter);
+        adapterViewPager = new PlayerStatPagerAdapter(getSupportFragmentManager());
+
+
+
+        myPager.setAdapter(adapterViewPager);
         myPager.setCurrentItem(3);
 
 
@@ -61,9 +69,9 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
         currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
-        mProfileName.setText(currentPlayer.getName());
-        mProfileHeight.setText("Height " +currentPlayer.getHeight());
-        mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
+//        mProfileName.setText(currentPlayer.getName());
+//        mProfileHeight.setText("Height " +currentPlayer.getHeight());
+//        mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
 
 //the brute force option
 //        mTwoPointers.setText("Games\n"+currentPlayer.getGamesPlayed()+"");
@@ -89,7 +97,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
         teamRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mProfileTeam.setText(dataSnapshot.getValue(Team.class).getName());
+//                mProfileTeam.setText(dataSnapshot.getValue(Team.class).getName());
             }
 
             @Override

@@ -4,13 +4,24 @@
                 android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/subsituteButton"
+        android:paddingRight="10dp"
+        android:layout_alignTop="@+id/tableLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="2dp"/>
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shrinkColumns="*"
         android:stretchColumns="*"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp">
+        android:layout_below="@+id/subsituteButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:text="Name"
@@ -106,14 +117,4 @@
                 android:layout_weight="1"/>
         </TableRow>
     </TableLayout>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/subsituteButton"
-        android:paddingRight="10dp"
-        android:layout_alignTop="@+id/tableLayout"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingTop="2dp"/>
 </RelativeLayout>

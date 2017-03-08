@@ -42,7 +42,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
         myPager = (ViewPager) findViewById(R.id.playerViewPager);
         adapterViewPager = new PlayerStatPagerAdapter(getSupportFragmentManager(),currentPlayer);
         myPager.setAdapter(adapterViewPager);
-        myPager.setCurrentItem(3);
+//        myPager.setCurrentItem(3);
 
         TextView mProfileName = (TextView) findViewById(R.id.profileName);
         TextView mProfileHeight = (TextView) findViewById(R.id.profileHeight);
@@ -50,8 +50,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
         final TextView mProfileTeam = (TextView) findViewById(R.id.profileTeam);
 
         mProfileName.setText(currentPlayer.getName());
-        mProfileHeight.setText("Height " +currentPlayer.getHeight());
-        mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
+        mProfileHeight.setText("Height " +currentPlayer.getHeight()+"");
+        mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge())+"");
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -75,10 +75,4 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
     }
 
-
-    //May MOVE TO THE FRAGMENT IF THATS WHERE THE ROUNDING IS NEEDED
-    public double round(int topNumber, int bottomNumber){
-//        return  Math.round((topNumber/bottomNumber * 100)*10)/10.0;
-        return (double) Math.round(topNumber/(float) bottomNumber * 10) /10;
-    }
 }

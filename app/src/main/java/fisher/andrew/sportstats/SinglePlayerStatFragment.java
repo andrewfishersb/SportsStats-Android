@@ -57,7 +57,7 @@ public class SinglePlayerStatFragment extends Fragment {
         //MAYBE USE THE STRING.XML FILLERS
         if(page==0){
             header.setText("Average Statistics -- Games Played: "+mPlayer.getGamesPlayed()+"");
-            twoPoints.setText("2Pts.\n"+round(mPlayer.getTwoPointers(),mPlayer.getGamesPlayed())+"");
+            twoPoints.setText("2Pts.\n"+round(mPlayer.getOverallTwoPointers(),mPlayer.getGamesPlayed())+"");
             threePoints.setText("3pt PG.\n"+ round(mPlayer.getOverallThreePointers(),mPlayer.getGamesPlayed())+"");
             freeThrows.setText("FTPG\n" + round(mPlayer.getOverallFreeThrows(),mPlayer.getGamesPlayed())+"");
             totalPoints.setText("PPG\n"+ round(mPlayer.getOverallPoints(),mPlayer.getGamesPlayed())+"");

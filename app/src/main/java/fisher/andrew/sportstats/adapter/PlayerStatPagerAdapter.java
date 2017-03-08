@@ -8,10 +8,6 @@ import fisher.andrew.sportstats.SinglePlayerStatFragment;
 import fisher.andrew.sportstats.model.Player;
 
 
-/**
- * Created by andrewfisher on 3/7/17.
- */
-
 public class PlayerStatPagerAdapter extends FragmentPagerAdapter {
     Player mPlayer;
     private static int NUM_ITEMS = 2;
@@ -25,9 +21,9 @@ public class PlayerStatPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0: //Maybe eventually get rid of the Page #1 title bar thing
+            case 0: //Will show players average stats
                 return SinglePlayerStatFragment.newInstance(0, mPlayer);
-            case 1: // Fragment # 0 - This will show FirstFragment different title
+            case 1: // Will show Players Overall Stats
                 return SinglePlayerStatFragment.newInstance(1, mPlayer);
             default:
                 return null;

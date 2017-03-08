@@ -70,7 +70,8 @@
         android:fadingEdge="vertical"
         android:id="@+id/playerViewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
     </android.support.v4.view.ViewPager>
 
 

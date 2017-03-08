@@ -16,7 +16,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
-import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.adapter.PlayerStatPagerAdapter;
@@ -51,15 +50,17 @@ public class PlayerProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
+        currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
+        Log.d("Name",currentPlayer.getName());
 
         //testing the stat swipe
         ViewPager myPager;
 
 //        PlayerStatPagerAdapter adapter = new PlayerStatPagerAdapter();
         myPager = (ViewPager) findViewById(R.id.playerViewPager);
-        adapterViewPager = new PlayerStatPagerAdapter(getSupportFragmentManager());
+        adapterViewPager = new PlayerStatPagerAdapter(getSupportFragmentManager(),currentPlayer);
 
 
 
@@ -69,26 +70,24 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
         //end of test stat swipe
 
-        currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
-        Log.d("Name",currentPlayer.getName());
 
         //stop the binding
         TextView mProfileName = (TextView) findViewById(R.id.profileName);
         TextView mProfileHeight = (TextView) findViewById(R.id.profileHeight);
         TextView mProfileAge = (TextView) findViewById(R.id.profileAge);
-        TextView mStatHeader = (TextView) findViewById(R.id.playerName);
+//        TextView mStatHeader = (TextView) findViewById(R.id.playerName);
 
         final TextView mProfileTeam = (TextView) findViewById(R.id.profileTeam);
 
-        TextView mTwoPointers = (TextView) findViewById(R.id.player2Pts);
-        TextView mThreePointers = (TextView) findViewById(R.id.player3Pts);
-        TextView mFreeThrows = (TextView) findViewById(R.id.playerFT);
-        TextView mPlayerPoints = (TextView) findViewById(R.id.playerPoints);
-        TextView mAssists = (TextView) findViewById(R.id.playerAst);
-        TextView mRebounds = (TextView) findViewById(R.id.playerReb);
-        TextView mSteals = (TextView) findViewById(R.id.playerStl);
-        TextView mBlocks = (TextView) findViewById(R.id.playerBLK);
+//        TextView mTwoPointers = (TextView) findViewById(R.id.player2Pts);
+//        TextView mThreePointers = (TextView) findViewById(R.id.player3Pts);
+//        TextView mFreeThrows = (TextView) findViewById(R.id.playerFT);
+//        TextView mPlayerPoints = (TextView) findViewById(R.id.playerPoints);
+//        TextView mAssists = (TextView) findViewById(R.id.playerAst);
+//        TextView mRebounds = (TextView) findViewById(R.id.playerReb);
+//        TextView mSteals = (TextView) findViewById(R.id.playerStl);
+//        TextView mBlocks = (TextView) findViewById(R.id.playerBLK);
 
 
 

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import fisher.andrew.sportstats.Fragment3;
 import fisher.andrew.sportstats.SinglePlayerStatFragment;
+import fisher.andrew.sportstats.model.Player;
 
 
 /**
@@ -13,21 +14,22 @@ import fisher.andrew.sportstats.SinglePlayerStatFragment;
  */
 
 public class PlayerStatPagerAdapter extends FragmentPagerAdapter {
+    Player mPlayer;
+    private static int NUM_ITEMS = 2;
 
-    private static int NUM_ITEMS = 3;
-
-    public PlayerStatPagerAdapter(FragmentManager fragmentManager) {
+    public PlayerStatPagerAdapter(FragmentManager fragmentManager, Player player) {
         super(fragmentManager);
+        mPlayer=player;
     }
 
     // Returns the fragment to display for that page
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0: // Fragment # 0 - This will show FirstFragment
-                return SinglePlayerStatFragment.newInstance(0, "Page # 1");
+            case 0: //Maybe eventually get rid of the Page #1 title bar thing
+                return SinglePlayerStatFragment.newInstance(0, "Page # 1",mPlayer);
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return SinglePlayerStatFragment.newInstance(1, "Page # 2");
+                return SinglePlayerStatFragment.newInstance(1, "Page # 2",mPlayer);
             case 2: // Fragment # 1 - This will show SecondFragment
                 return Fragment3.newInstance(2, "Page # 3");
             default:
@@ -43,7 +45,7 @@ public class PlayerStatPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return NUM_ITEMS;
     }
 
 

@@ -3,28 +3,34 @@ package fisher.andrew.sportstats;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import fisher.andrew.sportstats.model.Player;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SinglePlayerStatFragment extends Fragment {
+
     private String title;
     private int page;
+    private Player mPlayer;
 
     // newInstance constructor for creating fragment with arguments
 
-    public static SinglePlayerStatFragment newInstance(int page, String title) {
-        SinglePlayerStatFragment fragmentFirst = new SinglePlayerStatFragment();
+    public static SinglePlayerStatFragment newInstance(int page, String title,Player player) {
+        SinglePlayerStatFragment fragmentPlayerStats = new SinglePlayerStatFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
         args.putString("someTitle", title);
-        fragmentFirst.setArguments(args);
-        return fragmentFirst;
+        fragmentPlayerStats.mPlayer=player;
+        fragmentPlayerStats.setArguments(args);
+        return fragmentPlayerStats;
     }
 
     // Store instance variables based on arguments passed
@@ -39,6 +45,9 @@ public class SinglePlayerStatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        mPlayer =  getArguments().getParcelable(PLAYER_KEY);
+        Log.d("DID IT WORK???",mPlayer.getName());
+
 //        View view = inflater.inflate(R.layout.fragment_fragment1, container, false);
         View view = inflater.inflate(R.layout.single_player_stat, container, false);
 

@@ -69,7 +69,7 @@ public class SinglePlayerStatFragment extends Fragment {
         if(page==0){
             header.setText("Average Statistics");
             //eventually programatically will have values here
-            twoPoints.setText("2.6");
+            twoPoints.setText("2Pts.\n"+mPlayer.getTwoPointers()+"");
             threePoints.setText("2.6");
             freeThrows.setText("2.6");
             totalPoints.setText("2.6");

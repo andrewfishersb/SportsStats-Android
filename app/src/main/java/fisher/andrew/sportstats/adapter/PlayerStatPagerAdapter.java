@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import fisher.andrew.sportstats.Fragment3;
 import fisher.andrew.sportstats.SinglePlayerStatFragment;
 import fisher.andrew.sportstats.model.Player;
 
@@ -27,11 +26,9 @@ public class PlayerStatPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0: //Maybe eventually get rid of the Page #1 title bar thing
-                return SinglePlayerStatFragment.newInstance(0, "Page # 1",mPlayer);
+                return SinglePlayerStatFragment.newInstance(0, mPlayer);
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return SinglePlayerStatFragment.newInstance(1, "Page # 2",mPlayer);
-            case 2: // Fragment # 1 - This will show SecondFragment
-                return Fragment3.newInstance(2, "Page # 3");
+                return SinglePlayerStatFragment.newInstance(1, mPlayer);
             default:
                 return null;
         }

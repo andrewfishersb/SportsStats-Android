@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,95 +28,36 @@ public class PlayerProfileActivity extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
 
 
-//    @Bind(R.id.profileName) TextView mProfileName;
-//    @Bind(R.id.profileAge) TextView mProfileAge;
-//    @Bind(R.id.profileHeight) TextView mProfileHeight;
-//    @Bind(R.id.profileTeam) TextView mProfileTeam;
-//
-//    //MAY HAVE TO CHANGE ID NAMES SO I CAN REUSE for the grid layout
-//    @Bind(R.id.player2Pts) TextView mTwoPointers;
-//    @Bind(R.id.playerPoints) TextView mPlayerPoints;
-//    @Bind(R.id.player3Pts) TextView mThreePointers;
-//    @Bind(R.id.playerFT) TextView mFreeThrows;
-//    @Bind(R.id.playerReb) TextView mRebounds;
-//    @Bind(R.id.playerAst) TextView mAssists;
-//    @Bind(R.id.playerStl) TextView mSteals;
-//    @Bind(R.id.playerBLK) TextView mBlocks;
-//    @Bind(R.id.playerName) TextView mStatHeader;
-
     private Player currentPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
-//        ButterKnife.bind(this);
+
+        //retrieves player object
         currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
-        Log.d("Name",currentPlayer.getName());
-
-        //testing the stat swipe
+        //creates the view pager and assists in retrieving the fragments
         ViewPager myPager;
-
-//        PlayerStatPagerAdapter adapter = new PlayerStatPagerAdapter();
         myPager = (ViewPager) findViewById(R.id.playerViewPager);
         adapterViewPager = new PlayerStatPagerAdapter(getSupportFragmentManager(),currentPlayer);
-
-
-
         myPager.setAdapter(adapterViewPager);
         myPager.setCurrentItem(3);
 
-
-        //end of test stat swipe
-
-
-
-        //stop the binding
         TextView mProfileName = (TextView) findViewById(R.id.profileName);
         TextView mProfileHeight = (TextView) findViewById(R.id.profileHeight);
         TextView mProfileAge = (TextView) findViewById(R.id.profileAge);
-//        TextView mStatHeader = (TextView) findViewById(R.id.playerName);
-
         final TextView mProfileTeam = (TextView) findViewById(R.id.profileTeam);
-
-//        TextView mTwoPointers = (TextView) findViewById(R.id.player2Pts);
-//        TextView mThreePointers = (TextView) findViewById(R.id.player3Pts);
-//        TextView mFreeThrows = (TextView) findViewById(R.id.playerFT);
-//        TextView mPlayerPoints = (TextView) findViewById(R.id.playerPoints);
-//        TextView mAssists = (TextView) findViewById(R.id.playerAst);
-//        TextView mRebounds = (TextView) findViewById(R.id.playerReb);
-//        TextView mSteals = (TextView) findViewById(R.id.playerStl);
-//        TextView mBlocks = (TextView) findViewById(R.id.playerBLK);
-
-
-
-
-        //end here
-
 
         mProfileName.setText(currentPlayer.getName());
         mProfileHeight.setText("Height " +currentPlayer.getHeight());
         mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
-//
-////the brute force option
-//        mTwoPointers.setText("Games\n"+currentPlayer.getGamesPlayed()+"");
-//        mThreePointers.setText("3pt PG.\n"+ round(currentPlayer.getOverallThreePointers(),currentPlayer.getGamesPlayed())+"");
-//        mFreeThrows.setText("FTPG\n" + round(currentPlayer.getOverallFreeThrows(),currentPlayer.getGamesPlayed())+"");
-//        mRebounds.setText("RPG\n" + round(currentPlayer.getOverallRebounds(),currentPlayer.getGamesPlayed())+"");
-//        mAssists.setText("APG\n"+round(currentPlayer.getOverallAssists(),currentPlayer.getGamesPlayed())+"");
-//        mSteals.setText("STLPG\n" + round(currentPlayer.getOverallSteals(),currentPlayer.getGamesPlayed())+"");
-//        mBlocks.setText("BLKPG\n"+round(currentPlayer.getOverallBlocks(),currentPlayer.getGamesPlayed())+"");
-//        mPlayerPoints.setText("PPG\n"+ round(currentPlayer.getOverallPoints(),currentPlayer.getGamesPlayed())+"");
-//        mStatHeader.setText(currentPlayer.getName()+"'s Career Stats");
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
 
         DatabaseReference teamRef = FirebaseDatabase.getInstance()
                 .getReference(Constants.FIREBASE_CHILD_TEAMS).child(uid)
                 .child(currentPlayer.getTeamId());
-
 
         //what is this line for? - to retrieve the team name
         teamRef.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -67,38 +67,33 @@ public class SinglePlayerStatFragment extends Fragment {
         //will determine if average or overall
         //MAYBE REPLACE 2pts WITH GAMES OR FIGURE SOMETHING ELSE OUT TO ADD IN GAMES MAYBE TO THE HEADER????
         if(page==0){
-            header.setText("Average Statistics");
+            header.setText("Average Statistics -- Games Played: "+mPlayer.getGamesPlayed()+"");
             //eventually programatically will have values here
-            twoPoints.setText("2Pts.\n"+mPlayer.getTwoPointers()+"");
-            threePoints.setText("2.6");
-            freeThrows.setText("2.6");
-            totalPoints.setText("2.6");
-            assists.setText("2.6");
-            rebounds.setText("2.6");
-            steals.setText("2.6");
-            blocks.setText("2.6");
+            twoPoints.setText("2Pts.\n"+round(mPlayer.getTwoPointers(),mPlayer.getGamesPlayed())+"");
+            threePoints.setText("3pt PG.\n"+ round(mPlayer.getOverallThreePointers(),mPlayer.getGamesPlayed())+"");
+            freeThrows.setText("FTPG\n" + round(mPlayer.getOverallFreeThrows(),mPlayer.getGamesPlayed())+"");
+            totalPoints.setText("PPG\n"+ round(mPlayer.getOverallPoints(),mPlayer.getGamesPlayed())+"");
+            assists.setText("APG\n"+round(mPlayer.getOverallAssists(),mPlayer.getGamesPlayed())+"");
+            rebounds.setText("RPG\n" + round(mPlayer.getOverallRebounds(),mPlayer.getGamesPlayed())+"");
+            steals.setText("STLPG\n" + round(mPlayer.getOverallSteals(),mPlayer.getGamesPlayed())+"");
+            blocks.setText("BLKPG\n"+round(mPlayer.getOverallBlocks(),mPlayer.getGamesPlayed())+"");
         }else if(page==1){
-            header.setText("Career Statistics");
-            twoPoints.setText("15");
-            threePoints.setText("215");
-            freeThrows.setText("15");
-            totalPoints.setText("6");
-            assists.setText("26");
-            rebounds.setText("15");
-            steals.setText("15");
-            blocks.setText("156");
+            header.setText("Career Statistics -- Games Played: "+mPlayer.getGamesPlayed()+"");
+            twoPoints.setText("2Pts.\n"+mPlayer.getTwoPointers()+"");
+            threePoints.setText("3pts.\n"+ mPlayer.getThreePointers()+"");
+            freeThrows.setText("FT\n" + mPlayer.getFreeThrows()+"");
+            totalPoints.setText("TOT\n"+ mPlayer.getTotalPoints()+"");
+            assists.setText("AST\n"+mPlayer.getAssists()+"");
+            rebounds.setText("REB\n" + mPlayer.getRebounds()+"");
+            steals.setText("STL\n" + mPlayer.getSteals()+"");
+            blocks.setText("BLK\n"+mPlayer.getBlocks()+"");
         }
 
         return view;
     }
-
+    //May MOVE TO THE FRAGMENT IF THATS WHERE THE ROUNDING IS NEEDED
+    public double round(int topNumber, int bottomNumber){
+//        return  Math.round((topNumber/bottomNumber * 100)*10)/10.0;
+        return (double) Math.round(topNumber/(float) bottomNumber * 10) /10;
+    }
 }
-
-//twoPoints.setText("2Pts.\n"+player.getTwoPointers()+"");
-//        threePoints.setText("3pts.\n"+ player.getThreePointers()+"");
-//        freeThrows.setText("FT\n" + player.getFreeThrows()+"");
-//        rebounds.setText("REB\n" + player.getRebounds()+"");
-//        assists.setText("AST\n"+player.getAssists()+"");
-//        steals.setText("STL\n" + player.getSteals()+"");
-//        blocks.setText("BLK\n"+player.getBlocks()+"");
-//        totalPoints.setText("TOT\n"+ player.getTotalPoints()+"");

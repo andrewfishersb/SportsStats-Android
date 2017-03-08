@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,11 +16,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
-import butterknife.Bind;
+import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.adapter.PlayerStatPagerAdapter;
 import fisher.andrew.sportstats.model.Player;
+import fisher.andrew.sportstats.model.Team;
 
 //need to send back to previous page but cant do it through the manifest???
 public class PlayerProfileActivity extends AppCompatActivity {
@@ -28,28 +30,28 @@ public class PlayerProfileActivity extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
 
 
-    @Bind(R.id.profileName) TextView mProfileName;
-    @Bind(R.id.profileAge) TextView mProfileAge;
-    @Bind(R.id.profileHeight) TextView mProfileHeight;
-    @Bind(R.id.profileTeam) TextView mProfileTeam;
-
-    //MAY HAVE TO CHANGE ID NAMES SO I CAN REUSE for the grid layout
-    @Bind(R.id.player2Pts) TextView mTwoPointers;
-    @Bind(R.id.playerPoints) TextView mPlayerPoints;
-    @Bind(R.id.player3Pts) TextView mThreePointers;
-    @Bind(R.id.playerFT) TextView mFreeThrows;
-    @Bind(R.id.playerReb) TextView mRebounds;
-    @Bind(R.id.playerAst) TextView mAssists;
-    @Bind(R.id.playerStl) TextView mSteals;
-    @Bind(R.id.playerBLK) TextView mBlocks;
-    @Bind(R.id.playerName) TextView mStatHeader;
+//    @Bind(R.id.profileName) TextView mProfileName;
+//    @Bind(R.id.profileAge) TextView mProfileAge;
+//    @Bind(R.id.profileHeight) TextView mProfileHeight;
+//    @Bind(R.id.profileTeam) TextView mProfileTeam;
+//
+//    //MAY HAVE TO CHANGE ID NAMES SO I CAN REUSE for the grid layout
+//    @Bind(R.id.player2Pts) TextView mTwoPointers;
+//    @Bind(R.id.playerPoints) TextView mPlayerPoints;
+//    @Bind(R.id.player3Pts) TextView mThreePointers;
+//    @Bind(R.id.playerFT) TextView mFreeThrows;
+//    @Bind(R.id.playerReb) TextView mRebounds;
+//    @Bind(R.id.playerAst) TextView mAssists;
+//    @Bind(R.id.playerStl) TextView mSteals;
+//    @Bind(R.id.playerBLK) TextView mBlocks;
+//    @Bind(R.id.playerName) TextView mStatHeader;
 
     private Player currentPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
 
         //testing the stat swipe
@@ -69,11 +71,36 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
         currentPlayer = Parcels.unwrap(getIntent().getParcelableExtra("player"));
 
-//        mProfileName.setText(currentPlayer.getName());
-//        mProfileHeight.setText("Height " +currentPlayer.getHeight());
-//        mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
+        Log.d("Name",currentPlayer.getName());
 
-//the brute force option
+        //stop the binding
+        TextView mProfileName = (TextView) findViewById(R.id.profileName);
+        TextView mProfileHeight = (TextView) findViewById(R.id.profileHeight);
+        TextView mProfileAge = (TextView) findViewById(R.id.profileAge);
+        TextView mStatHeader = (TextView) findViewById(R.id.playerName);
+
+        final TextView mProfileTeam = (TextView) findViewById(R.id.profileTeam);
+
+        TextView mTwoPointers = (TextView) findViewById(R.id.player2Pts);
+        TextView mThreePointers = (TextView) findViewById(R.id.player3Pts);
+        TextView mFreeThrows = (TextView) findViewById(R.id.playerFT);
+        TextView mPlayerPoints = (TextView) findViewById(R.id.playerPoints);
+        TextView mAssists = (TextView) findViewById(R.id.playerAst);
+        TextView mRebounds = (TextView) findViewById(R.id.playerReb);
+        TextView mSteals = (TextView) findViewById(R.id.playerStl);
+        TextView mBlocks = (TextView) findViewById(R.id.playerBLK);
+
+
+
+
+        //end here
+
+
+        mProfileName.setText(currentPlayer.getName());
+        mProfileHeight.setText("Height " +currentPlayer.getHeight());
+        mProfileAge.setText("Age: " + Integer.toString(currentPlayer.getAge()));
+//
+////the brute force option
 //        mTwoPointers.setText("Games\n"+currentPlayer.getGamesPlayed()+"");
 //        mThreePointers.setText("3pt PG.\n"+ round(currentPlayer.getOverallThreePointers(),currentPlayer.getGamesPlayed())+"");
 //        mFreeThrows.setText("FTPG\n" + round(currentPlayer.getOverallFreeThrows(),currentPlayer.getGamesPlayed())+"");
@@ -93,11 +120,11 @@ public class PlayerProfileActivity extends AppCompatActivity {
                 .child(currentPlayer.getTeamId());
 
 
-        //what is this line for?
+        //what is this line for? - to retrieve the team name
         teamRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                mProfileTeam.setText(dataSnapshot.getValue(Team.class).getName());
+                mProfileTeam.setText(dataSnapshot.getValue(Team.class).getName());
             }
 
             @Override
@@ -110,6 +137,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
     }
 
 
+    //May MOVE TO THE FRAGMENT IF THATS WHERE THE ROUNDING IS NEEDED
     public double round(int topNumber, int bottomNumber){
 //        return  Math.round((topNumber/bottomNumber * 100)*10)/10.0;
         return (double) Math.round(topNumber/(float) bottomNumber * 10) /10;

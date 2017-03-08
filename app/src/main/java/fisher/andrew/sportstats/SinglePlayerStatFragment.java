@@ -17,6 +17,7 @@ public class SinglePlayerStatFragment extends Fragment {
     private int page;
 
     // newInstance constructor for creating fragment with arguments
+
     public static SinglePlayerStatFragment newInstance(int page, String title) {
         SinglePlayerStatFragment fragmentFirst = new SinglePlayerStatFragment();
         Bundle args = new Bundle();
@@ -43,18 +44,40 @@ public class SinglePlayerStatFragment extends Fragment {
 
 
 //All the TextViews
-        TextView tvLabel = (TextView) view.findViewById(R.id.playerName);
-
+        TextView header = (TextView) view.findViewById(R.id.playerName);
+        TextView twoPoints = (TextView) view.findViewById(R.id.player2Pts);
+        TextView threePoints = (TextView) view.findViewById(R.id.player3Pts);
+        TextView freeThrows = (TextView) view.findViewById(R.id.playerFT);
+        TextView totalPoints = (TextView) view.findViewById(R.id.playerPoints);
+        TextView assists = (TextView) view.findViewById(R.id.playerAst);
+        TextView rebounds = (TextView) view.findViewById(R.id.playerReb);
+        TextView steals = (TextView) view.findViewById(R.id.playerStl);
+        TextView blocks = (TextView) view.findViewById(R.id.playerBLK);
 
 
         //will determine if average or overall
+        //MAYBE REPLACE 2pts WITH GAMES OR FIGURE SOMETHING ELSE OUT TO ADD IN GAMES MAYBE TO THE HEADER????
         if(page==0){
-
-            tvLabel.setText("Andrew");
-
+            header.setText("Average Statistics");
+            //eventually programatically will have values here
+            twoPoints.setText("2.6");
+            threePoints.setText("2.6");
+            freeThrows.setText("2.6");
+            totalPoints.setText("2.6");
+            assists.setText("2.6");
+            rebounds.setText("2.6");
+            steals.setText("2.6");
+            blocks.setText("2.6");
         }else if(page==1){
-            TextView tvLabel = (TextView) view.findViewById(R.id.playerName);
-            tvLabel.setText(page + " -- Fragment One View 2");
+            header.setText("Career Statistics");
+            twoPoints.setText("15");
+            threePoints.setText("215");
+            freeThrows.setText("15");
+            totalPoints.setText("6");
+            assists.setText("26");
+            rebounds.setText("15");
+            steals.setText("15");
+            blocks.setText("156");
         }
 
         return view;
@@ -62,4 +85,11 @@ public class SinglePlayerStatFragment extends Fragment {
 
 }
 
-//
+//twoPoints.setText("2Pts.\n"+player.getTwoPointers()+"");
+//        threePoints.setText("3pts.\n"+ player.getThreePointers()+"");
+//        freeThrows.setText("FT\n" + player.getFreeThrows()+"");
+//        rebounds.setText("REB\n" + player.getRebounds()+"");
+//        assists.setText("AST\n"+player.getAssists()+"");
+//        steals.setText("STL\n" + player.getSteals()+"");
+//        blocks.setText("BLK\n"+player.getBlocks()+"");
+//        totalPoints.setText("TOT\n"+ player.getTotalPoints()+"");

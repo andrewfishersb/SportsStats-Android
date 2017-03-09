@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -52,14 +53,19 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="15dp" />
 
+
+
+
+
+
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/heightSpinner"
         android:spinnerMode="dropdown"
         android:background="#ffffff"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/addAgeEditText"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/cameraButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="15dp"
@@ -77,4 +83,6 @@
         android:layout_centerHorizontal="true"
         android:background="@color/colorAccent"
         android:textColor="#ffffff" />
+
+
 </RelativeLayout>

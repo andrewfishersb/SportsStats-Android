@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -144,6 +145,8 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
                 final Spinner mPlayerHeightSpinner = (Spinner) createPlayerDialogView.findViewById(R.id.heightSpinner);
                 final EditText mAddAgeEditText = (EditText) createPlayerDialogView.findViewById(R.id.addAgeEditText);
                 final EditText mAddNameEditText = (EditText) createPlayerDialogView.findViewById(R.id.addNameEditText);
+                final ImageView mCameraImageView = (ImageView) createPlayerDialogView.findViewById(R.id.cameraButton);
+
                 Button mAddPlayerButton = (Button) createPlayerDialogView.findViewById(R.id.addPlayerButton);
                 ArrayList<String> playerHeightOptions = new ArrayList<>();
 
@@ -160,6 +163,7 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
                 //attaches builder to a new Dialog
                 createPlayerDialogBuilder.setView(createPlayerDialogView);
                 final AlertDialog dialog = createPlayerDialogBuilder.create();
+
 
                 mAddPlayerButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -228,5 +232,7 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
+
+
 }
 

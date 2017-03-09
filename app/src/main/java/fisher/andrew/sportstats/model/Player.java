@@ -19,6 +19,9 @@ public class Player {
     private String pushId;
     //have just team id or team name? with id ill still be able to access their name (try id for now)
     String teamId;
+    //picture
+    String image;
+
 
     //playerStats
     int freeThrows;
@@ -299,6 +302,14 @@ public class Player {
 
     public String getTeamId(){
         return this.teamId;
+    }
+
+    public String getImage(){
+        return this.image;
+    }
+
+    public void setImage(String image){
+        this.image=image;
     }
 
 

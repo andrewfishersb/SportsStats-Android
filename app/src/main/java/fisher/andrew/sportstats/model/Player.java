@@ -6,12 +6,14 @@ import com.google.firebase.database.DatabaseReference;
 
 import org.parceler.Parcel;
 
+import java.io.Serializable;
+
 import fisher.andrew.sportstats.Constants;
 
 
 //will this need an index for movement purposes...i think so
 @Parcel
-public class Player {
+public class Player implements Serializable{
     //Player info
     String name;
     String height;

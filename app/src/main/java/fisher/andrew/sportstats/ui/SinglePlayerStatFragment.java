@@ -1,4 +1,4 @@
-package fisher.andrew.sportstats;
+package fisher.andrew.sportstats.ui;
 
 
 import android.os.Bundle;
@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
 
-public class SinglePlayerStatFragment extends Fragment {
+public class SinglePlayerStatFragment extends Fragment  {
 
     private int page;
     private Player mPlayer;

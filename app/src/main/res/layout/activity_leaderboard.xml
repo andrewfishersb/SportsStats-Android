@@ -11,21 +11,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fisher.andrew.sportstats.ui.LeaderboardActivity">
 
-    <TextView
-        android:text="Leader Board"
+    <android.support.v4.view.ViewPager
+        android:layout_below="@+id/leaderBoardTextView"
+        android:fadingEdge="vertical"
+        android:id="@+id/leaderBoardViewPager"
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
-        android:textAlignment="center"/>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/leaderBoard"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_marginTop="30dp">
+    </android.support.v4.view.ViewPager>
 </RelativeLayout>

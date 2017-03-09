@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import fisher.andrew.sportstats.SinglePlayerStatFragment;
+import fisher.andrew.sportstats.ui.SinglePlayerStatFragment;
 import fisher.andrew.sportstats.model.Player;
 
 
@@ -28,12 +28,6 @@ public class PlayerStatPagerAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
-    }
-
-    // Returns the page title for the top indicator
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return "Page " + position;
     }
 
     @Override

@@ -37,7 +37,6 @@ import fisher.andrew.sportstats.model.Team;
 //need to send back to previous page but cant do it through the manifest???
 public class PlayerProfileActivity extends AppCompatActivity {
 
-    //may not need if i stop this fragment bizz
     FragmentPagerAdapter adapterViewPager;
 
 
@@ -64,7 +63,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
         myPager = (ViewPager) findViewById(R.id.playerViewPager);
         adapterViewPager = new PlayerStatPagerAdapter(getSupportFragmentManager(),currentPlayer);
         myPager.setAdapter(adapterViewPager);
-//        myPager.setCurrentItem(3);
+
+
 
         TextView mProfileName = (TextView) findViewById(R.id.profileName);
         TextView mProfileHeight = (TextView) findViewById(R.id.profileHeight);
@@ -88,7 +88,6 @@ public class PlayerProfileActivity extends AppCompatActivity {
                 .getReference(Constants.FIREBASE_CHILD_TEAMS).child(uid)
                 .child(currentPlayer.getTeamId());
 
-        //what is this line for? - to retrieve the team name
         teamRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

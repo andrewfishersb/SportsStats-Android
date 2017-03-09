@@ -93,10 +93,27 @@ public class TeamDetailActivity extends AppCompatActivity implements View.OnClic
                         DatabaseReference currPlayerReference = mPlayerReference.child(currentPlayer.getPushId());
                         currentPlayer.endGameAddStatsToOverall(currPlayerReference);
                         currentPlayer.endGameResetStats(currPlayerReference);
-
+//                        String test = snapshot.child("imageUrl").getValue(Player.class).toString();
+//                                Log.d("TEST TEST TEST",test);
                         filterPlayer.add(currentPlayer);
                     }
                 }
+               // //IF PASS IN PLAYER TO ARRAY BY ID ONLY
+//                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+//                    //gets the team id of the current player and compares
+//                    if(currentTeam.getPushId().equals(snapshot.getValue(Player.class).getTeamId())){
+//
+//                        Player currentPlayer =snapshot.getValue(Player.class);
+//                        DatabaseReference currPlayerReference = mPlayerReference.child(currentPlayer.getPushId());
+//                        currentPlayer.endGameAddStatsToOverall(currPlayerReference);
+//                        currentPlayer.endGameResetStats(currPlayerReference);
+////                        String test = snapshot.child("imageUrl").getValue(Player.class).toString();
+////                                Log.d("TEST TEST TEST",test);
+//                        filterPlayer.add(currentPlayer);
+//                    }
+//                }
+//                //
+
                 playerAdapter = new PlayerAdapter(TeamDetailActivity.this,filterPlayer);
                 mRecyclerView.setHasFixedSize(true);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(TeamDetailActivity.this,2);

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -69,8 +70,12 @@ public class PlayerProfileActivity extends AppCompatActivity {
         TextView mProfileHeight = (TextView) findViewById(R.id.profileHeight);
         TextView mProfileAge = (TextView) findViewById(R.id.profileAge);
         final TextView mProfileTeam = (TextView) findViewById(R.id.profileTeam);
+
+        //image
         mProfilePicture = (ImageView) findViewById(R.id.profilePicture);
 
+
+//
 
 
         mProfileName.setText(currentPlayer.getName());
@@ -148,5 +153,8 @@ return true;
                 .child(currentPlayer.getPushId())
                 .child("imageUrl");
         ref.setValue(imageEncoded);
+
+        currentPlayer.setImageURL(imageEncoded);
+        Log.d("Image String",currentPlayer.getImageURL());
     }
 }

@@ -20,7 +20,7 @@ public class Player {
     //have just team id or team name? with id ill still be able to access their name (try id for now)
     String teamId;
     //picture
-    String image;
+    String imageURL;
 
 
     //playerStats
@@ -304,12 +304,12 @@ public class Player {
         return this.teamId;
     }
 
-    public String getImage(){
-        return this.image;
+    public String getImageURL(){
+        return this.imageURL;
     }
 
-    public void setImage(String image){
-        this.image=image;
+    public void setImageURL(String image){
+        this.imageURL=image;
     }
 
 

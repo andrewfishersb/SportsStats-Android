@@ -33,11 +33,11 @@ import static fisher.andrew.sportstats.R.id.playerName;
 
 
 public class FirebasePlayerStatsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
-    View mView;
-    Context mContext;
-    String teamId;
-    DatabaseReference ref;
-    DatabaseReference playerToSelectRef;
+    private View mView;
+    private Context mContext;
+    private String teamId;
+    private DatabaseReference ref;
+    private DatabaseReference playerToSelectRef;
 
 //    int [] switchArray = new int[2];
     int subOutPlayer;

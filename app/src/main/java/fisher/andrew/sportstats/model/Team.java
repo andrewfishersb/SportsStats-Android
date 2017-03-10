@@ -2,10 +2,11 @@ package fisher.andrew.sportstats.model;
 
 import org.parceler.Parcel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Parcel
-public class Team {
+public class Team implements Serializable {
 
     String name;
     ArrayList<String> playerIds = new ArrayList<>();

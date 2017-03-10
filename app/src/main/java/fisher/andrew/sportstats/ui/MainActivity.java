@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
+import fisher.andrew.sportstats.model.Team;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.createTeamTextViewLinkFromMainActivity) TextView mCreateTeamLink;
@@ -34,7 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseUser user;
     private String uid;
     private DatabaseReference mUserReference;
+    private DatabaseReference mTeamReference;
+
     private ArrayList<Player> players;
+    private ArrayList<Team> teams;
 
 
     @Override
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //START OF FIREBASE - if get fragment working move this into the click section?
         players=new ArrayList<>();
+        teams=new ArrayList<>();
+
         //will this firebase stuff crash if there are yet to be any firebase info?
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
@@ -79,6 +85,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
+        mTeamReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_TEAMS).child(uid);
+
+        mTeamReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Team team = snapshot.getValue(Team.class);
+                    teams.add(team);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
+
+
         //end of firebase
 
     }
@@ -89,7 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(view == mLeaderBoardTextView){
             Intent intent = new Intent(MainActivity.this,LeaderboardActivity.class);
+
             intent.putExtra("playerList", players);
+            intent.putExtra("teamList", teams);
             startActivity(intent);
         }
 

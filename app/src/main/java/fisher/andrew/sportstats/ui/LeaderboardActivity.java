@@ -1,11 +1,9 @@
 package fisher.andrew.sportstats.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -31,14 +29,11 @@ public class LeaderboardActivity extends FragmentActivity {//usually extends App
         setContentView(R.layout.activity_leaderboard);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        players = (ArrayList<Player>) intent.getSerializableExtra("playerList");
+        if(getIntent().getExtras()!=null) {
+            players = (ArrayList<Player>) getIntent().getSerializableExtra("playerList");
 
 
 //        players = new ArrayList<>();
-        Log.d("did this come",""+ players.get(0).getName());
-
-
 
 
 //
@@ -76,14 +71,12 @@ public class LeaderboardActivity extends FragmentActivity {//usually extends App
 //        });
 
 
-        //Once I smooth out the array this should work
+            //Once I smooth out the array this should work
 
-        ViewPager myPager;
-        myPager = (ViewPager) findViewById(R.id.leaderBoardViewPager);
-        adapterViewPager = new LeaderPagerAdapter(getSupportFragmentManager(),players);
-        myPager.setAdapter(adapterViewPager);
-
-
+            ViewPager myPager;
+            myPager = (ViewPager) findViewById(R.id.leaderBoardViewPager);
+            adapterViewPager = new LeaderPagerAdapter(getSupportFragmentManager(), players);
+            myPager.setAdapter(adapterViewPager);
 
 
 //        Collections.reverse(rank);
@@ -98,7 +91,7 @@ public class LeaderboardActivity extends FragmentActivity {//usually extends App
 
 //        mUserReference.orderByChild("overallPoints")
 
-
+        }
 
         }
 

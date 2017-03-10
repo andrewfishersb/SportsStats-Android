@@ -12,19 +12,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import fisher.andrew.sportstats.Constants;
 import fisher.andrew.sportstats.R;
 import fisher.andrew.sportstats.model.Player;
+import fisher.andrew.sportstats.model.Team;
 
 public class LeaderboardFragment extends Fragment {
     private int page;
     private ArrayList<Player> mPlayers;
     private ArrayAdapter listAdapter;
     private Context mContext;
-
+    private String teamName;
 
 
     public static LeaderboardFragment newInstance(int page, ArrayList<Player> players) {
@@ -73,7 +82,7 @@ public class LeaderboardFragment extends Fragment {
             header.setText("Overall Two Pointers");
 
             for (Player player : mPlayers) {
-                outcome.add(rank+ ". "+ player.getName() + "\t\t--" + player.getTeamId() + "\t\t--" + player.getOverallTwoPointers());
+                outcome.add(rank+ ". "+ player.getName() + "\t\t--" + getPlayersTeam(player) + "\t\t--" + player.getOverallTwoPointers());
                 rank++;
             }
 
@@ -89,6 +98,32 @@ public class LeaderboardFragment extends Fragment {
 
         return view;
     }
+
+
+    public String getPlayersTeam(Player player){
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference teamRef = FirebaseDatabase.getInstance()
+                .getReference(Constants.FIREBASE_CHILD_TEAMS).child(uid)
+                .child(player.getTeamId());
+
+        teamRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                teamName = dataSnapshot.getValue(Team.class).getName();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        return teamName;
+    }
+
 
 }
 //Average 2Pts 1

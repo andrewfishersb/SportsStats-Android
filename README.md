@@ -7,6 +7,9 @@ An android app meant for tracking basketball stats
 ## Description
 A user will be able to create their own teams and players and in doing so record statistics of these players. This current version will focus on basketball statistics.
 
+![sportstat1](https://cloud.githubusercontent.com/assets/17396138/25404513/262ce078-29b5-11e7-8670-1e1e564650ac.jpg)
+![sportstat2](https://cloud.githubusercontent.com/assets/17396138/25404514/26345d26-29b5-11e7-82bd-d0c87984f9e6.jpg)
+
 ## Specifications
 
 |Behaviors                |

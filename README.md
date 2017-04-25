@@ -31,20 +31,10 @@ A user will be able to create their own teams and players and in doing so record
 ```
 
 
-## Future Goals and Ideas (will slowly work their way into the Specifications)
+## Future Goals and Ideas 
  * Looks like you have no teams click the plus to add one (or just pop a dialog for them to use)
- * Turn add a player into a DialogFragment - https://developer.android.com/reference/android/app/DialogFragment.html
- * First page might just have View teams or View players and then have the top bar available to add new teams and players
  * Height spinner, set a different default value i.e. to 6'2", limit the amount of items shown
- * Start a game, resets stats, but at the end of the game sends them to an overall, which can then find an average since they have the games played
- * Click vs double click to record certain stats
- * Substitutions
- * Record live time
- * Refractor some activities into fragments (ie the format of the statistics)
- * Change CreateAPlayerActivity into a DialogFragment
- * Swipe a player to sub, this may launch a dialog box where a user will choose a player to switch then with
- * Finish a game and once done see stats for everyone who took part
-
+ * Renovate to use SQLite instead of Firebase as I have been having some database issues.
 
 ## Technologies Used
 
@@ -56,7 +46,7 @@ A user will be able to create their own teams and players and in doing so record
 
 
 ## Known Bugs or Improvements
-* On Team detail in landscape mode the players may disappear if not when you turn back to portrait the same may happen
+* If clicked wrong certain statistics may increase and decrease in a random manner. I believe this may have to do with Firebase which is why I will be working on translating the app into SQLite
 
 ### License
 

@@ -60,7 +60,7 @@
         android:spinnerMode="dropdown"
         android:background="#ffffff"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/cameraButton"
+        android:layout_below="@+id/addAgeEditText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="15dp"
